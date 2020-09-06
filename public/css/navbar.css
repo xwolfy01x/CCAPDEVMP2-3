@@ -1,0 +1,223 @@
+body {
+	margin: 0;
+}
+body::-webkit-scrollbar {
+	width: 0.5rem;
+}
+body::-webkit-scrollbar-track {
+	background: black;
+}
+body::-webkit-scrollbar-thumb {
+	background: #5356ad;
+}
+#navbar{
+	background-color: #5356ad;
+	border-top: 5px solid #5356ad;
+	display: grid;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	width: 100%;
+	position: fixed;
+	grid-template-columns: repeat(4, 12%) 1fr 10% 10%;
+}
+#navbar a {
+	text-decoration: none;
+}
+.navbarbtn{
+	font-family: verdana;
+	color: black;
+	display: flex;
+	flex-direction: column;
+	font-weight: 700;
+	border-bottom: 5px solid #5356ad;
+	padding: 0.75rem 1rem;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	transition: all 1s linear;
+}
+#navbar .imglink {
+	height: 60px;
+	width: 80px;
+	cursor: pointer;
+	transition: all 0.5s linear;
+}
+#navbar .imglink:hover {
+	transform: scale(1.5,1.5);
+}
+#navbar label {
+	font-family: 'Actor';
+	cursor: pointer;
+	display: none;
+	visibility: hidden;
+	font-size: 25px;
+	bottom: 0;
+	transition: visibility 1s ease;
+}
+#searchbar {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	margin-right: 0;
+	padding-right: 0;
+}
+#searchbar form {
+	width: 100%;
+	padding-left: 5%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	margin: 0;
+}
+#search {
+	font-size: 1em;
+	border-radius: 20px;
+	width: 100%;
+	height: 50%;
+	padding-left: 1.5%;
+	border: 3px solid #2C2A4A;
+}
+#search:focus, #searchbar {
+	outline: none;
+}
+button {
+	background-color: inherit;
+	border: 0;
+}
+#searchbtn {
+	width: 60px;
+	height: 50px;
+}
+.indexbtns {
+	display: grid;
+	font-family: verdana;
+	font-weight: 600;
+	grid-column: 6/8;
+	grid-template-columns: 1fr 1fr;
+}
+a.indexbtn{
+	display: flex;
+	align-items: center;
+	height: 95%;
+	justify-content: center;
+	font-family: 'Actor';
+	font-size: 1.2em;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	padding: 0% 15% 0% 5%;
+	transition: all 0.25s linear;
+}
+#postdiv{
+	grid-column: 6/7;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.userbtns {
+	grid-column: 7/8;
+	display: grid;
+	grid-template-columns:1fr;
+	position: relative;
+	font-family: verdana;
+	align-items: center;
+	text-align: right;
+	justify-content: center;
+	transition: all .5s ease;
+	padding-right: 10%;
+}
+#profname {
+	z-index: 1;
+	color: black;
+	font-weight: 600;
+	position: relative;
+	font-family: 'Actor';
+	font-size: 1.4em;
+}
+#creatpost{
+	font-family:Verdana;
+	font-weight: 600;
+}
+#profpic{
+	height: 50px;
+	width: 50px;
+	padding-left: 5%;
+}
+ul {
+	list-style-type: none;
+	text-align: center;
+	width: 100%;
+	opacity: 0;
+	transition: all 5 ease;
+	position: absolute;
+	top: 73px;
+	right: 0;
+}
+.userbtns:hover ul {
+	height: 200px;
+	opacity: 1;
+	transform: translateY(0);
+}
+li {
+	color: black;
+	font-size: 1.2em;
+	font-weight: 600;
+	position: relative;
+	background-color: #5356ad;
+	padding: 20px 10px;
+}
+li a {
+	color: black;
+	font-family: 'Actor';
+	transition: all .5s ease;
+}
+#postCreateButton {
+	width: 50px;
+	height: 50px;
+}
+@media(max-width: 1300px) {
+	#navbar .imglink {
+		height: 50px;
+		width: 50px;
+	}
+	#postCreateButton {
+		width: 30px;
+		height: 30px;
+	}
+	.navbarbtn {
+		padding:0;
+	}
+	#searchbar {
+		width: 100%;
+	}
+	a.indexbtn {
+		font-size: 1em;
+		height: 90%;
+	}
+	#profpic {
+		height: 40px;
+		width: 30px;
+	}
+	#profname {
+		font-size: 1em;
+	}
+	ul {
+		top: 40px;
+	}
+	li {
+		font-size: 1em;
+	}
+}
+@font-face {
+	font-family: 'Actor';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/actor-v9-latin/actor-v9-latin-regular.eot'); /* IE9 Compat Modes */
+	src: local('Actor Regular'), local('Actor-Regular'),
+		 url('../fonts/actor-v9-latin/actor-v9-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+		 url('../fonts/actor-v9-latin/actor-v9-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+		 url('../fonts/actor-v9-latin/actor-v9-latin-regular.woff') format('woff'), /* Modern Browsers */
+		 url('../fonts/actor-v9-latin/actor-v9-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+		 url('../fonts/actor-v9-latin/actor-v9-latin-regular.svg#Actor') format('svg'); /* Legacy iOS */
+}

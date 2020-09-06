@@ -1,0 +1,182 @@
+extends ./layouts/navbar.pug
+block css
+	link(rel="stylesheet", type="text/css", href="/css/navbar2.css")
+	link(rel="stylesheet", type="text/css", href="/css/exercise.css")
+block body
+	#navbar2
+		form(style="width: 100%", action="filter", method="GET")
+			.navbarbtn2
+				span DURATION
+					ul.drop2
+						li
+							input.checkboxfilter#30min(type="checkbox", name="30min", value="30")
+							label(for="30min") 30 MINUTES
+						li
+							input.checkboxfilter#60min(type="checkbox", name="60min", value="60")
+							label(for="60min") 1 HOUR
+						li
+							input.checkboxfilter#90min(type="checkbox", name="90min", value="90")
+							label(for="90min") 1 HOUR 30 MINUTES
+			.navbarbtn2
+				span BODY FOCUS
+					ul.drop2
+						li
+							input.checkboxfilter#abdomen(type="checkbox", name="Abdomen", value="abdomen")
+							label(for="abdomen") ABDOMEN
+						li
+							input.checkboxfilter#chest(type="checkbox", name="Chest", value="chest")
+							label(for="chest") CHEST
+						li
+							input.checkboxfilter#quadriceps(type="checkbox", name="Quadriceps", value="quadriceps")
+							label(for="quadriceps") QUADRICEPS
+						li
+							input.checkboxfilter#glutes(type="checkbox", name="Glutes", value="glutes")
+							label(for="glutes") GLUTES
+						li
+							input.checkboxfilter#biceps(type="checkbox", name="Biceps", value="biceps")
+							label(for="biceps") BICEPS
+						li
+							input.checkboxfilter#triceps(type="checkbox", name="Triceps", value="triceps")
+							label(for="triceps") TRICEPS
+						li
+							input.checkboxfilter#back(type="checkbox", name="Back", value="back")
+							label(for="back") BACK
+						li
+							input.checkboxfilter#thighs(type="checkbox", name="Thighs", value="thighs")
+							label(for="thighs") THIGHS
+						li
+							input.checkboxfilter#wholebody(type="checkbox", name = "WholeBody",value="wholebody")
+							label(for="WholeBody") WHOLE BODY
+			.navbarbtn2
+				span DIFFICULTIES
+					ul.drop2
+						li
+							input.checkboxfilter#beginner(type="checkbox", name="Beginner", value="beginner")
+							label(for="beginner") BEGINNER
+						li
+							input.checkboxfilter#intermediate(type="checkbox", name="Intermediate", value="intermediate")
+							label(for="intermediate") INTEREDIATE
+						li
+							input.checkboxfilter#advanced(type="checkbox", name="Advanced", value="advanced")
+							label(for="advanced") ADVANCED
+			.filterbox
+				button#filterbtn(type="submit") Filter
+	.postscontainer
+		if topPosts.length <= 5
+			.subcontainer#topworkout
+				.categoryHeader
+					span.headerTitle TOP POSTS
+					a(href="/seemoretop")#seemoretop See More...
+				each topPost in topPosts
+					a.workoutpost(href=`post/${topPost._id}`)
+						img.image(src=`${topPost.image}`)
+						.postinfo(href=`exercises/post/${topPost._id}`)
+							p.workposttitle #{topPost.title}
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+		else if topPosts.length <= 10
+			.subcontainer#topworkout2
+				.categoryHeader
+					span.headerTitle TOP POSTS
+					if topPosts.length <= 5
+						a(href="/seemoretop")#seemoretop See More...
+				each topPost in topPosts
+					a.workoutpost(href=`post/${topPost._id}`)
+						img.image(src=`${topPost.image}`)
+						.postinfo(href=`exercises/post/${topPost._id}`)
+							p.workposttitle #{topPost.title}
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+		else if topPosts.length <= 15
+			.subcontainer#topworkout3
+				.categoryHeader
+					span.headerTitle TOP POSTS
+					if topPosts.length <= 5
+						a(href="/seemoretop")#seemoretop See More...
+				each topPost in topPosts
+					a.workoutpost(href=`post/${topPost._id}`)
+						img.image(src=`${topPost.image}`)
+						.postinfo(href=`exercises/post/${topPost._id}`)
+							p.workposttitle #{topPost.title}
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+		else if topPosts.length <= 20
+			.subcontainer#topworkout4
+				.categoryHeader
+					span.headerTitle TOP POSTS
+					if topPosts.length <= 5
+						a(href="/seemoretop")#seemoretop See More...
+				each topPost in topPosts
+					a.workoutpost(href=`post/${topPost._id}`)
+						img.image(src=`${topPost.image}`)
+						.postinfo(href=`exercises/post/${topPost._id}`)
+							p.workposttitle #{topPost.title}
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+		else if topPosts.length <= 25
+			.subcontainer#topworkout5
+				.categoryHeader
+					span.headerTitle TOP POSTS
+					if topPosts.length <= 5
+						a(href="/seemoretop")#seemoretop See More...
+				each topPost in topPosts
+					a.workoutpost(href=`post/${topPost._id}`)
+						img.image(src=`${topPost.image}`)
+						.postinfo(href=`exercises/post/${topPost._id}`)
+							p.workposttitle #{topPost.title}
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+		if newPosts.length <= 5
+			.subcontainer#newworkout
+				.categoryHeader
+					span.headerTitle NEW POSTS
+					a(href="/seemorenew")#seemorenew See More...
+				each newPost in newPosts
+					a.workoutpost(href=`post/${newPost._id}`)
+						img.image(src=`${newPost.image}`)
+						.postinfo(href=`post/${newPost._id}`)
+							p.workposttitle #{newPost.title}
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+		else if newPosts.length <= 10
+			.subcontainer#newworkout2
+				.categoryHeader
+					span.headerTitle NEW POSTS
+					if newPosts.length <= 5
+						a(href="/seemorenew")#seemorenew See More...
+				each newPost in newPosts
+					a.workoutpost(href=`post/${newPost._id}`)
+						img.image(src=`${newPost.image}`)
+						.postinfo(href=`post/${newPost._id}`)
+							p.workposttitle #{newPost.title}
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+		else if newPosts.length <= 15
+			.subcontainer#newworkout3
+				.categoryHeader
+					span.headerTitle NEW POSTS
+					if newPosts.length <= 5
+						a(href="/seemorenew")#seemorenew See More...
+				each newPost in newPosts
+					a.workoutpost(href=`post/${newPost._id}`)
+						img.image(src=`${newPost.image}`)
+						.postinfo(href=`post/${newPost._id}`)
+							p.workposttitle #{newPost.title}
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+		else if newPosts.length <= 20
+			.subcontainer#newworkout4
+				.categoryHeader
+					span.headerTitle NEW POSTS
+					if newPosts.length <= 5
+						a(href="/seemorenew")#seemorenew See More...
+				each newPost in newPosts
+					a.workoutpost(href=`post/${newPost._id}`)
+						img.image(src=`${newPost.image}`)
+						.postinfo(href=`post/${newPost._id}`)
+							p.workposttitle #{newPost.title}
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+		else if newPosts.length <= 25
+			.subcontainer#newworkout5
+				.categoryHeader
+					span.headerTitle NEW POSTS
+					if newPosts.length <= 5
+						a(href="/seemorenew")#seemorenew See More...
+				each newPost in newPosts
+					a.workoutpost(href=`post/${newPost._id}`)
+						img.image(src=`${newPost.image}`)
+						.postinfo(href=`post/${newPost._id}`)
+							p.workposttitle #{newPost.title}
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes

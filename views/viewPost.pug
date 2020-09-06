@@ -1,0 +1,104 @@
+extends ./layouts/navbar.pug
+block css
+    link(rel="stylesheet", type="text/css", href="/css/viewPost.css")
+block body
+    - var count = 0;
+    - var userCount = 0;
+    .postContainer
+        #categoryForm 
+            header
+                #difficulty 
+                    span Difficulty: 
+                    if workout.difficulty == "Easy"
+                        span(style="color: green;") #{workout.difficulty}
+                    if workout.difficulty == "Medium"
+                        span(style="color: orange;") #{workout.difficulty}
+                    if workout.difficulty === "Hard"
+                        span(style="color: red;") #{workout.difficulty}
+                #duration
+                    span Duration: #{workout.duration} minutes
+                #pTitle #{post.title} 
+                .category
+                    each category in workout.bodyfocus
+                        span | #{category} |
+        hr
+        div(style="padding-left: 50px; padding-right: 50px;")
+            #exerciseContainer
+                each exercisepics in exerciseImgs
+                    div(style="display: flex; justify-content: center;")
+                        button(type="button")
+                            img.pic(src=`${exercisepics}`, onclick=`
+                                $("#ename").text("${exercises[count].name}");
+                                $("#edescription").text("${exercises[count].description}");
+                                $("#erepetitions").text("Repetitions: ${exercises[count].repetitions}");
+                                $("#esets").text("Sets: ${exercises[count].sets}");
+                                $("#eimage").attr("src", "${exerciseImgs[count]}");
+                            `)
+                    -count++;
+        div(style="padding-left: 50px; padding-right: 50px;")
+            #exerciseDetailContainer
+                img#eimage(src=`${exerciseImgs[0]}`) 
+                div(style="width: 100%; height: 100%; padding-left: 50px;")
+                    br
+                    br
+                    span#ename #{exercises[0].name}
+                    br
+                    br
+                    span#edescription #{exercises[0].description}
+                    br
+                    br
+                    br
+                    span#erepetitions Repetitions: #{exercises[0].repetitions}
+                    br
+                    span#esets Sets: #{exercises[0].sets}
+        hr
+        #commentsSection
+            span#commentTitle Comments
+            if guest.addComment
+                div
+                    form(action="/postComment", method="POST")
+                        span#postCommentTitle Post your comment here!
+                        textarea#postCommentBox(name="comment", required)
+                        br
+                        br
+                        button#postComment(type="submit") Post Comment
+                        input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
+            div
+                each comment in comments
+                    div
+                        span.userCommentor #{comment.userId.fname} #{comment.userId.lname} says..
+                        if comment.userId._id == guest._id
+                            button 
+                                img.ebtn#edit(src="/images/editButton.png", onclick=`
+                                    $("#editCommentBox").text("${comment.comment}");
+                                    $("#editComment${userCount}").css("display", "inline-block");
+                                    $("#cancelComment${userCount}").css("display", "inline-block");
+                                    $("#editcommentID").val('${comment._id}');
+                                    document.getElementById('comment${userCount}').contentEditable=true;
+                                `)
+                            button
+                                form(action="/deleteComment", method="POST")
+                                    button(type="submit")
+                                        img.ebtn#delete(src="/images/deleteButton.png")
+                                    input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
+                                    input#editcommentID(type="text", value=`${comment._id}`, name=`commentId`, style="display: none;")
+                    if comment.userId._id == guest._id
+                        form(id=`editForm${userCount}`,action="/editComment", name=`editForm${userCount}`, method="POST")
+                            blockquote(id=`comment${userCount}`) #{comment.comment}
+                            button.cancelComment(id=`cancelComment${userCount}`, type="button", onclick=`
+                                $("#editComment${userCount}").css("display", "none");
+                                $("#cancelComment${userCount}").css("display", "none");
+                                document.getElementById('comment${userCount}').contentEditable=false;
+                            `) Cancel
+                            button.editComment(id=`editComment${userCount}`, type="button", onclick=`
+                                $("#hiddenComment").val($("#comment${userCount}").html());
+                                document.editForm${userCount}.submit()
+                            `) Save
+                            input#editcommentID(type="text", value=`${comment._id}`, name=`commentId`, style="display: none;")
+                            input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
+                            input(id=`hiddenComment${userCount}`, type="text", name=`comment`, style="display: none;")
+                    else
+                        blockquote(id=`comment${userCount}`) "#{comment.comment}"
+                    --userCount++
+block scripts
+    script(src="/scripts/viewPost.js")

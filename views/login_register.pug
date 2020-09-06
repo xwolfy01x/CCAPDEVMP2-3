@@ -1,0 +1,51 @@
+html
+	head
+		link(rel = "stylesheet", type = "text/css", href = "/css/regforms.css")
+		script(src="/scripts/jquery.js")
+	body
+		.container
+			.box
+			.container-forms
+				.container-info
+					.info-item
+						.table
+							.table-cell
+								p Have an account?
+								.btn Log In
+					.info-item
+						.table
+							.table-cell
+								p Don't have an account?
+								.btn Register
+				.container-form
+					form.form-item.sign-up(action="/register", method="POST", name="regform")
+						.table
+							.table-cell
+								center
+									a(href="/") 
+										img(src="/images/backToHome.png", height="40", width="40", style="padding-bottom: 5%;")
+								input#regfname(name = "fname", placeholder = "First Name", type = "text", required)
+								input#reglname(name = "lname", placeholder = "Last Name",type="text", required)
+								input#regemail(name = "email", placeholder = "Enter email", type = "text", required)
+								input#regpass(name = "password", placeholder = "password", type = "password", required)
+								input#regcpass(name = "cpassword", placeholder = "confirm password", type = "password", required)
+								center
+									span#regerror(style = "display: none") .
+									if (success)
+										span#success #{success}
+									if (regerror)
+										span#nosuccess #{regerror}
+								.btn#reg(type="submit") Register
+					form.form-item.log-in(action="/login", method="POST", name="logform")
+						.table
+							.table-cell
+								center
+									a(href="/") 
+										img(src="/images/backToHome.png", height="40", width="40", style="padding-bottom: 5%;")
+								input(name = "email", placeholder = "Email address", type = "text")
+								input(name = "password", placeholder = "Password", type = "password")
+								center
+									if (error)
+										span#logerror #{error}
+								.btn#log(type="submit") Log in
+		script(src="/scripts/regforms.js")

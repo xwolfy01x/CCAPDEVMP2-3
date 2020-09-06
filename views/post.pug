@@ -1,0 +1,78 @@
+extends ./layouts/navbar.pug
+block css
+	link(rel = "stylesheet", type = "text/css", href = "/css/post.css")
+block body
+	#postcontainer
+		img#RecipeCreateImg(src="/images/postCreateRecipe.jpg")
+		img#WorkoutCreateImg(src="/images/postCreateWorkout.jpg")
+		h1 Create a Post
+		.left-col
+			button#showrecbtn(type = "button") Recipe
+		.right-col
+			button#showworkbtn(type = "button") Workout	
+	#recipecontainer(style = "display: none")
+		form#recipepost(action = "/newrecipepost", method = "POST", name = "recipepost")
+			p Post Title:
+			input#recipetitle(name = "recipetitle", placeholder = "Title of post", type = "text", required)
+			p Picture:
+			input#recipepic(name = "recipepic", type = "file", accept = "image/*", required)
+			//incomplete
+			button#rpostbtn(type="submit") Post
+
+	#workoutcontainer(style = "display: none")
+		form#workoutpost(action = "/newworkoutpost",method = "POST", name = "workoutpost", enctype="multipart/form-data")
+			.workTitleSection
+				p#workTitle TITLE OF THE POST:
+				input#workTitleBox(name = "workouttitle", placeholder = "Title of post", type = "text", autocomplete = "off", required)
+				p#workimg IMAGE OF THE POST (this will be displayed for others to see):
+				input#workpostimg(name = "postimg", type = "file", required)
+			.workBodyFocusSection
+				#slideshow
+				#workBodyFocus
+					p#workBodyFocusTitle BODY FOCUS:
+				div(style="z-index:2; padding-left: 20vh; box-sizing: border-box;")
+					input#abdomen.boxes(name = "abdomen", type = "checkbox")
+					label(for = "abdomen") Abdomen
+				div(style="z-index:2; padding-left: 20vh; box-sizing: border-box; width: 100%;")
+					input#glutes.boxes(name = "glutes", type = "checkbox")
+					label(for = "glutes") Glutes
+				div(style="z-index:2; padding-left: 20vh; box-sizing: border-box; width: 100%;")
+					input#triceps.boxes(name = "triceps", type = "checkbox")
+					label(for = "triceps") Triceps
+				div(style="z-index:2; padding-left: 20vh; box-sizing: border-box; width: 100%;")
+					input#biceps.boxes(name = "biceps", type = "checkbox")
+					label(for = "biceps") Biceps
+				div(style="z-index:2; padding-left: 20vh; box-sizing: border-box; width: 100%;")
+					input#back.boxes(name = "back", type = "checkbox")
+					label(for = "back") Back
+				div(style="z-index:2; padding-left: 20vh; box-sizing: border-box; width: 100%;")
+					input#chest.boxes(name = "chest", type = "checkbox")
+					label(for = "chest") Chest
+				div(style="z-index:2; padding-left: 20vh; box-sizing: border-box; width: 100%;")
+					input#thighs.boxes(name = "thighs", type = "checkbox")
+					label(for = "thighs") Thighs
+				div(style="z-index:2; padding-left: 20vh; box-sizing: border-box; width: 100%;")
+					input#wholebody.boxes(name = "wholebody", type = "checkbox", onclick="toggle(this);")
+					label(for = "wholebody") Whole Body
+				input#bodyFocusList(type="text", style="display: none;" name="bodyfocuslist")
+			.workdurdiffcontainer
+				.workDurationSection
+					p#workDuration DURATION (In Minutes):
+					select#workDurationBox(name="workoutdur", required)
+						option(value="30") 30
+						option(value="60") 60
+						option(value="90") 90
+				.workDifficultySection
+					p#workDiff DIFFICULTY:
+					select#workDiffBox(name="workoutdiff", required)
+						option(value="Easy")  Easy
+						option(value="Medium") Medium
+						option(value="Hard")  Hard
+			#workExercisesContainer
+				p Exercises
+				button#addExercise(type="button")
+					img(src="/images/plus.png")
+			center
+				button#wpostbtn(type="submit", disabled) Post
+block scripts
+	script(src="/scripts/post.js")

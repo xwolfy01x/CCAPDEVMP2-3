@@ -1,0 +1,14 @@
+const express = require('express');
+const route = express();
+const userController = require('../controllers/user.js');
+route.get('/', userController.getIndex);
+route.get('/registerpage', userController.getRegLog);
+route.get('/loginpage', userController.getLogReg);
+route.get('/about', userController.getIndex);
+route.post('/register', userController.postRegister);
+route.post('/login', userController.postLogin);
+route.get('/logout', userController.getLogout);
+route.get('/profile', userController.getProfile);
+route.get('/createpost', userController.getPostform);
+route.post('/updateprofile', userController.postUpdateUser);
+module.exports = route;

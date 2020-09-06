@@ -1,0 +1,318 @@
+html {
+  scroll-behavior: smooth;
+ }
+
+body{
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#postcontainer{
+	height: 100%;
+    width: 100%;
+    position: relative;
+    top: 90px;
+	text-align: center;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	align-items: center;
+    box-shadow: 2px solid #5356AD;
+}
+#postcontainer h1{
+	font-family: 'Actor';
+    font-size: 15vmin;
+    text-align: center;
+    grid-column: 1/3;
+	margin: 1vh 20vh;
+	margin-bottom: 1vmin;
+	border-bottom: 2vh solid #5356AD;
+}
+#WorkoutCreateImg {
+    position: absolute;
+    grid-row: 1/3;
+    opacity: 0.7;
+    grid-column: 2/3;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+#RecipeCreateImg {
+    position: absolute;
+    grid-row: 1/3;
+    grid-column: 1/2;
+    opacity: 0.7;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.left-col {
+	position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+	justify-content: space-evenly;
+}
+.right-col {
+	position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+	justify-content: space-evenly;
+}
+.left-col button, .right-col button, #wpostbtn {
+	font-size: 5vmin;
+	background-color: #7fdeff;
+	color: white;
+	border-radius: 10%;
+	margin: 10px;
+	padding: 2vw 3vw;
+	cursor: pointer;
+	outline: 0;
+}
+#workoutcontainer{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+#recipecontainer{
+	position: relative;
+	top: 100px;
+	height: 100%;
+	width: 100%;
+	padding: 30vh;
+}
+.workTitleSection {
+	width: 100%;
+	box-sizing: border-box;
+	font-family: 'Actor';
+	background-color: #2c2a4a;
+	padding: 20vh;
+}
+#workTitle {
+	font-size: 5vh;
+	width: 100%;
+	color: white;
+	border-top: 5px solid #DABFFF;
+	padding-bottom: 50px;
+}
+#workTitleBox{
+	width: 100%;
+	border: 0;
+	background-color: #2c2a4a;
+	color: white;
+	border-bottom: 5px solid #DABFFF;
+	font-size: 4vh;
+}
+#workimg{
+	color: white;
+	font-size: 4vh;
+	width: 100%;
+}
+workpostimg{
+	height: 4vmin;
+	width: 4vmin;
+}
+#workTitleBox:focus {
+	outline: 0;
+	border-bottom: 5px solid #74DEFF;
+}
+.workBodyFocusSection {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	font-family: 'Actor';
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 0.75fr repeat(4, 0.25fr);
+	opacity: 1;
+}
+#slideshow {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	z-index: 0;
+	opacity: 0.8;
+}
+#workBodyFocus {
+	box-sizing: border-box;
+	font-size: 5vh;
+	width: 100%;
+	grid-column: 1/3;
+	color: black;
+	z-index: 2;
+}
+#workBodyFocusTitle {
+	margin: 20vh 20vh 0vh 20vh;
+	border-top: 5px solid #5653AD;
+}
+label {
+	font-size: 4vh;
+	font-weight: 800;
+	color: black;
+}
+.boxes {
+	color: black;
+	height: 3.5vh;
+	width: 3.5vh;
+	margin-right: 10px;
+}
+.workdurdiffcontainer{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.workDurationSection {
+	grid-column: 1/2;
+	padding: 20vh;
+	box-sizing: border-box;
+	font-family: 'Actor';
+	display: flex;
+  	align-items: center;
+	flex-direction: column;
+	background-color: #5356ad;
+	color: white;
+	border-right: 5px solid #2c2A4A;
+}
+.workDurationSection:hover{
+	border-right: 5px solid #DABFFF;
+	transition: all 0.5s;
+}
+.workDifficultySection{
+	grid-column: 2/3;
+	padding: 20vh;
+	box-sizing: border-box;
+	font-family: 'Actor';
+	display: flex;
+  	align-items: center;
+	flex-direction: column;
+	background-color: #5356ad;
+	color: white;
+	border-right: 5px solid #2c2A4A;
+}
+.workDifficultySection:hover{
+	border-right: 5px solid #DABFFF;
+	transition: all 0.5s;
+}
+#workDurationBox, #workDiffBox {
+	font-size: 4vh;
+	font-weight: 700;
+	border: none;
+	border-radius: 5%;
+	width: 100%;
+	text-align: center;
+	height: 100%;
+	background-color: #2c2a4a;
+	color: white;
+	text-align-last: center;
+}
+p#workDuration, p#workDiff{
+	border-top: 5px solid #DABFFF;
+	font-size: 4vh;
+	font-weight: 700;
+	width: 100%;
+	text-align: center;
+}
+#workExercisesContainer {
+	padding: 20vh;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: 20vh 30vh;
+}
+#addExercise img {
+	height: 25vmin;
+	width: 25vmin;
+	cursor: pointer;
+}
+#workExercisesContainer p {
+	font-weight: 600;
+	font-family: 'Actor';
+	font-size: 5vh;
+	grid-column: 1/6; 
+	border-top: 5px solid #7FDEFF;
+}
+
+.newExercise {
+	background-color: #2c2a4a;
+	color: white;
+	font-size: 2vh;
+	height: 70%;
+	width: 100%;
+	cursor: pointer;
+}
+.newExercise:hover{
+	border-top: 2px solid #2C2A4A;
+	border-left: 2px solid #2c2A4A;
+	border-right: 2px solid #2c2A4A;
+}
+.exerciseForm {
+	padding: 5vh;
+	position: fixed;
+	display: grid;
+	grid-template-rows: 3vh 30vh 3vh 3vh;
+	grid-template-columns: repeat(4, 1fr);
+	grid-column-gap: 2%;
+	grid-row-gap: 5%;
+	top: 20%;
+	left: 20%;
+	height: 60%;
+	width: 60%;
+	box-sizing: border-box;
+	z-index: 20;
+	font-family: 'Actor';
+	color: white;
+	background-color: #2C2A4A;
+}
+.exerciseForm button {
+	color: black;
+	font-family: 'Actor';
+	font-size: 3vh;
+	width: 30%;
+	background-color: white;
+}
+.exerciseForm span {
+	font-size: 2.5vh;
+	font-family: 'Actor';
+}
+.exerciseForm textarea {
+	width: 100%;
+	height: 90%;
+}
+.exerciseForm input {
+	font-size: 2vh;
+	font-family: 'Actor';
+	width: 100%;
+	font-weight: 600;
+	height: 100%;
+}
+.exerciseForm input:focus{
+	outline: 0;
+}
+.removeButton{
+	background-color: red;
+	color: white;
+	font-family: 'Actor';
+	font-weight: 600;
+	padding: 2vh;
+	width: 100%;
+	transition: background 0.5s;
+	cursor: pointer;
+}
+.removeButton:hover{
+	background-color: darkred;
+}
+/* @media(max-width: 1300px) {
+    #postcontainer {
+        top: 60px;
+    }
+	#workTitle, #workTitleBox {
+		font-size: 4vh;
+	}
+	#workBodyFocus {
+		font-size: 4vh;
+	}
+} */
