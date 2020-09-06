@@ -179,7 +179,6 @@ exports.getPost = (req, res, next) => {
 	let acquiredWork
 	let guest;
 	let acquiredComments = [];
-	let userList = [];
 	let exercises=[];
 	if (req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
 		let data = Workout.getDetails(req.params.postId);

@@ -145,6 +145,11 @@ hr {
     background-color: #5356AD;
     border: none;
 }
+.dateCreated {
+    margin-left: 50px;
+    font-weight: 600;
+    font-family: 'Actor';
+}
 .editComment, .cancelComment {
     display: none;
 }

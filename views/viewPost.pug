@@ -66,6 +66,8 @@ block body
             div
                 each comment in comments
                     div
+                        span.dateCreated #{comment.dateCreated.toISOString().slice(0,10)}
+                        br
                         span.userCommentor #{comment.userId.fname} #{comment.userId.lname} says..
                         if comment.userId._id == guest._id
                             button 
