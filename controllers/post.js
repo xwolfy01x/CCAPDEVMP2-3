@@ -52,7 +52,7 @@ exports.postWorkout = (req, res, next) =>{
 	let exerdescriptions = req.body.exerdesc;
 	let exerreps = req.body.exerrep;
 	let exersets = req.body.exerset;
-	for(i = 0; i < exernames.length; i++){ 
+	for(i = 0; i < exerimages.length; i++){ 
 	 	const exercise = new Exercise({
 	 		name: exernames[i],
 	 		image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${exerimages[i].filename}`)),
