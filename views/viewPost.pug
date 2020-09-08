@@ -76,7 +76,7 @@ block body
                                     $("#editComment${userCount}").css("display", "inline-block");
                                     $("#cancelComment${userCount}").css("display", "inline-block");
                                     $("#editcommentID").val('${comment._id}');
-                                    document.getElementById('hiddenComment${userCount}').contentEditable=true;
+                                    document.getElementById('comment${userCount}').contentEditable=true;
                                 `)
                             button
                                 form(action="/deleteComment", method="POST")
@@ -86,21 +86,21 @@ block body
                                     input#editcommentID(type="text", value=`${comment._id}`, name=`commentId`, style="display: none;")
                     if comment.userId._id == guest._id
                         form(id=`editForm${userCount}`,action="/editComment", name=`editForm${userCount}`, method="POST")
-                            blockquote(id=`hiddenComment${userCount}`) #{comment.comment}
+                            blockquote(id=`comment${userCount}`) #{comment.comment}
                             button.cancelComment(id=`cancelComment${userCount}`, type="button", onclick=`
                                 $("#editComment${userCount}").css("display", "none");
                                 $("#cancelComment${userCount}").css("display", "none");
-                                document.getElementById('hiddenComment${userCount}').contentEditable=false;
+                                document.getElementById('comment${userCount}').contentEditable=false;
                             `) Cancel
                             button.editComment(id=`editComment${userCount}`, type="button", onclick=`
-                                $("#hiddenComment").val($("#comment${userCount}").html());
+                                $("#hiddenComment${userCount}").val($("#comment${userCount}").html());
                                 document.editForm${userCount}.submit()
                             `) Save
                             input#editcommentID(type="text", value=`${comment._id}`, name=`commentId`, style="display: none;")
                             input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
                             input(id=`hiddenComment${userCount}`, type="text", name=`comment`, style="display: none;")
                     else
-                        blockquote(id=`hiddenComment${userCount}`) "#{comment.comment}"
+                        blockquote(id=`comment${userCount}`) "#{comment.comment}"
                     --userCount++
 block scripts
     script(src="/scripts/viewPost.js")
