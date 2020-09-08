@@ -76,7 +76,7 @@ block body
                                     $("#editComment${userCount}").css("display", "inline-block");
                                     $("#cancelComment${userCount}").css("display", "inline-block");
                                     $("#editcommentID").val('${comment._id}');
-                                    document.getElementById('comment${userCount}').contentEditable=true;
+                                    document.getElementById('hiddenComment${userCount}').contentEditable=true;
                                 `)
                             button
                                 form(action="/deleteComment", method="POST")
@@ -90,7 +90,7 @@ block body
                             button.cancelComment(id=`cancelComment${userCount}`, type="button", onclick=`
                                 $("#editComment${userCount}").css("display", "none");
                                 $("#cancelComment${userCount}").css("display", "none");
-                                document.getElementById('comment${userCount}').contentEditable=false;
+                                document.getElementById('hiddenComment${userCount}').contentEditable=false;
                             `) Cancel
                             button.editComment(id=`editComment${userCount}`, type="button", onclick=`
                                 $("#hiddenComment").val($("#comment${userCount}").html());
