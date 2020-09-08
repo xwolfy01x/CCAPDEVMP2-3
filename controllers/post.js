@@ -30,9 +30,10 @@ exports.postWorkout = (req, res, next) =>{
         User.findOneAndUpdate(
             {_id : result._id},
             {posts : result.posts}
-	).then(() => {
-		console.log('Post added to User');
-	})})
+		).then(() => {
+			console.log('Post added to User');
+		})
+	})
 	let bodyFocus = req.body.bodyfocuslist.split(' ');
 	let bodyFocus2 = [];
 	for (let i = 0; i < bodyFocus.length; i++)
@@ -47,18 +48,14 @@ exports.postWorkout = (req, res, next) =>{
     });
 	work.save();
 	let exerciseIDs = [];
-	let exernames = req.body.exername;
 	let exerimages = req.files.exerpic;
-	let exerdescriptions = req.body.exerdesc;
-	let exerreps = req.body.exerrep;
-	let exersets = req.body.exerset;
 	for(i = 0; i < exerimages.length; i++){ 
 	 	const exercise = new Exercise({
-	 		name: exernames[i],
+	 		name: req.body.exername[i],
 	 		image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${exerimages[i].filename}`)),
-			description: exerdescriptions[i],
-	 		repetitions: parseInt(exerreps[i],10),
-	 		sets: parseInt(exersets[i], 10),
+			description: req.body.exerdesc[i],
+	 		repetitions: parseInt(req.body.exerrep[i],10),
+	 		sets: parseInt(req.body.exerset[i], 10),
 	 	});
 	 	exercise.save();
 		exerciseIDs.push(exercise._id);
@@ -68,12 +65,13 @@ exports.postWorkout = (req, res, next) =>{
 			console.log(err);
 		});
 	}
-	for (i=0; i<exerciseIDs.length; i++)
-		work.exercises.push(exerciseIDs[i]);
-		Workout.findOneAndUpdate({id: work._id}, {exercises: work.exercises}).then(() => {
-		console.log('hi');
+	work.exercises = exerciseIDs;
+	Workout.findOneAndUpdate({id: work._id}, {exercises: work.exercises}, {new:true}).then(() => {
+		console.log('Workout updated');
+		setTimeout(function(){res.redirect(`post/${post._id}`);}, 2000);
+	}).catch(err => {
+		console.log(err);
 	})
-	res.redirect(`/post/${post._id}`);
 }
 exports.getWorkouts = (req, res, next) => {
 	let result1, result2;

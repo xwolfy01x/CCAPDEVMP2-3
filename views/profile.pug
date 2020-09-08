@@ -26,7 +26,7 @@ html
           button(class="edit" id="save" type="submit") Save Changes
         button(class="edit" id="cancel" onclick = 'cancel()') Cancel
       ul#center
-        each userPost in postarr
+        each userPost in user.posts
           li 
             img(class="pic" src = "/images/profile.png")
             a(href=`/post/${userPost._id}`)
