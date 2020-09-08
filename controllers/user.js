@@ -71,17 +71,18 @@ exports.getLogout =(req, res, next) =>{
 exports.getProfile =(req, res, next) =>{
 	let data;
 	let userpost = [];
-	for(i = 0;i < req.session.user.posts.length; i++){
-		data = Post.getPost(req.session.user.posts[i]).then(result =>{
-			userpost.push(result);
-			if(userpost.length == req.session.user.posts.length){
-				res.render("profile",{
-					user: req.session.user,
-					postarr: userpost
-				})
-			}
-		})
-	}
+	let oneUser = User.getUser(req.session.user._id);
+	oneUser.then(user => {
+		req.session.user = user;
+		for(i = 0;i < user.posts.length; i++){
+			data = Post.getPost(req.session.user.posts[i]).then(result =>{
+				userpost.push(result);
+				if(userpost.length == req.session.user.posts.length){
+					res.redirect('/profile');
+				}
+			})
+		}
+	})
 };
 exports.getPostform = (req, res, next) =>{
 	res.render("post",{
