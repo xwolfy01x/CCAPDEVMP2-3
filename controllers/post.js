@@ -50,15 +50,28 @@ exports.postWorkout = (req, res, next) =>{
 	let exerciseIDs = [];
 	let exerimages = req.files.exerpic;
 	for(i = 0; i < exerimages.length; i++){ 
-	 	const exercise = new Exercise({
-	 		name: req.body.exername[i],
-	 		image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${exerimages[i].filename}`)),
-			description: req.body.exerdesc[i],
-	 		repetitions: parseInt(req.body.exerrep[i],10),
-	 		sets: parseInt(req.body.exerset[i], 10),
-	 	});
-	 	exercise.save();
-		exerciseIDs.push(exercise._id);
+		if (exerimages.length===1) {
+			const exercise = new Exercise({
+				name: req.body.exername,
+				image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${exerimages[i].filename}`)),
+				description: req.body.exerdesc,
+				repetitions: parseInt(req.body.exerrep,10),
+				sets: parseInt(req.body.exerset, 10),
+			});
+			exercise.save();
+			exerciseIDs.push(exercise._id);
+		}
+		else {
+			const exercise = new Exercise({
+				name: req.body.exername[i],
+				image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${exerimages[i].filename}`)),
+				description: req.body.exerdesc[i],
+				repetitions: parseInt(req.body.exerrep[i],10),
+				sets: parseInt(req.body.exerset[i], 10),
+			});
+			exercise.save();
+			exerciseIDs.push(exercise._id);
+		}
 		moveFile(path.join(__dirname, '..', `/public/uploads/${exerimages[i].filename}`), path.join(__dirname, '..', `/public/uploads/${post._id}/exerpic${i}.png`)).then(() => {
 			console.log('File Added Successfully')
 		}).catch(err => {
