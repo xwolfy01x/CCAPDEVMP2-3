@@ -12,7 +12,8 @@ exports.postWorkout = (req, res, next) =>{
         title: req.body.workouttitle,
         dateCreated: currdate.toISOString().slice(0,10),
         dateUpdated: currdate.toISOString().slice(0,10),
-        likes: 0,
+		likes: [],
+		dislikes: [],
         category: "Workout",
 		image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${req.files.postimg[0].filename}`))
 	});
@@ -72,7 +73,7 @@ exports.postWorkout = (req, res, next) =>{
 		Workout.findOneAndUpdate({id: work._id}, {exercises: work.exercises}).then(() => {
 		console.log('hi');
 	})
-	//res.redirect(`/post/${post._id}`);
+	res.redirect(`/post/${post._id}`);
 }
 exports.getWorkouts = (req, res, next) => {
 	let result1, result2;

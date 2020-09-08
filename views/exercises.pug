@@ -72,7 +72,7 @@ block body
 						img.image(src=`${topPost.image}`)
 						.postinfo(href=`exercises/post/${topPost._id}`)
 							p.workposttitle #{topPost.title}
-							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes.length} likes
 		else if topPosts.length <= 10
 			.subcontainer#topworkout2
 				.categoryHeader
@@ -84,7 +84,7 @@ block body
 						img.image(src=`${topPost.image}`)
 						.postinfo(href=`exercises/post/${topPost._id}`)
 							p.workposttitle #{topPost.title}
-							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes.length} likes
 		else if topPosts.length <= 15
 			.subcontainer#topworkout3
 				.categoryHeader
@@ -96,7 +96,7 @@ block body
 						img.image(src=`${topPost.image}`)
 						.postinfo(href=`exercises/post/${topPost._id}`)
 							p.workposttitle #{topPost.title}
-							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes.length} likes
 		else if topPosts.length <= 20
 			.subcontainer#topworkout4
 				.categoryHeader
@@ -108,7 +108,7 @@ block body
 						img.image(src=`${topPost.image}`)
 						.postinfo(href=`exercises/post/${topPost._id}`)
 							p.workposttitle #{topPost.title}
-							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes.length} likes
 		else if topPosts.length <= 25
 			.subcontainer#topworkout5
 				.categoryHeader
@@ -120,7 +120,7 @@ block body
 						img.image(src=`${topPost.image}`)
 						.postinfo(href=`exercises/post/${topPost._id}`)
 							p.workposttitle #{topPost.title}
-							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes.length} likes
 		if newPosts.length <= 5
 			.subcontainer#newworkout
 				.categoryHeader
@@ -131,7 +131,7 @@ block body
 						img.image(src=`${newPost.image}`)
 						.postinfo(href=`post/${newPost._id}`)
 							p.workposttitle #{newPost.title}
-							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes.length} likes
 		else if newPosts.length <= 10
 			.subcontainer#newworkout2
 				.categoryHeader
@@ -143,7 +143,7 @@ block body
 						img.image(src=`${newPost.image}`)
 						.postinfo(href=`post/${newPost._id}`)
 							p.workposttitle #{newPost.title}
-							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes.length} likes
 		else if newPosts.length <= 15
 			.subcontainer#newworkout3
 				.categoryHeader
@@ -155,7 +155,7 @@ block body
 						img.image(src=`${newPost.image}`)
 						.postinfo(href=`post/${newPost._id}`)
 							p.workposttitle #{newPost.title}
-							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes.length} likes
 		else if newPosts.length <= 20
 			.subcontainer#newworkout4
 				.categoryHeader
@@ -167,7 +167,7 @@ block body
 						img.image(src=`${newPost.image}`)
 						.postinfo(href=`post/${newPost._id}`)
 							p.workposttitle #{newPost.title}
-							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes.length} likes
 		else if newPosts.length <= 25
 			.subcontainer#newworkout5
 				.categoryHeader
@@ -179,4 +179,4 @@ block body
 						img.image(src=`${newPost.image}`)
 						.postinfo(href=`post/${newPost._id}`)
 							p.workposttitle #{newPost.title}
-							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes.length} likes

@@ -53,10 +53,16 @@ const postSchema = new Schema({
 		type: Date,
 		required: true
 	},
-	likes: {
-		type: Number,
+	likes: [{
+		type: mongoose.Types.ObjectId,
+		ref: 'User',
 		required: true
-	},
+	}],
+	dislikes: [{
+		type: mongoose.Types.ObjectId,
+		ref: 'User',
+		required: true
+	}],
 	category: {
 		type: String,
 		required: true
