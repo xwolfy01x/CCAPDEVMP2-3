@@ -1,28 +1,27 @@
-const Comment = require('../models/reviews');
-exports.postComment = (req, res, next) => {
+const Review = require('../models/reviews');
+exports.postReview = (req, res, next) => {
     let currDate = new Date;
-    const comment = new Comment({
+    const comment = new Review({
         postId: req.body.postId,
         userId: req.session.user._id,
         dateCreated: currDate.toISOString().slice(0,10),
-        comment: req.body.comment
+        review: req.body.comment
     });
     comment.save();
     res.redirect(`/post/${req.body.postId}`);
 }
-exports.editComment = (req, res, next) => {
-    console.log(req.body.comment);
-    Comment.findOneAndUpdate(
+exports.editReview = (req, res, next) => {
+    Review.findOneAndUpdate(
         {_id: req.body.commentId}, 
-        {comment: req.body.comment}
+        {review: req.body.comment}
     ).then(() => {
         res.redirect(`/post/${req.body.postId}`);
     }).catch(err => {
         console.log(err);
     })
 }
-exports.deleteComment = (req, res, next) => {
-    Comment.findOneAndDelete(
+exports.deleteReview = (req, res, next) => {
+    Review.findOneAndDelete(
         {_id: req.body.commentId}
     ).then(() => {
         res.redirect(`/post/${req.body.postId}`);

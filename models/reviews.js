@@ -7,7 +7,7 @@
 */ 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const commentSchema = new Schema ({
+const reviewSchema = new Schema ({
 	postId: { 
 		type: mongoose.Types.ObjectId,
 		ref: 'Post',
@@ -22,13 +22,13 @@ const commentSchema = new Schema ({
 		type: Date,
 		required: true
 	},
-	comment: {
+	review: {
 		type: String,
 		required: true
 	}
 });
-commentSchema.statics.getComments = async id => {
-	return Comment.find({postId: id}).populate('userId');
+reviewSchema.statics.getReviews = async id => {
+	return Review.find({postId: id}).populate('userId');
 }
-const Comment = mongoose.model('Comment', commentSchema, 'reviews') 
-module.exports = Comment;
+const Review = mongoose.model('Review', reviewSchema, 'reviews') 
+module.exports = Review;

@@ -2,7 +2,7 @@ const Post = require('../models/posts');
 const User = require('../models/users');
 const Workout = require('../models/workouts');
 const Exercise = require('../models/exercises');
-const Comment = require('../models/reviews');
+const Review = require('../models/reviews');
 const fs = require('fs');
 const moveFile = require('move-file');
 const path = require('path');
@@ -190,7 +190,7 @@ exports.getPost = (req, res, next) => {
 	let acquiredPost;
 	let acquiredWork
 	let guest;
-	let acquiredComments = [];
+	let acquiredReviews = [];
 	let exercises=[];
 	if (req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
 		let data = Workout.getDetails(req.params.postId);
@@ -203,9 +203,9 @@ exports.getPost = (req, res, next) => {
 					exercises.push(acquiredWork.exercises[i])
 					exerciseImgs.push(`/uploads/${acquiredPost._id}/exerpic${i}.png`)
 				}
-				let comments = Comment.getComments(req.params.postId);
-				comments.then(result3 => {
-					acquiredComments = result3;
+				let reviews = Review.getReviews(req.params.postId);
+				reviews.then(result3 => {
+					acquiredReviews = result3;
 					if (!req.session.user) {
 						guest=new User({
 							fname: '',
@@ -214,11 +214,11 @@ exports.getPost = (req, res, next) => {
 							email: '',
 							posts: []
 						});
-						guest.addComment = false;
+						guest.addReview = false;
 					}
 					else {
 						guest = req.session.user;
-						guest.addComment = true;
+						guest.addReview = true;
 					}
 					res.render('viewPost', {
 						post: acquiredPost,
@@ -227,7 +227,7 @@ exports.getPost = (req, res, next) => {
 						exerciseImgs: exerciseImgs,
 						user: req.session.user,
 						guest: guest,
-						comments: acquiredComments
+						comments: acquiredReviews
 					});
 				});
 			})
