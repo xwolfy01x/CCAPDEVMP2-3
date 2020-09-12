@@ -22,7 +22,7 @@ app.use(session({
 }))
 const userRoute = require('./routes/userroute');
 const postRoute = require('./routes/postroute');
-const commentRoute = require('./routes/commentroute');
+const commentRoute = require('./routes/reviewroute');
 app.use(userRoute);
 app.use(postRoute);
 app.use(commentRoute)
