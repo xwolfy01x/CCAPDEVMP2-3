@@ -1,12 +1,12 @@
-@import url(https://fonts.googleapis.com/css?family=Oswald|Roboto);
+
 body {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  font-family: "Roboto", sans-serif;
-  background-color: #5356ad;
+  font-family: "Actor";
+  /*background-color: #bebebe; /*color of the whole page*/
   overflow: hidden;
 }
 
@@ -30,7 +30,7 @@ body {
   width: 600px;
   margin: 30px auto 0;
   height: 320px;
-  background-color: #999ede;
+  background-color: #A41725; /*Color of the back box - triangles*/
   top: 50%;
   margin-top: -160px;
   -moz-transition: all 0.5s;
@@ -51,7 +51,7 @@ body {
   position: absolute;
   left: 152px;
   top: 50px;
-  background-color: #9297e0;
+  background-color: #fff; /*Bottom triangle*/
   transform: rotateX(52deg) rotateY(15deg) rotateZ(-38deg);
   width: 300px;
   height: 285px;
@@ -61,7 +61,7 @@ body {
   transition: all 0.5s;
 }
 .container .box:after {
-  background-color: #a5aae4;
+  background-color: #fff; /*Top triangle*/
   top: -10px;
   left: 80px;
   width: 320px;
@@ -75,13 +75,14 @@ body {
   text-align: center;
   margin: 0 auto;
   width: 60px;
-  color: #fff;
-  background-color: #4a7be4;
+  color: black;
+  background-color: #A41725; /*Log in Register buttons*/
   opacity: 1;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
+  padding-right: 20px;
 }
 .container .btn:hover {
   opacity: 0.7;
@@ -109,7 +110,7 @@ body {
   height: 320px;
   display: inline-block;
   vertical-align: top;
-  color: #fff;
+  color: black;
   opacity: 1;
   -moz-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -122,7 +123,7 @@ body {
 }
 .container .container-forms .container-info .info-item .btn {
   background-color: transparent;
-  border: 1px solid #fff;
+  border: 1px solid black;
 }
 .container .container-forms .container-info .info-item .table-cell {
   padding-right: 35px;
@@ -138,21 +139,8 @@ body {
   top: -30px;
   width: 305px;
   height: 450px;
-  background-color: #fff;
+  background-color: #bebebe;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
-  -moz-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-}
-.container .container-form:before {
-  content: "✔";
-  position: absolute;
-  left: 160px;
-  top: -50px;
-  color: #5356ad;
-  font-size: 130px;
-  opacity: 0;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -160,7 +148,7 @@ body {
 }
 .container .container-form .btn {
   position: relative;
-  box-shadow: 0 0 10px 1px lightblue;
+  box-shadow: 0 0 10px 1px #bebebe; /*Shadow of button*/
   margin-top: 30px;
 }
 .container .form-item {
@@ -213,15 +201,6 @@ body {
   width: 200px;
   height: 200px;
 }
-.container.active .container-form:before {
-  content: "✔";
-  position: absolute;
-  left: 51px;
-  top: 5px;
-  color: #5356ad;
-  font-size: 130px;
-  opacity: 1;
-}
 .container.active input, .container.active .btn, .container.active .info-item {
   display: none;
   opacity: 0;
@@ -243,4 +222,17 @@ body {
 
 #success {
   color: green;
+}
+
+@font-face {
+	font-family: 'Actor';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/actor-v9-latin/actor-v9-latin-regular.eot'); /* IE9 Compat Modes */
+	src: local('Actor Regular'), local('Actor-Regular'),
+		 url('../fonts/actor-v9-latin/actor-v9-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+		 url('../fonts/actor-v9-latin/actor-v9-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+		 url('../fonts/actor-v9-latin/actor-v9-latin-regular.woff') format('woff'), /* Modern Browsers */
+		 url('../fonts/actor-v9-latin/actor-v9-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+     url('../fonts/actor-v9-latin/actor-v9-latin-regular.svg#Actor') format('svg'); /* Legacy iOS */
 }

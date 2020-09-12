@@ -1,23 +1,21 @@
 $('.navbarbtn').hover(function() {
-    var div;
-    console.log('hover')
-    $(this).children('.labellink').css('visibility', 'visible');
-    $(this).children('.labellink').css('display', 'block');
-    $(this).css('border-bottom', '5px solid #dabfff');
+    $(this).css('background-color', '#b04632');
+    $(this).css('border-bottom', '5px solid #b04632');
 }, function() {
-    $(this).children('.imglink').css('display', 'block');
-    $(this).children('.labellink').css('visibility', 'hidden');
-    $(this).children('.labellink').css('display', 'none');
-    $(this).children('.labellink').css('visibility', 'hidden');
-    $(this).css('border-bottom', '5px solid #5356ad');
+    $(this).css('background-color', '#BFBEBE');
+    $(this).css('border-bottom', '5px solid #BFBEBE');
 })
-$('.indexbtn').hover(function() {
-    $(this).css('border-bottom', '5px solid #dabfff');
+$('#postdiv').hover(function() {
+    $(this).css('background-color', '#b04632');
+    $(this).css('border-bottom', '5px solid #b04632');
 }, function() {
-    $(this).css('border-bottom', '5px solid #5356ad');
+    $(this).css('background-color', '#BFBEBE');
+    $(this).css('border-bottom', '5px solid #BFBEBE');
 })
 $('.userbtns').hover(function() {
-    $(this).css('border-bottom', '5px solid #dabfff');
+    $(this).css('background-color', '#bebebe');
+    $(this).css('border-bottom', '5px solid #b04632');
 }, function() {
-    $(this).css('border-bottom', '5px solid #5356ad');
+    $(this).css('background-color', '#BFBEBE');
+    $(this).css('border-bottom', '5px solid #BFBEBE');
 })

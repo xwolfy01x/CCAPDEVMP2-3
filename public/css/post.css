@@ -219,9 +219,6 @@ p#workDuration, p#workDiff{
 }
 #workExercisesContainer {
 	padding: 20vh;
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	grid-template-rows: 20vh 30vh;
 }
 #addExercise img {
 	height: 25vmin;
@@ -235,19 +232,25 @@ p#workDuration, p#workDiff{
 	grid-column: 1/6; 
 	border-top: 5px solid #7FDEFF;
 }
-
 .newExercise {
-	background-color: #2c2a4a;
-	color: white;
+	display: grid;
+	background-color: #bebebe;
 	font-size: 2vh;
 	height: 70%;
 	width: 100%;
 	cursor: pointer;
 }
+.newExercise:hover {
+	transform: translateY(-1rem);
+}
 .newExercise:hover{
 	border-top: 2px solid #2C2A4A;
 	border-left: 2px solid #2c2A4A;
 	border-right: 2px solid #2c2A4A;
+}
+.exerciseFormButton {
+	width: 300px;
+	height: 400px;
 }
 .exerciseForm {
 	padding: 5vh;

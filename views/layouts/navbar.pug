@@ -6,35 +6,30 @@ html
         block css
     body
         #navbar
-            a.navbarbtn(href="/exercises") 
-                img.imglink(src="/images/exercises.png") 
+            a.navbarbtn(href="/")
+                label.labellink OFIT 
+            a.navbarbtn(href="/exercises")  
                 label.labellink EXERCISES
             a.navbarbtn(href="/recipes") 
-                img.imglink(src="/images/recipes.png")
                 label.labellink RECIPES
-            a.navbarbtn(href="/about") 
-                img.imglink(src="/images/about.png")
-                label.labellink ABOUT
-            a.navbarbtn(href="/contacts") 
-                img.imglink(src="/images/contacts.png")
-                label.labellink CONTACT US
             #searchbar
                 form(action="/search", method="GET")
                     input#search(type = "text", placeholder = "Type an exercise or a recipe name...", name="search")
                     button
                         img#searchbtn(src="/images/searchbtn.png")
             if (user)
-                div#postdiv
-                    a#createpost(href = "/createpost" style="display:flex; justify-content:center; align-items:center;")
-                        img#postCreateButton(src = "/images/CreatePostBtn.png")
-                .userbtns
-                    div(style="display: flex; justify-content: center; width: 100%; align-items: center")
-                        img#profpic(src="/images/profile.png")
-                        ul.drop
-                            li
-                              a(href="/profile") VIEW PROFILE
-                            li
-                              a(href="/logout") LOGOUT
+                div(style="display: grid; grid-template-columns: repeat(2,1fr)")
+                    #postdiv
+                        a#createpost(href = "/createpost" style="display:flex; justify-content:center; align-items:center;")
+                            label CREATE A POST
+                    .userbtns
+                        div(style="display: flex; justify-content: center; width: 100%; align-items: center")
+                            img#profpic(src="/images/profile.png")
+                            ul.drop
+                                li
+                                    a(href="/profile") VIEW PROFILE
+                                li
+                                    a(href="/logout") LOGOUT
             else
                 .indexbtns
                     a.indexbtn#index1(href="/registerpage") REGISTER

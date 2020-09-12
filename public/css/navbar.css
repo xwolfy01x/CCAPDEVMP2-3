@@ -8,50 +8,38 @@ body::-webkit-scrollbar-track {
 	background: black;
 }
 body::-webkit-scrollbar-thumb {
-	background: #5356ad;
+	background: #b04632;
 }
 #navbar{
-	background-color: #5356ad;
-	border-top: 5px solid #5356ad;
+	background-color: #BFBEBE;
 	display: grid;
 	top: 0;
 	left: 0;
 	z-index: 10;
 	width: 100%;
+	height: 8%;
 	position: fixed;
-	grid-template-columns: repeat(4, 12%) 1fr 10% 10%;
+	grid-template-columns: repeat(3, 12%) 1fr 0.5fr;
 }
 #navbar a {
 	text-decoration: none;
 }
 .navbarbtn{
-	font-family: verdana;
 	color: black;
 	display: flex;
 	flex-direction: column;
-	font-weight: 700;
-	border-bottom: 5px solid #5356ad;
+	border-bottom: 5px solid #BFBEBE;
+	font-weight: 600;
 	padding: 0.75rem 1rem;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	transition: all 1s linear;
-}
-#navbar .imglink {
-	height: 60px;
-	width: 80px;
-	cursor: pointer;
 	transition: all 0.5s linear;
 }
-#navbar .imglink:hover {
-	transform: scale(1.5,1.5);
-}
 #navbar label {
-	font-family: 'Actor';
+	font-family: 'actor';
 	cursor: pointer;
-	display: none;
-	visibility: hidden;
-	font-size: 25px;
+	font-size: 20px;
 	bottom: 0;
 	transition: visibility 1s ease;
 }
@@ -74,8 +62,8 @@ body::-webkit-scrollbar-thumb {
 	font-size: 1em;
 	border-radius: 20px;
 	width: 100%;
-	height: 50%;
-	padding-left: 1.5%;
+	height: 70%;
+	padding-left: 2%;
 	border: 3px solid #2C2A4A;
 }
 #search:focus, #searchbar {
@@ -93,7 +81,6 @@ button {
 	display: grid;
 	font-family: verdana;
 	font-weight: 600;
-	grid-column: 6/8;
 	grid-template-columns: 1fr 1fr;
 }
 a.indexbtn{
@@ -110,15 +97,11 @@ a.indexbtn{
 	transition: all 0.25s linear;
 }
 #postdiv{
-	grid-column: 6/7;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 .userbtns {
-	grid-column: 7/8;
-	display: grid;
-	grid-template-columns:1fr;
 	position: relative;
 	font-family: verdana;
 	align-items: center;
@@ -126,18 +109,6 @@ a.indexbtn{
 	justify-content: center;
 	transition: all .5s ease;
 	padding-right: 10%;
-}
-#profname {
-	z-index: 1;
-	color: black;
-	font-weight: 600;
-	position: relative;
-	font-family: 'Actor';
-	font-size: 1.4em;
-}
-#creatpost{
-	font-family:Verdana;
-	font-weight: 600;
 }
 #profpic{
 	height: 50px;
@@ -149,28 +120,40 @@ ul {
 	text-align: center;
 	width: 100%;
 	opacity: 0;
+	height: 10%;
 	transition: all 5 ease;
 	position: absolute;
-	top: 73px;
+	top: 45px;
 	right: 0;
+	padding-left: 0;
 }
 .userbtns:hover ul {
-	height: 200px;
+	height: 130px;
 	opacity: 1;
-	transform: translateY(0);
+	background-color: #ef7564;
 }
 li {
 	color: black;
 	font-size: 1.2em;
+	text-align: center;
 	font-weight: 600;
-	position: relative;
-	background-color: #5356ad;
-	padding: 20px 10px;
+	width: 100%;
+	margin: 20;
 }
 li a {
 	color: black;
 	font-family: 'Actor';
 	transition: all .5s ease;
+	text-decoration: none;
+	width: 100%;
+	margin-right: 40px;
+}
+#postdiv {
+	transition: all .5s ease;
+}
+#postdiv a label {
+	color: black;
+	font-weight: 600;
 }
 #postCreateButton {
 	width: 50px;

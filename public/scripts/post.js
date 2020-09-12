@@ -19,7 +19,8 @@ function toggle(source) {
 }
 let idexer = 1;
 $("#addExercise").click(function (){
-	document.getElementById('addExercise').insertAdjacentHTML("beforebegin",`<div id="exerciseFormButton${idexer}">
+	document.getElementById('addExercise').insertAdjacentHTML("beforebegin",`
+	<div id="exerciseFormButton${idexer}" class="exerciseFormButton">
 		<button type="button" class="newExercise" onclick="showExerForm('${idexer}')" id="showyButton${idexer}"></button>
 		<button type="button" class="removeButton" onclick="removeExercise('newExercise${idexer}Form', 'exerciseFormButton${idexer}')">Remove</button>
 	</div>`);

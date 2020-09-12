@@ -10,23 +10,3 @@ function showSlide() {
     slides[slideNumber%slides.length].style.display="block";
     setTimeout(showSlide, 5000);
 }
-$('.slides').hover(function() {
-    $(this).children('#slideimg').css('border-left', '10px solid #DABFFF')
-}, function() {
-    $(this).children('#slideimg').css('border-left', '10px solid #7fdeff')
-})
-$('#slideshow .text').hover(function() {
-    $(this).css('border-right', '10px solid #DABFFF')
-}, function() {
-    $(this).css('border-right', '10px solid #7fdeff')
-})
-$('#aboutus .txt').hover(function() {
-    $(this).css('border-left', '10px solid #DABFFF')
-}, function() {
-    $(this).css('border-left', '10px solid #7fdeff')
-})
-$('#aboutus .image').hover(function() {
-    $(this).children('#aboutimg').css('border-right', '10px solid #DABFFF')
-}, function() {
-    $(this).children('#aboutimg').css('border-right', '10px solid #7fdeff')
-})
