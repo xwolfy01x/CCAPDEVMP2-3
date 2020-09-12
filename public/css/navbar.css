@@ -15,9 +15,8 @@ body::-webkit-scrollbar-thumb {
 	display: grid;
 	top: 0;
 	left: 0;
-	z-index: 10;
+	z-index: 3;
 	width: 100%;
-	height: 8%;
 	position: fixed;
 	grid-template-columns: repeat(3, 12%) 1fr 0.5fr;
 }
@@ -28,7 +27,6 @@ body::-webkit-scrollbar-thumb {
 	color: black;
 	display: flex;
 	flex-direction: column;
-	border-bottom: 5px solid #BFBEBE;
 	font-weight: 600;
 	padding: 0.75rem 1rem;
 	align-items: center;
@@ -41,7 +39,6 @@ body::-webkit-scrollbar-thumb {
 	cursor: pointer;
 	font-size: 20px;
 	bottom: 0;
-	transition: visibility 1s ease;
 }
 #searchbar {
 	width: 100%;
@@ -83,90 +80,66 @@ button {
 	font-weight: 600;
 	grid-template-columns: 1fr 1fr;
 }
+.newindexbtns{
+	display: grid;
+	grid-template-columns: 1fr 0.75fr;
+}
 a.indexbtn{
 	display: flex;
 	align-items: center;
-	height: 95%;
 	justify-content: center;
 	font-family: 'Actor';
-	font-size: 1.2em;
+	font-size: 20px;
 	text-align: center;
-	text-decoration: none;
 	color: black;
 	padding: 0% 15% 0% 5%;
 	transition: all 0.25s linear;
 }
-#postdiv{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
 .userbtns {
 	position: relative;
-	font-family: verdana;
+	display: flex;
 	align-items: center;
-	text-align: right;
 	justify-content: center;
-	transition: all .5s ease;
-	padding-right: 10%;
+	transition: all 0.5s linear;	/*turning grey to red-orange*/
 }
 #profpic{
-	height: 50px;
-	width: 50px;
-	padding-left: 5%;
+	height: 45px;
+	width: 40px;
 }
 ul {
 	list-style-type: none;
-	text-align: center;
 	width: 100%;
-	opacity: 0;
-	height: 10%;
-	transition: all 5 ease;
 	position: absolute;
-	top: 45px;
+	top: 50px;
 	right: 0;
-	padding-left: 0;
+	font-weight: 600;
+	padding: 0;
+	margin: 0;
+	background-color: #ef7564;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 1s ease;		/*doesnt work on auto height*/
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
 }
 .userbtns:hover ul {
-	height: 130px;
 	opacity: 1;
-	background-color: #ef7564;
+	visibility: visible;
 }
-li {
-	color: black;
-	font-size: 1.2em;
+li{
 	text-align: center;
-	font-weight: 600;
-	width: 100%;
-	margin: 20;
+	padding: 10px 5px;
 }
 li a {
 	color: black;
 	font-family: 'Actor';
-	transition: all .5s ease;
-	text-decoration: none;
-	width: 100%;
-	margin-right: 40px;
-}
-#postdiv {
-	transition: all .5s ease;
-}
-#postdiv a label {
-	color: black;
-	font-weight: 600;
-}
-#postCreateButton {
-	width: 50px;
-	height: 50px;
+	font-size: 1 em;
 }
 @media(max-width: 1300px) {
 	#navbar .imglink {
 		height: 50px;
 		width: 50px;
-	}
-	#postCreateButton {
-		width: 30px;
-		height: 30px;
 	}
 	.navbarbtn {
 		padding:0;
@@ -174,19 +147,8 @@ li a {
 	#searchbar {
 		width: 100%;
 	}
-	a.indexbtn {
-		font-size: 1em;
-		height: 90%;
-	}
-	#profpic {
-		height: 40px;
-		width: 30px;
-	}
 	#profname {
 		font-size: 1em;
-	}
-	ul {
-		top: 40px;
 	}
 	li {
 		font-size: 1em;

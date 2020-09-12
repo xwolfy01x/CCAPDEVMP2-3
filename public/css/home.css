@@ -6,7 +6,7 @@ body{
 }
 h1{
 	font-size: 3em;
-	font-family: 'verdana';
+	font-family: 'Actor';
 }
 h2 {
 	font-size: 2em;
@@ -18,14 +18,6 @@ h3 {
 a {
 	text-decoration: none;
 }
-span{
-  border-right: solid 3px black;
-  animation: animated-cursor 600ms linear infinite;
-}
-@keyframes animated-cursor {
-  from{border-right-color: white;}
-  to{border-right-color: black;}
-}
 #slideshow {
 	width: 100%;
 	display: block;
@@ -35,7 +27,6 @@ span{
 .slides img{
 	width: 50%;
 	margin-left: 6.5%;
-	border-left: 15px solid #bebebe;
 	float: left;
 	transition: all 0.6s ease;
 }
@@ -43,8 +34,8 @@ span{
 	float: left;
 	padding-left: 3%;
 	padding-right: 3%;
-	color: black;
-	background-color: #bebebe;
+	color: white;
+	background-color: #b04632;
 	width: 30%;
 	height: 60%;
 }
@@ -62,11 +53,11 @@ span{
 	float: left;
 	padding-left: 3%;
 	margin-left: 6.5%;
-	color: #FAFBF5;
+	color: white;
 	background-color: #b04632;
 	font-size: 2vh;
 	text-align: justify;
-	font-family: 'verdana';
+	font-family: 'Actor';
 	width: 30%;
 	height: 60%;
 	padding-right: 3%;
@@ -75,9 +66,8 @@ span{
 
 #aboutus .image img{
 	border: none;
-	border-right: 15px solid #b04632;
 	float: left;
-	color: #FAFBF5;
+	color: white;
 	margin-bottom: 3%;
 }
 @keyframes fade {
@@ -103,4 +93,4 @@ span{
 	#aboutus .txt {
 		font-size: 2.2vh;
 	}
-}
+} 

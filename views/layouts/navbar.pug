@@ -18,18 +18,16 @@ html
                     button
                         img#searchbtn(src="/images/searchbtn.png")
             if (user)
-                div(style="display: grid; grid-template-columns: repeat(2,1fr)")
-                    #postdiv
-                        a#createpost(href = "/createpost" style="display:flex; justify-content:center; align-items:center;")
-                            label CREATE A POST
+                .newindexbtns
+                    a.navbarbtn(href = "/createpost")
+                        label.labellink CREATE A POST
                     .userbtns
-                        div(style="display: flex; justify-content: center; width: 100%; align-items: center")
-                            img#profpic(src="/images/profile.png")
-                            ul.drop
-                                li
-                                    a(href="/profile") VIEW PROFILE
-                                li
-                                    a(href="/logout") LOGOUT
+                        img#profpic(src="/images/profile.png")
+                        ul.drop
+                            li
+                                a(href="/profile") VIEW PROFILE
+                            li
+                                a(href="/logout") LOGOUT
             else
                 .indexbtns
                     a.indexbtn#index1(href="/registerpage") REGISTER

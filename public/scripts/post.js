@@ -21,14 +21,19 @@ let idexer = 1;
 $("#addExercise").click(function (){
 	document.getElementById('addExercise').insertAdjacentHTML("beforebegin",`
 	<div id="exerciseFormButton${idexer}" class="exerciseFormButton">
-		<button type="button" class="newExercise" onclick="showExerForm('${idexer}')" id="showyButton${idexer}"></button>
+		<div class="newExercise" onclick="showExerForm('${idexer}')" id="showyButton${idexer}">
+			<center>
+				<span id="exerNameDisplay${idexer}" class="exerNameDisplay"></span>
+				<img id="exerPicDisplay${idexer}" src="#" class="exerPicDisplay" alt="imagehere">
+			</center>
+		</div>
 		<button type="button" class="removeButton" onclick="removeExercise('newExercise${idexer}Form', 'exerciseFormButton${idexer}')">Remove</button>
 	</div>`);
 	document.getElementById('workoutpost').insertAdjacentHTML("afterbegin", `<div class="exerciseForm" id="newExercise${idexer}Form">
 		<span>Exercise ${idexer} Name:</span>
 		<input type="text" id="exername${idexer}" name="exername" required>
 		<span>Exercise ${idexer} Picture: </span>
-		<input type="file" id="exerpic${idexer}" name="exerpic" accept="image/*">
+		<input type="file" id="exerpic${idexer}" name="exerpic" onchange="readURL(this, ${idexer})" accept="image/*">
 		<div style="grid-column: 1/5">
 			<span>Exercise ${idexer} Instructions:</span><br>
 			<textarea id="exerdesc${idexer}" name="exerdesc" required></textarea>
@@ -63,13 +68,32 @@ function removeExercise(formid, buttonid) {
 	$(`#${buttonid}`).remove();
 }
 function increaseExerCount(id) {
-	$(`#showyButton${id}`).html($(`#exername${id}`).val());
-	$(`#cancel${idexer}`).val(`2`);
+	$(`#exerNameDisplay${id}`).html($(`#exername${id}`).val());
+	$(`#cancel${id}`).val(`2`);
 	idexer++;
+}
+function readWorkThumbnail(input, count) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = e => {
+			$(`#workpostimg`).attr("src", e.target.result);
+			$(`#thumbnailName`).val($('#thumbnail').val().split('\\')[2]);
+			$(`#workpostimg`).css('display', 'block');
+		}
+		reader.readAsDataURL(input.files[0]);
+	}	
+}
+function readURL(input, count) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = e => {
+			$(`#exerPicDisplay${count}`).attr("src", e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}	
 }
 function checkCancelCount(id, formid, buttonid) {
 	var cancelid = id;
-	console.log(formid)
 	var count = parseInt($(`#${cancelid}`).val(), 10);
 	console.log(count)
 	if (count === 1) 

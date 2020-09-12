@@ -9,11 +9,11 @@ block body
             header
                 #difficulty 
                     span Difficulty: 
-                    if workout.difficulty == "Easy"
+                    if workout.difficulty == "Beginner"
                         span(style="color: green;") #{workout.difficulty}
-                    if workout.difficulty == "Medium"
+                    if workout.difficulty == "Intermediate"
                         span(style="color: orange;") #{workout.difficulty}
-                    if workout.difficulty === "Hard"
+                    if workout.difficulty === "Advanced"
                         span(style="color: red;") #{workout.difficulty}
                 #duration
                     span Duration: #{workout.duration} minutes
