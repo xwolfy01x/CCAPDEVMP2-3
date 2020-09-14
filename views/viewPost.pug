@@ -31,8 +31,8 @@ block body
                         span | #{category} |
                 #exercises
                     span Exercises included in the post:
-                    each exercisepics in exerciseImgs
-                        .exerciseContainer
+                    .exerciseContainer
+                        each exercisepics in exerciseImgs
                             .exerciseList
                                 button(type="button")
                                     img.pic(src=`${exercisepics}`, onclick=`
@@ -42,7 +42,7 @@ block body
                                     $("#esets").text("Sets: ${exercises[count].sets}");
                                     $("#eimage").attr("src", "${exerciseImgs[count]}");
                                     `)
-                        -count++;
+                            -count++;
         div(style="padding-top: 50px; padding-bottom: 50px;")
             #exerciseDetailContainer
                 center
