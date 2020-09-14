@@ -1,13 +1,16 @@
+/* body {
+	background-color: #b04632;
+} */
 .postscontainer{
 	position: relative;
 	padding-top: 40px;
-	top: 75px;
+	top: 50px;
 }
 .subcontainer{
 	margin: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	border-bottom: 5px solid #5356AD;
+	border-bottom: 5px solid #b04632;
 	display: grid;
 }
 #topworkout{
@@ -52,7 +55,7 @@
 }
 .categoryHeader {
 	grid-column: 1/6;
-	border-bottom: 5px solid #5356AD;
+	border-bottom: 5px solid #b04632;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
@@ -72,13 +75,14 @@
 	padding: 10px 20px;
 	transition: all .5s ease;
 	text-decoration: none;
+	color: black;
 }
 #seemoretop:hover, #seemorenew:hover {
-	background-color: #5356AD;
+	background-color: #b04632;
 	color: white;
 }
 .image{
-	background-color:#2c2a4a;
+	background-color:#b04632;
 	display:inline-block;
 	height: 100%;
 	width: 100%;
@@ -109,7 +113,6 @@
 }
 a.workoutpost:hover{
 	cursor: pointer;
-	background-color: #a8dadc;
 	transition: all 0.5s ease;
 }
 .workposttitle {

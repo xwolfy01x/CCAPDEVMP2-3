@@ -330,6 +330,7 @@ html {
 	  box-shadow: -1rem 0 3rem gray;
 	  transition: 0.4s;
 	  margin-bottom: 2rem;
+	  padding-bottom: 2rem;
   }
   .exerciseFormButton:hover~.exerciseFormButton {
 	  transform: translateX(5rem);
@@ -372,3 +373,15 @@ html {
 		height: 300px;
 	}
   } 
+  @media(max-width: 1100px) {
+	  .file2 {
+		  width: 80%;
+	  }
+	  #workDurationBox, #workDiffBox {
+		  font-size: 3vh;
+	  }
+	  .execCont::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+  }

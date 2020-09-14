@@ -12,7 +12,7 @@ block body
                 #duration
                     span Duration: 
                     if workout.duration == 30
-                        span(style="color: green")  #{workout.duration} minutes
+                        span(style="color: lightgreen")  #{workout.duration} minutes
                     if workout.duration == 60
                         span(style="color: orange") #{workout.duration} minutes
                     if workout.duration == 90
@@ -20,11 +20,23 @@ block body
                 #difficulty 
                     span Difficulty: 
                     if workout.difficulty == "Beginner"
-                        span(style="color: green;") #{workout.difficulty}
+                        span(style="color: lightgreen;") #{workout.difficulty}
                     if workout.difficulty == "Intermediate"
                         span(style="color: orange;") #{workout.difficulty}
                     if workout.difficulty == "Advanced"
                         span(style="color: red;") #{workout.difficulty}
+                #likeContainer
+                    form(method="POST", action="likePost")
+                        input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
+                        if userLiked === true
+                            button
+                                img.likeBtn(src="/images/LikeAfter.png") 
+                        else if userLiked === false && guest.addReview
+                            button
+                                img.likeBtn(src="/images/LikeBefore.png")
+                        else 
+                            button(disabled)
+                                img.likeBtn(src="/images/LikeBefore.png")
                 #pTitle #{post.title} 
                 .category
                     each category in workout.bodyfocus
@@ -36,13 +48,13 @@ block body
                             .exerciseList
                                 button(type="button")
                                     img.pic(src=`${exercisepics}`, onclick=`
-                                    $("#ename").text("${exercises[count].name}");
-                                    $("#edescription").text("${exercises[count].description}");
-                                    $("#erepetitions").text("Repetitions: ${exercises[count].repetitions}");
-                                    $("#esets").text("Sets: ${exercises[count].sets}");
-                                    $("#eimage").attr("src", "${exerciseImgs[count]}");
+                                        $("#ename").text("${exercises[count].name}");
+                                        $("#edescription").text("${exercises[count].description}");
+                                        $("#erepetitions").text("Repetitions: ${exercises[count].repetitions}");
+                                        $("#esets").text("Sets: ${exercises[count].sets}");
+                                        $("#eimage").attr("src", "${exerciseImgs[count]}");
                                     `)
-                            -count++;
+                            - count++;
         div(style="padding-top: 50px; padding-bottom: 50px;")
             #exerciseDetailContainer
                 center

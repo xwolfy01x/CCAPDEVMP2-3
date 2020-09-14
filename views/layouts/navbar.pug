@@ -8,14 +8,14 @@ html
         #navbar
             a.navbarbtn(href="/")
                 label.labellink OFIT 
-            a.navbarbtn(href="/exercises")  
-                label.labellink EXERCISES
+            a.navbarbtn(href="/workouts")  
+                label.labellink WORKOUTS
             a.navbarbtn(href="/recipes") 
                 label.labellink RECIPES
             #searchbar
                 form(action="/search", method="GET")
-                    input#search(type = "text", placeholder = "Type an exercise or a recipe name...", name="search")
-                    button
+                    input#search(type = "text", placeholder = "Type a workout or a recipe name...", name="search")
+                    button.search
                         img#searchbtn(src="/images/searchbtn.png")
             if (user)
                 .newindexbtns

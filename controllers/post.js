@@ -81,7 +81,7 @@ exports.postWorkout = (req, res, next) =>{
 	work.exercises = exerciseIDs;
 	Workout.findOneAndUpdate({id: work._id}, {exercises: work.exercises}, {new:true}).then(() => {
 		console.log('Workout updated');
-		setTimeout(function(){res.redirect(`post/${post._id}`);}, 2000);
+		setTimeout(function(){res.redirect(`post/${post._id}`);}, 4000);
 	}).catch(err => {
 		console.log(err);
 	})
@@ -192,6 +192,7 @@ exports.getPost = (req, res, next) => {
 	let guest;
 	let acquiredReviews = [];
 	let exercises=[];
+	let userLiked;
 	if (req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
 		let data = Workout.getDetails(req.params.postId);
 		data.then(result => {
@@ -203,6 +204,8 @@ exports.getPost = (req, res, next) => {
 					exercises.push(acquiredWork.exercises[acquiredWork.exercises.length-i-1])
 					exerciseImgs.push(`/uploads/${acquiredPost._id}/exerpic${acquiredWork.exercises.length-i-1}.png`)
 				}
+				if (req.session.user != null)
+					userLiked = acquiredPost.likes.includes(req.session.user._id);
 				let reviews = Review.getReviews(req.params.postId);
 				reviews.then(result3 => {
 					acquiredReviews = result3;
@@ -225,6 +228,7 @@ exports.getPost = (req, res, next) => {
 						workout: acquiredWork,
 						exercises: exercises,
 						exerciseImgs: exerciseImgs,
+						userLiked: userLiked,
 						user: req.session.user,
 						guest: guest,
 						comments: acquiredReviews
@@ -233,4 +237,21 @@ exports.getPost = (req, res, next) => {
 			})
 		});
 	} else next();
+}
+exports.likePost = (req, res, next) => {
+	let userLiked;
+	let post = Post.getPost(req.body.postId);
+	let newLikes = [];
+	post.then(result => {
+		newLikes = result.likes;
+		userLiked = newLikes.includes(req.session.user._id);
+		if (!userLiked) 
+			newLikes.push(req.session.user._id);
+		else newLikes.splice(newLikes.indexOf(req.session.user._id), 1);
+		Post.findOneAndUpdate({_id: req.body.postId}, {likes: newLikes}, {new:true}).catch (err => {
+			console.log(err);
+		});
+		res.redirect(`/post/${req.body.postId}`)
+	})
+
 }

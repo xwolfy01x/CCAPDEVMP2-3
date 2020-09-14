@@ -66,13 +66,15 @@ body::-webkit-scrollbar-thumb {
 #search:focus, #searchbar {
 	outline: none;
 }
-button {
+button.search {
 	background-color: inherit;
 	border: 0;
 }
 #searchbtn {
 	width: 60px;
 	height: 50px;
+	background-color: inherit;
+	border: 0;
 }
 .indexbtns {
 	display: grid;
@@ -106,7 +108,7 @@ a.indexbtn{
 	height: 45px;
 	width: 40px;
 }
-ul {
+ul.drop {
 	list-style-type: none;
 	width: 100%;
 	position: absolute;
@@ -127,11 +129,11 @@ ul {
 	opacity: 1;
 	visibility: visible;
 }
-li{
+li.dropopt{
 	text-align: center;
 	padding: 10px 5px;
 }
-li a {
+li.dropopt a {
 	color: black;
 	font-family: 'Actor';
 	font-size: 1 em;
@@ -152,6 +154,11 @@ li a {
 	}
 	li {
 		font-size: 1em;
+	}
+}
+@media(max-width: 1100px) {
+	#navbar label {
+		font-size: 15px;
 	}
 }
 @font-face {

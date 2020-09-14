@@ -7,117 +7,117 @@ block body
 			.subcontainer#topworkout
 				.categoryHeader
 					span.headerTitle TOP POSTS
-					a(href="/seemoretop")#seemoretop See More...
+					a(href="/seemoretop")#seemoretop See More
 				each topPost in topPosts
 					a.workoutpost(href=`post/${topPost._id}`)
 						img.image(src=`${topPost.image}`)
 						.postinfo(href=`exercises/post/${topPost._id}`)
 							p.workposttitle #{topPost.title}
-							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes.length} likes
 		else if topPosts.length <= 10
 			.subcontainer#topworkout2
 				.categoryHeader
 					span.headerTitle TOP POSTS
 					if topPosts.length <= 5
-						a(href="/seemoretop")#seemoretop See More...
+						a(href="/seemoretop")#seemoretop See More
 				each topPost in topPosts
 					a.workoutpost(href=`post/${topPost._id}`)
 						img.image(src=`${topPost.image}`)
 						.postinfo(href=`exercises/post/${topPost._id}`)
 							p.workposttitle #{topPost.title}
-							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes.length} likes
 		else if topPosts.length <= 15
 			.subcontainer#topworkout3
 				.categoryHeader
 					span.headerTitle TOP POSTS
 					if topPosts.length <= 5
-						a(href="/seemoretop")#seemoretop See More...
+						a(href="/seemoretop")#seemoretop See More
 				each topPost in topPosts
 					a.workoutpost(href=`post/${topPost._id}`)
 						img.image(src=`${topPost.image}`)
 						.postinfo(href=`exercises/post/${topPost._id}`)
 							p.workposttitle #{topPost.title}
-							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes.length} likes
 		else if topPosts.length <= 20
 			.subcontainer#topworkout4
 				.categoryHeader
 					span.headerTitle TOP POSTS
 					if topPosts.length <= 5
-						a(href="/seemoretop")#seemoretop See More...
+						a(href="/seemoretop")#seemoretop See More
 				each topPost in topPosts
 					a.workoutpost(href=`post/${topPost._id}`)
 						img.image(src=`${topPost.image}`)
 						.postinfo(href=`exercises/post/${topPost._id}`)
 							p.workposttitle #{topPost.title}
-							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes.length} likes
 		else if topPosts.length <= 25
 			.subcontainer#topworkout5
 				.categoryHeader
 					span.headerTitle TOP POSTS
 					if topPosts.length <= 5
-						a(href="/seemoretop")#seemoretop See More...
+						a(href="/seemoretop")#seemoretop See More
 				each topPost in topPosts
 					a.workoutpost(href=`post/${topPost._id}`)
 						img.image(src=`${topPost.image}`)
 						.postinfo(href=`exercises/post/${topPost._id}`)
 							p.workposttitle #{topPost.title}
-							p.workpostbottom #{topPost.displayDate} #{topPost.likes} likes
+							p.workpostbottom #{topPost.displayDate} #{topPost.likes.length} likes
 		if newPosts.length <= 5
 			.subcontainer#newworkout
 				.categoryHeader
 					span.headerTitle NEW POSTS
-					a(href="/seemorenew")#seemorenew See More...
+					a(href="/seemorenew")#seemorenew See More
 				each newPost in newPosts
 					a.workoutpost(href=`post/${newPost._id}`)
 						img.image(src=`${newPost.image}`)
 						.postinfo(href=`post/${newPost._id}`)
 							p.workposttitle #{newPost.title}
-							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes.length} likes
 		else if newPosts.length <= 10
 			.subcontainer#newworkout2
 				.categoryHeader
 					span.headerTitle NEW POSTS
 					if newPosts.length <= 5
-						a(href="/seemorenew")#seemorenew See More...
+						a(href="/seemorenew")#seemorenew See More
 				each newPost in newPosts
 					a.workoutpost(href=`post/${newPost._id}`)
 						img.image(src=`${newPost.image}`)
 						.postinfo(href=`post/${newPost._id}`)
 							p.workposttitle #{newPost.title}
-							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes.length} likes
 		else if newPosts.length <= 15
 			.subcontainer#newworkout3
 				.categoryHeader
 					span.headerTitle NEW POSTS
 					if newPosts.length <= 5
-						a(href="/seemorenew")#seemorenew See More...
+						a(href="/seemorenew")#seemorenew See More
 				each newPost in newPosts
 					a.workoutpost(href=`post/${newPost._id}`)
 						img.image(src=`${newPost.image}`)
 						.postinfo(href=`post/${newPost._id}`)
 							p.workposttitle #{newPost.title}
-							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes.length} likes
 		else if newPosts.length <= 20
 			.subcontainer#newworkout4
 				.categoryHeader
 					span.headerTitle NEW POSTS
 					if newPosts.length <= 5
-						a(href="/seemorenew")#seemorenew See More...
+						a(href="/seemorenew")#seemorenew See More
 				each newPost in newPosts
 					a.workoutpost(href=`post/${newPost._id}`)
 						img.image(src=`${newPost.image}`)
 						.postinfo(href=`post/${newPost._id}`)
 							p.workposttitle #{newPost.title}
-							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes.length} likes
 		else if newPosts.length <= 25
 			.subcontainer#newworkout5
 				.categoryHeader
 					span.headerTitle NEW POSTS
 					if newPosts.length <= 5
-						a(href="/seemorenew")#seemorenew See More...
+						a(href="/seemorenew")#seemorenew See More
 				each newPost in newPosts
 					a.workoutpost(href=`post/${newPost._id}`)
 						img.image(src=`${newPost.image}`)
 						.postinfo(href=`post/${newPost._id}`)
 							p.workposttitle #{newPost.title}
-							p.workpostbottom #{newPost.displayDate} #{newPost.likes} likes
+							p.workpostbottom #{newPost.displayDate} #{newPost.likes.length} likes
