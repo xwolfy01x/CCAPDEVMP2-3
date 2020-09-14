@@ -200,8 +200,8 @@ exports.getPost = (req, res, next) => {
 			post.then(result2 => {
 				acquiredPost = result2;
 				for (let i=0; i<acquiredWork.exercises.length; i++) {
-					exercises.push(acquiredWork.exercises[i])
-					exerciseImgs.push(`/uploads/${acquiredPost._id}/exerpic${i}.png`)
+					exercises.push(acquiredWork.exercises[acquiredWork.exercises.length-i-1])
+					exerciseImgs.push(`/uploads/${acquiredPost._id}/exerpic${acquiredWork.exercises.length-i-1}.png`)
 				}
 				let reviews = Review.getReviews(req.params.postId);
 				reviews.then(result3 => {
