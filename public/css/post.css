@@ -340,7 +340,6 @@ html {
   .execCont::-webkit-scrollbar {
 	  width: 15px;
 	  height: 15px;
-	  
   }
   .execCont::-webkit-scrollbar-thumb {
 	  background: darkred;

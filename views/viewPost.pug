@@ -5,46 +5,55 @@ block body
     - var count = 0;
     - var userCount = 0;
     .postContainer
-        #categoryForm 
-            header
+        #postHeader
+            #postHeaderLeft
+                img#postimg(src=`/uploads/${post._id}/postimg.png`)
+            #postHeaderRight
+                #duration
+                    span Duration: 
+                    if workout.duration == 30
+                        span(style="color: green")  #{workout.duration} minutes
+                    if workout.duration == 60
+                        span(style="color: orange") #{workout.duration} minutes
+                    if workout.duration == 90
+                        span(style="color: red") #{workout.duration} minutes
                 #difficulty 
                     span Difficulty: 
                     if workout.difficulty == "Beginner"
                         span(style="color: green;") #{workout.difficulty}
                     if workout.difficulty == "Intermediate"
                         span(style="color: orange;") #{workout.difficulty}
-                    if workout.difficulty === "Advanced"
+                    if workout.difficulty == "Advanced"
                         span(style="color: red;") #{workout.difficulty}
-                #duration
-                    span Duration: #{workout.duration} minutes
                 #pTitle #{post.title} 
                 .category
                     each category in workout.bodyfocus
                         span | #{category} |
-        hr
-        div(style="padding-left: 50px; padding-right: 50px;")
-            #exerciseContainer
-                each exercisepics in exerciseImgs
-                    div(style="display: flex; justify-content: center;")
-                        button(type="button")
-                            img.pic(src=`${exercisepics}`, onclick=`
-                                $("#ename").text("${exercises[count].name}");
-                                $("#edescription").text("${exercises[count].description}");
-                                $("#erepetitions").text("Repetitions: ${exercises[count].repetitions}");
-                                $("#esets").text("Sets: ${exercises[count].sets}");
-                                $("#eimage").attr("src", "${exerciseImgs[count]}");
-                            `)
-                    -count++;
-        div(style="padding-left: 50px; padding-right: 50px;")
+                #exercises
+                    span Exercises included in the post:
+                    each exercisepics in exerciseImgs
+                        .exerciseContainer
+                            .exerciseList
+                                button(type="button")
+                                    img.pic(src=`${exercisepics}`, onclick=`
+                                    $("#ename").text("${exercises[count].name}");
+                                    $("#edescription").text("${exercises[count].description}");
+                                    $("#erepetitions").text("Repetitions: ${exercises[count].repetitions}");
+                                    $("#esets").text("Sets: ${exercises[count].sets}");
+                                    $("#eimage").attr("src", "${exerciseImgs[count]}");
+                                    `)
+                        -count++;
+        div(style="padding-top: 50px; padding-bottom: 50px;")
             #exerciseDetailContainer
-                img#eimage(src=`${exerciseImgs[0]}`) 
-                div(style="width: 100%; height: 100%; padding-left: 50px;")
+                center
+                    img#eimage(src=`${exerciseImgs[0]}`) 
+                div(style="width: 80%; height: 100%; padding-left: 50px;")
                     br
                     br
-                    span#ename #{exercises[0].name}
+                    span#ename(style="text-transform: uppercase;") #{exercises[0].name}
                     br
                     br
-                    span#edescription #{exercises[0].description}
+                    span#edescription(style="text-align: justify;") #{exercises[0].description}
                     br
                     br
                     br
