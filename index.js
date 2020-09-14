@@ -27,5 +27,5 @@ app.use(userRoute);
 app.use(postRoute);
 app.use(commentRoute)
 mongoose.set('useFindAndModify', false);
-mongoose.connect('mongodb://127.0.0.1:27017/OFIT', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://Chi:wintermelon@cluster0.nula3.gcp.mongodb.net/OFIT?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 app.listen(3000);
