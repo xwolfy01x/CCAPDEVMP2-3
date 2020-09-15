@@ -27,12 +27,13 @@ block body
       button(class="edit" id="cancel" onclick = 'cancel()') Cancel
     ul#center
       each userPost in user.posts
-        li 
-          img(class="pic" src = "/images/profile.png")
-          a(href=`/post/${userPost._id}`)
-            h3(class="name") #{userPost.title}
-          br
-          br
-          p Category: #{userPost.category}
-          p Likes: #{userPost.likes.length}
-          button.deletebtn Delete
+          li
+            a(href=`/post/${userPost._id}`)
+              img.postimgs(src="/images/profile.png")
+            div.posttext
+              h3(class="name") #{userPost.title}
+              p Category: #{userPost.category}
+              p Likes: #{userPost.likes.length}
+            div#buttons
+              img.editbtn(src="/images/editButton.png")
+              img.deletebtn(src="/images/deleteButton.png")

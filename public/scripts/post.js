@@ -2,6 +2,8 @@ $("#showrecbtn").click(function(){
 	$("#recipecontainer").css('display','block');
 	$("#workoutcontainer").css('display', 'none');
 	document.getElementById("recipecontainer").scrollIntoView();
+	document.getElementById('showrecbtn').disabled=true;
+	document.getElementById('showworkbtn').disabled=false;
 })
 
 $("#showworkbtn").click(function(){
@@ -9,6 +11,7 @@ $("#showworkbtn").click(function(){
 	$("#recipecontainer").css('display', 'none');
 	document.getElementById("workoutcontainer").scrollIntoView();
 	document.getElementById('showworkbtn').disabled=true;
+	document.getElementById('showrecbtn').disabled=false;
 })
 function toggle(source) {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -47,7 +50,8 @@ $("#addExercise").click(function (){
 			<input type="button" onclick="hideExerForm('${idexer}'); checkCancelCount('cancel${idexer}', 'newExercise${idexer}Form', 'exerciseFormButton${idexer}')" value="Cancel">
 		</center>
 		<center style="grid-column:3/5;">
-			<input type="button" onclick="hideExerForm('${idexer}'); increaseExerCount('${idexer}');" value="Add">
+		<input type="text" value="1" style="display: none;" id='add${idexer}' required>
+			<input type="button" onclick="hideExerForm('${idexer}'); checkAddCount('add${idexer}'); increaseExerCount('${idexer}');" value="Add">
 		</center>
 	</div>`);
 	document.getElementById("wpostbtn").disabled = false;
@@ -70,7 +74,6 @@ function removeExercise(formid, buttonid) {
 function increaseExerCount(id) {
 	$(`#exerNameDisplay${id}`).html($(`#exername${id}`).val());
 	$(`#cancel${id}`).val(`2`);
-	idexer++;
 }
 function readWorkThumbnail(input, count) {
 	if (input.files && input.files[0]) {
@@ -79,6 +82,17 @@ function readWorkThumbnail(input, count) {
 			$(`#workpostimg`).attr("src", e.target.result);
 			$(`#thumbnailName`).val($('#thumbnail').val().split('\\')[2]);
 			$(`#workpostimg`).css('display', 'block');
+		}
+		reader.readAsDataURL(input.files[0]);
+	}	
+}
+function readRecipeThumbnail(input, count) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = e => {
+			$(`#recipepostimg`).attr("src", e.target.result);
+			$(`#thumbnailName`).val($('#thumbnail').val().split('\\')[2]);
+			$(`#recipepostimg`).css('display', 'block');
 		}
 		reader.readAsDataURL(input.files[0]);
 	}	
@@ -98,6 +112,15 @@ function checkCancelCount(id, formid, buttonid) {
 	console.log(count)
 	if (count === 1) 
 		removeExercise(formid, buttonid);
+}
+function checkAddCount(id) {
+	var addid = id;
+	var count = parseInt($(`#${addid}`).val(), 10);
+	console.log(count)
+	if (count === 1) {
+		idexer++;
+		$(`#${addid}`).val('2');
+	}
 }
 let slideNumber = -1;
 showSlide();
@@ -141,3 +164,7 @@ $("#wpostbtn").click(function() {
         document.getElementById('bodyFocusList').value+='wholebody';
 	document.workoutpost.submit();
 })
+function addIngredient() {
+	
+	$('#ingredients').val('');
+}

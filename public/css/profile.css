@@ -22,11 +22,17 @@ body {
 
 #center {
   width: 650px;
-  display: inline-block;
+  display: grid;
   position: absolute;
+  right: 150px;
+  top: 120px;
+  grid-template-columns: 1fr 1fr 1fr;
   list-style: none;
   margin: 0 0 0 10px;
-  padding: 0;
+  padding: 20px;
+  background-color: white;
+  overflow-y:scroll;
+  height: 35%;
 }
 
 #profile-pic {
@@ -41,11 +47,23 @@ body {
   	margin: 0;
   	display: inline-block;
 }
-
+img#profile-pic{
+  display: block;
+  align-self: center;
+  margin-left: 9px;
+}
+span#editname{  
+  display: inline-block;
+}
 .edit {
   width: 100%;
   padding: 5px;
   margin-top: 10px;
+  color: white;
+  font-weight: 600;
+  font-family: "Actor";
+  background-color: #a41725;
+  border: 1px solid white;
 }
 
 .editing #name,
@@ -56,27 +74,50 @@ body {
 #center li {
   margin-bottom: 10px;
   background-color: white;
+  border: 2px solid #a41725;
   border-radius: 1px;
   padding: 10px;
+  margin-left: 10px;
   position: relative;
 }
-
-#center p {
-  margin: 0;
+img.postimgs{
+  display:inline-block;
+  width: 150px;
+  height: 150px;
+  padding-left: 15px;
+}
+div.posttext{
+	position: absolute;
+	bottom: 50;
+	left: 0;
+	width: 95%;
+	padding-left: 10px;
+	visibility: hidden;
+	background-color: black;
+	opacity: 0;
+	font-family: verdana;
+	color: white;
+	-webkit-transition: visibility 2s, opacity 0.5s linear;
+	transition: visibility 2s, opacity 0.5s linear;
+}
+a.postimgs:hover{
+	cursor: pointer;
+	transition: all 0.5s ease;
+}
+#center li:hover .posttext{
+  cursor:pointer;
+  visibility: visible;
+	opacity: 0.7; 
+}
+.posttext h3{
+  padding-left: 0;
+  font-size: 0.8em;
 }
 
-#center h3 {
-  margin: 0;
-  position: absolute;
-  left: 50px;
-  top: 10px;
-  color: black;
+.posttext p{
+  font-size: 0.6em;
 }
 
-#center h3:hover{
-  color: #b04632;
-  transition: all 0.3s;
-}
 #center a {
   text-decoration: none;
 }
@@ -88,19 +129,23 @@ body {
   display: inline-block;
 }
 
-button.deletebtn{
-  position: absolute;
-  right: 10;
-  top: 10;
-  padding: 3px 5px; 
-  border: 0;
-  background-color: #a41725;
-  color: white;
+div#buttons{
+  position: relative;
+  display:flex;
+  justify-content: space-evenly;
+  border-top: 2px solid #a41725;
+  padding-top: 5px;
 }
 
-.deletebtn:hover{
-  background-color: #b04632;
-  transition: all 0.3s;
+.editbtn, .deletebtn{
+  height: 25px;
+  width: 25px;
+  margin: 0px 20px;
+  padding-top: 5px;
+}
+
+.editbtn:hover, .deletebtn:hover{
+  cursor: pointer;
 }
 
 @font-face {

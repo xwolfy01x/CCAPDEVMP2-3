@@ -129,11 +129,11 @@ ul.drop {
 	opacity: 1;
 	visibility: visible;
 }
-li.dropopt{
+ul.drop li{
 	text-align: center;
 	padding: 10px 5px;
 }
-li.dropopt a {
+ul.drop li a {
 	color: black;
 	font-family: 'Actor';
 	font-size: 1 em;
@@ -159,6 +159,10 @@ li.dropopt a {
 @media(max-width: 1100px) {
 	#navbar label {
 		font-size: 15px;
+	}
+	#profpic {
+		height: 30px;
+		width: 40px;
 	}
 }
 @font-face {

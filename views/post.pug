@@ -10,11 +10,41 @@ block body
 			button#showworkbtn(type = "button") Workout	
 	#recipecontainer(style = "display: none")
 		form#recipepost(action = "/newrecipepost", method = "POST", name = "recipepost")
-			p Post Title
-			input#recipetitle(name = "recipetitle", placeholder = "Title of post", type = "text", required)
-			p Picture
-			input#recipepic(name = "recipepic", type = "file",accept = "image/*", required)
-			//incomplete
+			.recipeTitleSection
+				div(style="grid-column: 1/3;")
+					p#recipeTitle RECIPE TITLE
+					input#recipeTitleBox(name = "recipetitle", placeholder = "Title of post", type = "text", required)
+					p#recipeTitle RECIPE THUMBNAIL
+					label.upload
+						input.file#thumbnail(name = "postimg", type = "file", onchange="readRecipeThumbnail(this, 0)",required)
+						input.file2#thumbnailName(type="text", disabled, required)
+						span.customFile Browse
+					br
+					p#recipeCategories(style="color: white;") CATEGORIES:
+					div#1focus.focusopt(style="z-index:2; box-sizing: border-box;")
+						input#seafood.boxes.one(name = "seafood", type = "checkbox" , onclick="checkfullcategory(this)")
+						label(for = "seafood") Seafood
+						br
+						input#seafood.boxes.one(name = "pastry", type = "checkbox" , onclick="checkfullcategory(this)")
+						label(for = "pastry") Pastry
+						br
+						input#vegetables.boxes.one(name = "vegetables", type = "checkbox" , onclick="checkfullcategory(this)")
+						label(for = "vegetables") Vegetables
+						br
+						input#meat.boxes.one(name = "meat", type = "checkbox" , onclick="checkfullcategory(this)")
+						label(for = "meat") Meat
+						br
+						input#fruits.boxes.one(name = "seafood", type = "checkbox" , onclick="checkfullcategory(this)")
+						label(for = "fruits") Fruits
+				#thumbnailImg(style="grid-column: 3/5;")
+					img#recipepostimg(src="", alt="Post Thumbnail", style="display: none;")
+			#ingredientsContainer
+				p INGREDIENTS INCLUDED
+				input#ingredients(type="text")
+				input#fullingredients(type="text", style="display: none;", name="ingredients")
+				button(type="button")
+					img#addingredients(src="/images/plus.png" onclick="addIngredient();")
+				
 			button#rpostbtn(type="submit") Post
 	#workoutcontainer(style = "display: none")
 		form#workoutpost(action = "/newworkoutpost",method = "POST", name = "workoutpost", enctype="multipart/form-data")

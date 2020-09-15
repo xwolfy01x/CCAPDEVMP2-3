@@ -1,6 +1,6 @@
 /*
 	Name
-	Images (optional)
+	Image 
   	Ingredients[]
   	Directions[] - objectID of steps
 	Post ID - ObjectId
