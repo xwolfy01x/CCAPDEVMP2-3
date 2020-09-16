@@ -102,7 +102,7 @@ exports.getWorkouts = (req, res, next) => {
 				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
 				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
 			}
-			res.render('exercises', {
+			res.render('workouts', {
 				user: req.session.user,
 				topPosts: result1,
 				newPosts: result2	

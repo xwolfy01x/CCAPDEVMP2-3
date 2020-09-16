@@ -39,12 +39,12 @@ block body
 				#thumbnailImg(style="grid-column: 3/5;")
 					img#recipepostimg(src="", alt="Post Thumbnail", style="display: none;")
 			#ingredientsContainer
-				p INGREDIENTS INCLUDED
-				input#ingredients(type="text")
+				p INGREDIENTS LIST
+				input#ingredients(type="text", placeholder="ingredient")
 				input#fullingredients(type="text", style="display: none;", name="ingredients")
 				button(type="button")
 					img#addingredients(src="/images/plus.png" onclick="addIngredient();")
-				
+				#ingredientsList
 			button#rpostbtn(type="submit") Post
 	#workoutcontainer(style = "display: none")
 		form#workoutpost(action = "/newworkoutpost",method = "POST", name = "workoutpost", enctype="multipart/form-data")

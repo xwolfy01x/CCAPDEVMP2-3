@@ -164,7 +164,17 @@ $("#wpostbtn").click(function() {
         document.getElementById('bodyFocusList').value+='wholebody';
 	document.workoutpost.submit();
 })
+let ingCount = 0;
 function addIngredient() {
-	
+	document.getElementById('ingredientsList').insertAdjacentHTML('afterbegin', `
+		<li id="ingredient${ingCount}" class="ingredients">
+			<button type="button" class="ingDel" onclick="deleteIngredient(${ingCount})">X</button>
+			<center><span>${$("#ingredients").val()}</span></center>
+		</li>
+	`)
 	$('#ingredients').val('');
+	ingCount++;
+}
+function deleteIngredient(count) {
+	$(`#ingredient${count}`).remove();
 }

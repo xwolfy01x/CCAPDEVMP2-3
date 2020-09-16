@@ -395,6 +395,51 @@ html {
 	  width: 60px;
 	  height: 60px;
   }
+  #ingredientsList {
+	  display: flex;
+	  flex-wrap: wrap;
+	  width: 100%;
+	  flex-direction: row;
+  }
+  
+  .ingDel {
+	  font-size: 2vh;
+	  border: 0;
+	  outline: 0;
+	  background-color: inherit;
+	  display: inline-block;
+	  position: relative;
+	  top: 0;
+  }
+  .ingredients {
+	  position: relative;
+	  font-size: 2vh;
+	  background-color: lightgray;
+	  display: flex;
+	  flex-direction: row;
+	  align-items: center;
+	  margin-top: 2%;
+	  list-style-type: none;
+	  padding-right: 5%;
+	  margin-right: 5%;
+	  height: 45px;
+  }
+  #ingredientsList button {
+	  height: 100%;
+	  width: 100%;
+	  color: white;
+	  top: 0px;	
+	  background-color: red;
+	  /* border-radius: 50%; */
+  }
+  #ingredientsList span {
+	  height: 100%;
+	  text-align: center;
+	  font-family: 'Actor';
+	  font-weight: 600;
+	  margin-left: 10px;
+	  padding-left: 5%;
+  }
  @media(max-width: 1300px) {
 	.exerciseFormButton {
 		width: 200px;
@@ -411,5 +456,12 @@ html {
 	  .execCont::-webkit-scrollbar {
 		width: 10px;
 		height: 10px;
+	}
+	#addingredients {
+		width: 30px;
+		height: 30px;
+	}
+	#ingredients {
+		width: 80%;
 	}
   }
