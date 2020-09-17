@@ -9,14 +9,14 @@ block body
 		.right-col
 			button#showworkbtn(type = "button") Workout	
 	#recipecontainer(style = "display: none")
-		form#recipepost(action = "/newrecipepost", method = "POST", name = "recipepost")
+		form#recipepost(action = "/newrecipepost", method = "POST", name = "recipepost", enctype="multipart/form-data")
 			.recipeTitleSection
 				div(style="grid-column: 1/3;")
 					p#recipeTitle RECIPE TITLE
 					input#recipeTitleBox(name = "recipetitle", placeholder = "Title of post", type = "text", required)
 					p#recipeTitle RECIPE THUMBNAIL
 					label.upload
-						input.file#thumbnail2(name = "postimg", type = "file", onchange="readRecipeThumbnail(this, 0)",required)
+						input.file#thumbnail2(name = "postimg2", type = "file", onchange="readRecipeThumbnail(this, 0)",required)
 						input.file2#thumbnailName2(type="text", disabled, required)
 						span.customFile Browse
 					br

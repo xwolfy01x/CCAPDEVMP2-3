@@ -88,17 +88,17 @@ exports.postWorkout = (req, res, next) =>{
 	})
 }
 exports.postRecipe = (req,res, next) =>{
-    var currdate = new Date();
+	var currdate = new Date();
     const post = new Post({
         title: req.body.recipetitle,
         dateCreated: currdate.toISOString().slice(0,10),
         dateUpdated: currdate.toISOString().slice(0,10),
 		likes: [],
         category: "Recipe",
-		image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${req.files.postimg[0].filename}`))
+		image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${req.files.postimg2[0].filename}`))
     });
     post.save();
-    moveFile(path.join(__dirname, '..', `/public/uploads/${req.files.postimg[0].filename}`), path.join(__dirname, '..', `/public/uploads/${post._id}/postimg.png`)).then(() => {
+    moveFile(path.join(__dirname, '..', `/public/uploads/${req.files.postimg2[0].filename}`), path.join(__dirname, '..', `/public/uploads/${post._id}/postimg.png`)).then(() => {
 		console.log('File Added Successfully')
 	}).catch(err => {
 		console.log(err);
