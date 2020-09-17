@@ -1,0 +1,101 @@
+extends ./layouts/navbar.pug
+block css
+    link(rel="stylesheet", type="text/css", href="/css/viewPost2.css")
+block body
+    - var count = 0;
+    - var userCount = 0;
+    .postContainer
+        #postHeader
+            #postHeaderLeft
+                img#postimg(src=`/uploads/${post._id}/postimg.png`)
+            #postHeaderRight
+                #likeContainer
+                    form(method="POST", action="likePost")
+                        input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
+                        if userLiked === true
+                            button
+                                img.likeBtn(src="/images/LikeAfter.png") 
+                        else if userLiked === false && guest.addReview
+                            button
+                                img.likeBtn(src="/images/LikeBefore.png")
+                        else 
+                            button(disabled)
+                                img.likeBtn(src="/images/LikeBefore.png")
+                #pTitle #{post.title} 
+                .category
+                    each category in recipe.category
+                        span | #{category} |
+                #ingredients
+                    span(style="grid-column: 1/3") Ingredients
+                    each ingredient in recipe.ingredients
+                        li #{ingredient}
+        #steps
+            span Instructions
+            .stepContainer
+                each steppics in stepImgs
+                    .stepList
+                        button(type="button")
+                            img.pic(src=`${steppics}`, onclick=`
+                                        $("#sinstruction").text("${steps[count].instruction}");
+                                        $("#simage").attr("src", "${stepImgs[count]}");
+                                    `)
+                            - count++;
+        div(style="padding-top: 50px; padding-bottom: 50px;")
+            #stepDetailContainer
+                center
+                    img#simage(src=`${stepImgs[0]}`) 
+                div(style="width: 80%; height: 100%; padding-left: 50px;")
+                    span#sinstruction(style="text-align: justify;") #{steps[0].instruction}
+        hr
+        #commentsSection
+            span#commentTitle Comments
+            if guest.addReview
+                div
+                    form(action="/postComment", method="POST")
+                        span#postCommentTitle Post your comment here!
+                        textarea#postCommentBox(name="comment", required)
+                        br
+                        br
+                        button#postComment(type="submit") Post Comment
+                        input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
+            div
+                each comment in comments
+                    div
+                        span.dateCreated #{comment.dateCreated.toISOString().slice(0,10)}
+                        br
+                        span.userCommentor #{comment.userId.fname} #{comment.userId.lname} says..
+                        if comment.userId._id == guest._id
+                            button 
+                                img.ebtn#edit(src="/images/editButton.png", onclick=`
+                                    $("#editCommentBox").text("${comment.comment}");
+                                    $("#editComment${userCount}").css("display", "inline-block");
+                                    $("#cancelComment${userCount}").css("display", "inline-block");
+                                    $("#editcommentID").val('${comment._id}');
+                                    document.getElementById('comment${userCount}').contentEditable=true;
+                                `)
+                            button
+                                form(action="/deleteComment", method="POST")
+                                    button(type="submit")
+                                        img.ebtn#delete(src="/images/deleteButton.png")
+                                    input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
+                                    input#editcommentID(type="text", value=`${comment._id}`, name=`commentId`, style="display: none;")
+                    if comment.userId._id == guest._id
+                        form(id=`editForm${userCount}`,action="/editComment", name=`editForm${userCount}`, method="POST")
+                            blockquote(id=`comment${userCount}`) #{comment.review}
+                            button.cancelComment(id=`cancelComment${userCount}`, type="button", onclick=`
+                                $("#editComment${userCount}").css("display", "none");
+                                $("#cancelComment${userCount}").css("display", "none");
+                                document.getElementById('comment${userCount}').contentEditable=false;
+                            `) Cancel
+                            button.editComment(id=`editComment${userCount}`, type="button", onclick=`
+                                $("#hiddenComment${userCount}").val($("#comment${userCount}").html());
+                                document.editForm${userCount}.submit()
+                            `) Save
+                            input#editcommentID(type="text", value=`${comment._id}`, name=`commentId`, style="display: none;")
+                            input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
+                            input(id=`hiddenComment${userCount}`, type="text", name=`comment`, style="display: none;")
+                    else
+                        blockquote(id=`comment${userCount}`) "#{comment.review}"
+                    --userCount++
+block scripts
+    script(src="/scripts/viewPost.js")

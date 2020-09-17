@@ -1,0 +1,123 @@
+extends ./layouts/navbar.pug
+block css
+	link(rel="stylesheet", type="text/css", href="/css/recipe.css")
+block body
+	.postscontainer
+		if topPosts.length <= 5
+			.subcontainer#toprecipe
+				.categoryHeader
+					span.headerTitle TOP POSTS
+					a(href="/seemoretoprecipe")#seemoretop See More
+				each topPost in topPosts
+					a.recipepost(href=`post/${topPost._id}`)
+						img.image(src=`${topPost.image}`)
+						.postinfo(href=`post/${topPost._id}`)
+							p.recipetitle #{topPost.title}
+							p.recipebottom #{topPost.displayDate} #{topPost.likes.length} likes
+		else if topPosts.length <= 10
+			.subcontainer#toprecipe2
+				.categoryHeader
+					span.headerTitle TOP POSTS
+					if topPosts.length <= 5
+						a(href="/seemoretoprecipe")#seemoretop See More
+				each topPost in topPosts
+					a.recipepost(href=`post/${topPost._id}`)
+						img.image(src=`${topPost.image}`)
+						.postinfo(href=`post/${topPost._id}`)
+							p.recipetitle #{topPost.title}
+							p.recipebottom #{topPost.displayDate} #{topPost.likes.length} likes
+		else if topPosts.length <= 15
+			.subcontainer#toprecipe3
+				.categoryHeader
+					span.headerTitle TOP POSTS
+					if topPosts.length <= 5
+						a(href="/seemoretoprecipe")#seemoretop See More
+				each topPost in topPosts
+					a.recipepost(href=`post/${topPost._id}`)
+						img.image(src=`${topPost.image}`)
+						.postinfo(href=`post/${topPost._id}`)
+							p.recipetitle #{topPost.title}
+							p.recipebottom #{topPost.displayDate} #{topPost.likes.length} likes
+		else if topPosts.length <= 20
+			.subcontainer#toprecipe4
+				.categoryHeader
+					span.headerTitle TOP POSTS
+					if topPosts.length <= 5
+						a(href="/seemoretoprecipe")#seemoretop See More
+				each topPost in topPosts
+					a.recipepost(href=`post/${topPost._id}`)
+						img.image(src=`${topPost.image}`)
+						.postinfo(href=`post/${topPost._id}`)
+							p.recipetitle #{topPost.title}
+							p.recipebottom #{topPost.displayDate} #{topPost.likes.length} likes
+		else if topPosts.length <= 25
+			.subcontainer#toprecipe5
+				.categoryHeader
+					span.headerTitle TOP POSTS
+					if topPosts.length <= 5
+						a(href="/seemoretoprecipe")#seemoretop See More
+				each topPost in topPosts
+					a.recipepost(href=`post/${topPost._id}`)
+						img.image(src=`${topPost.image}`)
+						.postinfo(href=`post/${topPost._id}`)
+							p.recipetitle #{topPost.title}
+							p.recipebottom #{topPost.displayDate} #{topPost.likes.length} likes
+		if newPosts.length <= 5
+			.subcontainer#newrecipe
+				.categoryHeader
+					span.headerTitle NEW POSTS
+					a(href="/seemorenewrecipe")#seemorenew See More
+				each newPost in newPosts
+					a.recipepost(href=`post/${newPost._id}`)
+						img.image(src=`${newPost.image}`)
+						.postinfo(href=`post/${newPost._id}`)
+							p.recipetitle #{newPost.title}
+							p.recipebottom #{newPost.displayDate} #{newPost.likes.length} likes
+		else if newPosts.length <= 10
+			.subcontainer#newrecipe2
+				.categoryHeader
+					span.headerTitle NEW POSTS
+					if newPosts.length <= 5
+						a(href="/seemorenewrecipe")#seemorenew See More
+				each newPost in newPosts
+					a.recipepost(href=`post/${newPost._id}`)
+						img.image(src=`${newPost.image}`)
+						.postinfo(href=`post/${newPost._id}`)
+							p.recipetitle #{newPost.title}
+							p.recipebottom #{newPost.displayDate} #{newPost.likes.length} likes
+		else if newPosts.length <= 15
+			.subcontainer#newrecipe3
+				.categoryHeader
+					span.headerTitle NEW POSTS
+					if newPosts.length <= 5
+						a(href="/seemorenewrecipe")#seemorenew See More
+				each newPost in newPosts
+					a.recipepost(href=`post/${newPost._id}`)
+						img.image(src=`${newPost.image}`)
+						.postinfo(href=`post/${newPost._id}`)
+							p.recipetitle #{newPost.title}
+							p.recipebottom #{newPost.displayDate} #{newPost.likes.length} likes
+		else if newPosts.length <= 20
+			.subcontainer#newrecipe4
+				.categoryHeader
+					span.headerTitle NEW POSTS
+					if newPosts.length <= 5
+						a(href="/seemorenewrecipe")#seemorenew See More
+				each newPost in newPosts
+					a.recipepost(href=`post/${newPost._id}`)
+						img.image(src=`${newPost.image}`)
+						.postinfo(href=`post/${newPost._id}`)
+							p.recipetitle #{newPost.title}
+							p.recipebottom #{newPost.displayDate} #{newPost.likes.length} likes
+		else if newPosts.length <= 25
+			.subcontainer#newrecipe5
+				.categoryHeader
+					span.headerTitle NEW POSTS
+					if newPosts.length <= 5
+						a(href="/seemorenewrecipe")#seemorenew See More
+				each newPost in newPosts
+					a.recipepost(href=`post/${newPost._id}`)
+						img.image(src=`${newPost.image}`)
+						.postinfo(href=`post/${newPost._id}`)
+							p.recipetitle #{newPost.title}
+							p.recipebottom #{newPost.displayDate} #{newPost.likes.length} likes

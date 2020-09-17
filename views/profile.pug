@@ -1,39 +1,43 @@
 extends ./layouts/navbar.pug
 block css
-  link(rel = "stylesheet" href = "/css/profile.css" type="text/css")
-  script(src="scripts/profile.js")
+	link(rel = "stylesheet" href = "/css/profile.css" type="text/css")
+	script(src="scripts/profile.js")
 block body
-  .navbar
-    a#homebtn(href="/") BACK TO HOME
-  ul#container
-    div.editform#leftstatic
-      form
-        img(id="profile-pic" class="pic" src = "/images/profile.png")
-        h3(name = "fname" class="name" id="editname") #{user.fname}
-        h3(name = "lname" class="name" id="editname") #{user.lname}
-        p#email Email address: 
-        p#email #{user.email}
-        p#password Password: 
-        input(type="password" id="pw" disabled value = "dummypassword")
-      button(class="edit" id ="editprof" onclick = 'enableEdit()') Edit Profile
-    .editform#leftedit(style="display: none;")
-      form(method="POST" action = "updateprofile")
-        img(id="profile-pic" class="pic" src = "/images/profile.png")
-        input(type="text" name = "newfname" placeholder="new first name")
-        input(type="text" name = "newlname" placeholder="new last name")
-        p#password Password: 
-        input(type="password" id="pw" name="newpw")
-        button(class="edit" id="save" type="submit") Save Changes
-      button(class="edit" id="cancel" onclick = 'cancel()') Cancel
-    ul#center
-      each userPost in user.posts
-          li
-            a(href=`/post/${userPost._id}`)
-              img.postimgs(src="/images/profile.png")
-            div.posttext
-              h3(class="name") #{userPost.title}
-              p Category: #{userPost.category}
-              p Likes: #{userPost.likes.length}
-            div#buttons
-              img.editbtn(src="/images/editButton.png")
-              img.deletebtn(src="/images/deleteButton.png")
+	div#container
+		div.editform#leftstatic
+			form
+				img(id="profile-pic" class="pic" src = "/images/profile.png")
+				h3(name = "fname" class="name" id="editname") #{user.fname}
+				h3(name = "lname" class="name" id="editname") #{user.lname}
+				p#email Email address: 
+				p#email #{user.email}
+				p#password Password: 
+				input(type="password" disabled value = "dummypassword")
+				button(class="edit" id ="editprof" onclick = 'enableEdit()') Edit Profile
+		.editform#leftedit(style="display: none;")
+			form(method="POST" action = "updateprofile")
+				img(id="profile-pic" class="pic" src = "/images/profile.png")
+				input(type="text" name = "newfname" placeholder="new first name")
+				input(type="text" name = "newlname" placeholder="new last name")
+				p#password Password: 
+				input(type="password" id="pw" name="newpw")
+				button(class="edit" id="save" type="submit") Save Changes
+				button(class="edit" id="cancel" onclick = 'cancel()') Cancel
+		ul#center
+			each userPost in user.posts
+				li
+					a(href=`/post/${userPost._id}`)
+					img.postimgs(src=`/uploads/${userPost._id}/postimg.png`)
+					div.posttext
+						h3(class="name") #{userPost.title}
+						p Category: #{userPost.category}
+						p Likes: #{userPost.likes.length}
+					div#buttons
+						form(method="POST", action="/editpost")
+							input(type="text", value=`${userPost._id}`, name="postId")
+							button.postbtn(type="submit")
+								img.editbtn(src="/images/editButton.png")
+						form(method="POST", action="/deletepost")
+							input(type="text", value=`${userPost._id}`, name="postId")
+							button.postbtn(type="submit")
+								img.deletebtn(src="/images/deleteButton.png")

@@ -1,0 +1,128 @@
+.postscontainer{
+	position: relative;
+	padding-top: 40px;
+	top: 50px;
+}
+.subcontainer{
+	margin: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 5px solid #b04632;
+	display: grid;
+}
+#toprecipe{
+	grid-template-rows: 10vh 1fr;
+	grid-template-columns: repeat(5, 1fr);	
+}
+#toprecipe2{
+	grid-template-rows: 10vh repeat(2, 1fr);
+	grid-template-columns: repeat(5, 1fr);	
+}
+#toprecipe3{
+	grid-template-rows: 10vh repeat(3, 1fr);
+	grid-template-columns: repeat(5, 1fr);	
+}
+#toprecipe4{
+	grid-template-rows: 10vh repeat(4, 1fr);
+	grid-template-columns: repeat(5, 1fr);	
+}
+#toprecipe5{
+	grid-template-rows: 10vh repeat(5, 1fr);
+	grid-template-columns: repeat(5, 1fr);	
+}
+#newrecipe{
+	grid-template-rows: 10vh 1fr;
+	grid-template-columns: repeat(5, 1fr);
+}
+#newrecipe2{
+	grid-template-rows: 10vh repeat(2, 1fr);
+	grid-template-columns: repeat(5, 1fr);
+}
+#newrecipe3{
+	grid-template-rows: 10vh repeat(3, 1fr);
+	grid-template-columns: repeat(5, 1fr);
+}
+#newrecipe4{
+	grid-template-rows: 10vh repeat(4, 1fr);
+	grid-template-columns: repeat(5, 1fr);
+}
+#newrecipe5{
+	grid-template-rows: 10vh repeat(5, 1fr);
+	grid-template-columns: repeat(5, 1fr);
+}
+.categoryHeader {
+	grid-column: 1/6;
+	border-bottom: 5px solid #b04632;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	width: 100%;
+}
+.headerTitle {
+	font-family: 'Actor';
+	font-weight: 600;
+	font-size: 5vh;
+}
+#seemoretop, #seemorenew {
+	font-family: 'Actor';
+	font-weight: 600;
+	font-size: 4vh;
+	outline: 0;
+	cursor: pointer;
+	padding: 10px 20px;
+	transition: all .5s ease;
+	text-decoration: none;
+	color: black;
+}
+#seemoretop:hover, #seemorenew:hover {
+	background-color: #b04632;
+	color: white;
+}
+.image{
+	background-color:#b04632;
+	display:inline-block;
+	height: 100%;
+	width: 100%;
+}
+.recipepost{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	margin: 15px 10px;
+	transition: pointer 1s;
+}
+.postinfo{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 45%;
+	padding-left: 10px;
+	visibility: hidden;
+	background-color: black;
+	opacity: 0;
+	font-family: verdana;
+	color: white;
+	-webkit-transition: visibility 2s, opacity 0.5s linear;
+	transition: visibility 2s, opacity 0.5s linear;
+}
+a.recipepost:hover{
+	cursor: pointer;
+	transition: all 0.5s ease;
+}
+.recipetitle {
+	font-size: 2.25vh;
+	font-weight: 600;
+	font-family: 'Actor';
+}
+.recipebottom {
+	font-size: 2vh;
+	font-weight: 600;
+	font-family: 'Actor';
+}
+.recipepost:hover .postinfo{
+	visibility: visible;
+	opacity: 0.7; 
+}

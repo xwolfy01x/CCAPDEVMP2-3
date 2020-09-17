@@ -19,13 +19,12 @@ body {
   padding: 10px;
   position: relative;
 }
-
 #center {
-  width: 650px;
+  width: 50%;
   display: grid;
   position: absolute;
   right: 150px;
-  top: 120px;
+  top: 100px;
   grid-template-columns: 1fr 1fr 1fr;
   list-style: none;
   margin: 0 0 0 10px;
@@ -81,21 +80,21 @@ span#editname{
   position: relative;
 }
 img.postimgs{
+  position: relative;
   display:inline-block;
-  width: 150px;
-  height: 150px;
-  padding-left: 15px;
+  width: 100%;
+  height: 85%;
 }
-div.posttext{
+.posttext{
 	position: absolute;
 	bottom: 50;
 	left: 0;
-	width: 95%;
+	width: 97%;
 	padding-left: 10px;
 	visibility: hidden;
 	background-color: black;
 	opacity: 0;
-	font-family: verdana;
+	font-family: "Actor";
 	color: white;
 	-webkit-transition: visibility 2s, opacity 0.5s linear;
 	transition: visibility 2s, opacity 0.5s linear;
@@ -105,23 +104,21 @@ a.postimgs:hover{
 	transition: all 0.5s ease;
 }
 #center li:hover .posttext{
-  cursor:pointer;
-  visibility: visible;
-	opacity: 0.7; 
+	cursor:pointer;
+	visibility: visible;
+	opacity: 0.7;
+	z-index:3; 
 }
 .posttext h3{
   padding-left: 0;
   font-size: 0.8em;
 }
-
 .posttext p{
   font-size: 0.6em;
 }
-
 #center a {
   text-decoration: none;
 }
-
 #center .pic {
   width: 40px;
   height: 40px;
@@ -137,10 +134,18 @@ div#buttons{
   padding-top: 5px;
 }
 
+div#buttons input[type=text]{
+	display:none;
+}
+
+.postbtn{
+	border:none;
+	background-color: inherit;
+}
+
 .editbtn, .deletebtn{
   height: 25px;
   width: 25px;
-  margin: 0px 20px;
   padding-top: 5px;
 }
 
@@ -148,6 +153,12 @@ div#buttons{
   cursor: pointer;
 }
 
+@media(max-width: 1100px) {
+  .editbtn, .deletebtn {
+    height: 20px;
+    width: 20px;
+  }
+}
 @font-face {
 	font-family: 'Actor';
 	font-style: normal;

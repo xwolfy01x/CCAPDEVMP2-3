@@ -329,54 +329,96 @@ exports.getsearchposts = (req,res, next) => {
 }
 exports.getPost = (req, res, next) => {
 	let exerciseImgs = [];
-	let acquiredPost;
-	let acquiredWork
+	let stepImgs = [];
 	let guest;
 	let acquiredReviews = [];
 	let exercises=[];
+	let steps = [];
 	let userLiked;
 	if (req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
-		let data = Workout.getDetails(req.params.postId);
-		data.then(result => {
-			acquiredWork = result;
-			let post = Post.getPost(req.params.postId);
-			post.then(result2 => {
-				acquiredPost = result2;
-				for (let i=0; i<acquiredWork.exercises.length; i++) {
-					exercises.push(acquiredWork.exercises[acquiredWork.exercises.length-i-1])
-					exerciseImgs.push(`/uploads/${acquiredPost._id}/exerpic${acquiredWork.exercises.length-i-1}.png`)
-				}
-				if (req.session.user != null)
-					userLiked = acquiredPost.likes.includes(req.session.user._id);
-				let reviews = Review.getReviews(req.params.postId);
-				reviews.then(result3 => {
-					acquiredReviews = result3;
-					if (!req.session.user) {
-						guest=new User({
-							fname: '',
-							lname: '',
-							password: '',
-							email: '',
-							posts: []
+		let post = Post.getPost(req.params.postId);
+		post.then(result2 => {
+			let acquiredPost = result2;
+			if (acquiredPost.category === 'Workout') {
+				let data = Workout.getDetails(req.params.postId);
+				data.then(result => {
+					let acquiredWork = result;
+					for (let i=0; i<acquiredWork.exercises.length; i++) {
+						exercises.push(acquiredWork.exercises[acquiredWork.exercises.length-i-1])
+						exerciseImgs.push(`/uploads/${acquiredPost._id}/exerpic${acquiredWork.exercises.length-i-1}.png`)
+					}
+					if (req.session.user != null)
+						userLiked = acquiredPost.likes.includes(req.session.user._id);
+					let reviews = Review.getReviews(req.params.postId);
+					reviews.then(result3 => {
+						acquiredReviews = result3;
+						if (!req.session.user) {
+							guest=new User({
+								fname: '',
+								lname: '',
+								password: '',
+								email: '',
+								posts: []
+							});
+							guest.addReview = false;
+						}
+						else {
+							guest = req.session.user;
+							guest.addReview = true;
+						}
+						res.render('viewPost', {
+							post: acquiredPost,
+							workout: acquiredWork,
+							exercises: exercises,
+							exerciseImgs: exerciseImgs,
+							userLiked: userLiked,
+							user: req.session.user,
+							guest: guest,
+							comments: acquiredReviews
 						});
-						guest.addReview = false;
-					}
-					else {
-						guest = req.session.user;
-						guest.addReview = true;
-					}
-					res.render('viewPost', {
-						post: acquiredPost,
-						workout: acquiredWork,
-						exercises: exercises,
-						exerciseImgs: exerciseImgs,
-						userLiked: userLiked,
-						user: req.session.user,
-						guest: guest,
-						comments: acquiredReviews
 					});
 				});
-			})
+			}
+			else if (acquiredPost.category==="Recipe") {
+				let data = Recipe.getDetails(req.params.postId);
+				data.then(result => {
+					let acquiredRecipe = result;
+					for (let i = 0; i< acquiredRecipe.steps.length; i++) {
+						steps.push(acquiredRecipe.steps[acquiredRecipe.steps.length-1-i]);
+						stepImgs.push(`/uploads/${acquiredPost._id}/steppic${acquiredRecipe.steps.length-i-1}.png`);
+					}
+					if (req.session.user != null)
+						userLiked = acquiredPost.likes.includes(req.session.user._id);
+					let reviews = Review.getReviews(req.params.postId);
+					reviews.then(result3 => {
+						acquiredReviews = result3;
+						if (!req.session.user) {
+							guest=new User({
+								fname: '',
+								lname: '',
+								password: '',
+								email: '',
+								posts: []
+							});
+							guest.addReview = false;
+						}
+						else {
+							guest = req.session.user;
+							guest.addReview = true;
+						}
+						res.render('viewPost2', {
+							post: acquiredPost,
+							recipe: acquiredRecipe,
+							steps: steps,
+							stepImgs: stepImgs,
+							userLiked: userLiked,
+							user: req.session.user,
+							guest: guest,
+							comments: acquiredReviews
+						});
+					});
+				})
+			}
 		});
 	} else next();
 }
