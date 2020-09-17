@@ -11,5 +11,6 @@ route.get('/search', postController.getsearchposts);
 route.get('/seemoretoprecipe', postController.getRecSeemoreTop); 
 route.get('/seemorenewrecipe', postController.getRecSeemoreNew);
 route.get('/post/:postId', postController.getPost);
+route.post('/newrecipepost', upload.fields([{name:'postimg', maxCount: 1}, {name: 'steppic', maxCount: 20}]),postController.postRecipe)
 route.post('/post/likePost', postController.likePost);
 module.exports = route;

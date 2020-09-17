@@ -51,7 +51,7 @@ $("#addExercise").click(function (){
 		</center>
 		<center style="grid-column:3/5;">
 		<input type="text" value="1" style="display: none;" id='add${idexer}' required>
-			<input type="button" onclick="hideExerForm('${idexer}'); checkAddCount('add${idexer}'); increaseExerCount('${idexer}');" value="Add">
+			<input type="button" onclick="hideExerForm('${idexer}'); checkAddCount('add${idexer}', 'cancel${idexer}'); increaseExerCount('${idexer}');" value="Add">
 		</center>
 	</div>`);
 	document.getElementById("wpostbtn").disabled = false;
@@ -69,9 +69,7 @@ $("#addSteps").click(function (){
 		<button type="button" class="removeButton" onclick="removeStep('newStep${idexer2}Form', 'stepFormButton${idexer2}')">Remove</button>
 	</div>`);
 	document.getElementById('recipepost').insertAdjacentHTML("afterbegin", `<div class="stepForm" id="newStep${idexer2}Form">
-		<span>Step ${idexer2} Name:</span>
-		<input type="text" id="stepname${idexer2}" name="stepname" class="stepname" required>
-		<span>Exercise ${idexer2} Picture: </span>
+		<span>Step ${idexer2} Picture: </span>
 		<input type="file" id="steppic${idexer2}" name="steppic" class="steppic" onchange="readURL2(this, ${idexer2})" accept="image/*">
 		<div style="grid-column: 1/5">
 			<span>Step ${idexer2} Instructions:</span><br>
@@ -83,10 +81,10 @@ $("#addSteps").click(function (){
 		</center>
 		<center style="grid-column:3/5;">
 		<input type="text" value="1" style="display: none;" id='add2${idexer2}' required>
-			<input type="button" onclick="hideStepForm('${idexer2}'); checkAddCount2('add2${idexer2}'); increaseStepCount('${idexer2}');" value="Add">
+			<input type="button" onclick="hideStepForm('${idexer2}'); checkAddCount2('add2${idexer2}', 'cancel2${idexer}'); increaseStepCount('${idexer2}');" value="Add">
 		</center>
 	</div>`);
-	document.getElementById("wpostbtn").disabled = false;
+	document.getElementById("rpostbtn").disabled = false;
 })
 function showExerForm(id) {
 	document.getElementById(`newExercise${id}Form`).style.display="grid";
@@ -180,22 +178,20 @@ function checkCancelCount2(id, formid, buttonid) {
 	if (count === 1) 
 		removeStep(formid, buttonid);
 }
-function checkAddCount(id) {
+function checkAddCount(id, cancelid) {
 	var addid = id;
 	var count = parseInt($(`#${addid}`).val(), 10);
-	console.log(count)
 	if (count === 1) {
 		idexer++;
-		$(`#${id}`).val('2');
+		$(`#${cancelid}`).val('2');
 	}
 }
-function checkAddCount2(id) {
+function checkAddCount2(id, cancelid) {
 	var addid = id;
 	var count = parseInt($(`#${addid}`).val(), 10);
-	console.log(count)
 	if (count === 1) {
 		idexer2++;
-		$(`#${id}`).val('2');
+		$(`#${cancelid}`).val('2');
 	}
 }
 let slideNumber = -1;
@@ -235,6 +231,7 @@ function showSlide2() {
     setTimeout(showSlide2, 4000);
 }
 $("#wpostbtn").click(function() {
+	let incompleteData = 0;
 	document.getElementById('bodyFocusList').value='';
 	if(document.getElementById('abdomen').checked) 
          document.getElementById('bodyFocusList').value+='abdomen ';
@@ -251,11 +248,26 @@ $("#wpostbtn").click(function() {
 	if(document.getElementById('thighs').checked)
         document.getElementById('bodyFocusList').value+='thighs ';
     if(document.getElementById('wholebody').checked)
-        document.getElementById('bodyFocusList').value+='wholebody';
-	document.workoutpost.submit();
+		document.getElementById('bodyFocusList').value+='wholebody';
+	if(document.getElementById('bodyFocusList').value=='') {
+		$('#error').text('Please specify the body focus!')
+		incompleteData = 1;
+	}
+	if(document.getElementsByClassName('exerciseForm').length == 0) {
+		$('#error').text('Please put an exercise!')
+		incompleteData = 1;
+	}
+	for (let i = 0; i < document.getElementsByClassName('exerciseForm').length; i++) {
+		if($(`#exername${i+1}`).val()=='' || $(`#exerpic${i+1}`).val()=='' || $(`#exerrep${i+1}`).val()=='' || $(`#exerdesc${i+1}`).val()=='' || $(`#exerset${i+1}`).val()=='') {
+			incompleteData = 1;
+			$('#error').text('Please answer all your exercise fields')
+		}
+	}
+	if(!incompleteData) document.workoutpost.submit();
+	else $('#error').css('display', 'block');
 })
-let incompleteData = 0;
 $("#rpostbtn").click(function() {
+	let incompleteData = 0;
 	document.getElementById('fullingredients').value='';
 	document.getElementById('recipechecks').value='';
 	if(document.getElementById('seafood').checked) 
@@ -268,20 +280,29 @@ $("#rpostbtn").click(function() {
         document.getElementById('recipechecks').value+='meat ';
     if(document.getElementById('fruits').checked)
 		document.getElementById('recipechecks').value+='fruits ';
-	if(document.getElementById('recipechecks').value === '') incompleteData = 1;
-	if (document.getElementsByClassName('stepForm').length == 0) incompleteData = 1;
+	if(document.getElementById('recipechecks').value === '') {
+		$('#error2').text('Please specify the recipe category!');
+		incompleteData = 1;
+	}
+	if (document.getElementsByClassName('stepForm').length == 0) {
+		$('#error2').text('Please specify the step directions'); 
+		incompleteData = 1;
+	}
 	for(let i = 0; i < document.getElementsByClassName('ingredients').length; i++)
 		document.getElementById('fullingredients').value += $(`#ingredient${i}`).children('center').children('span').text()+'¿';
-	if(document.getElementById('fullingredients').value!='') incompleteData = 1;
+	if(document.getElementById('fullingredients').value=='') {
+		$('#error2').text('Please add your ingredients!');
+		incompleteData = 1
+	};
 	for(let i = 0; i< document.getElementsByClassName('stepForm').length; i++)
-		if ($(`#stepname${i+1}`).val() == '' || $(`#steppic${i+1}`).val()=='' || $(`#stepdesc${i+1}`).val() == '')
+		if ($(`#stepname${i+1}`).val() == '' || $(`#steppic${i+1}`).val()=='' || $(`#stepdesc${i+1}`).val() == ''){
 			incompleteData = 1;
-	console.log(incompleteData);
+			$('#error2').text('Please answer all your step details!');
+		}
 	if(!incompleteData) {
 		incompleteData=0;
 		document.recipepost.submit();
-		
-	}
+	} else $('#error2').css('display', 'block');
 })
 let ingCount = 0;
 function addIngredient() {

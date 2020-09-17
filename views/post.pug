@@ -36,7 +36,7 @@ block body
 						br
 						input#fruits.boxes.one(name = "seafood", type = "checkbox")
 						label(for = "fruits", style="color: white;") Fruits
-						input#recipechecks(type="text", style="display: none;")
+						input#recipechecks(type="text", style="display: none;" name="recipechecks")
 				#thumbnailImg(style="grid-column: 3/5;")
 					img#recipepostimg(src="", alt="Post Thumbnail", style="display: none;")
 			#ingredientsContainer
@@ -51,10 +51,11 @@ block body
 			#stepsContainer
 				p Instruction Steps
 				.stepCont
-					button#addSteps(type="button")
+					button#addSteps(type="submit")
 						img(src="/images/plus.png")
 			center
-				button#rpostbtn(type="button") Post
+				p#error2 Hi
+				button#rpostbtn(type="button", disabled="disabled") Post
 	#workoutcontainer(style = "display: none")
 		form#workoutpost(action = "/newworkoutpost",method = "POST", name = "workoutpost", enctype="multipart/form-data")
 			.workTitleSection
@@ -116,6 +117,7 @@ block body
 					button#addExercise(type="button")
 						img(src="/images/plus.png")
 			center
-				button#wpostbtn(type="submit") Post
+				p#error Hi
+				button#wpostbtn(type="button" disabled="true") Post
 block scripts
 	script(src="/scripts/post.js")

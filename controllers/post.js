@@ -15,7 +15,6 @@ exports.postWorkout = (req, res, next) =>{
         dateCreated: currdate.toISOString().slice(0,10),
         dateUpdated: currdate.toISOString().slice(0,10),
 		likes: [],
-		dislikes: [],
         category: "Workout",
 		image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${req.files.postimg[0].filename}`))
 	});
@@ -87,6 +86,83 @@ exports.postWorkout = (req, res, next) =>{
 	}).catch(err => {
 		console.log(err);
 	})
+}
+exports.postRecipe = (req,res, next) =>{
+    var currdate = new Date();
+    const post = new Post({
+        title: req.body.recipetitle,
+        dateCreated: currdate.toISOString().slice(0,10),
+        dateUpdated: currdate.toISOString().slice(0,10),
+		likes: [],
+        category: "Recipe",
+		image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${req.files.postimg[0].filename}`))
+    });
+    post.save();
+    moveFile(path.join(__dirname, '..', `/public/uploads/${req.files.postimg[0].filename}`), path.join(__dirname, '..', `/public/uploads/${post._id}/postimg.png`)).then(() => {
+		console.log('File Added Successfully')
+	}).catch(err => {
+		console.log(err);
+    });
+    let user = User.isExisting(req.session.user.email);
+    user.then(result => {
+        result.posts.push(post._id);
+        User.findOneAndUpdate(
+            {_id : result._id},
+            {posts : result.posts}
+		).then(() => {
+			console.log('Post added to User');
+		})
+    });
+    let category = req.body.recipechecks.split(' ');
+    let category2 = [];
+    for(let i = 0; i < category.length; i++)
+        if(category[i] != '')
+            category2.push(category[i]);
+    let ingredients = req.body.ingredients.split('¿');
+    let ingredients2 = [];
+    for(let i = 0; i < ingredients.length; i++)
+        if(ingredients[i] != '')
+            ingredients2.push(ingredients[i]);
+    const recipe = new Recipe({
+        ingredients: ingredients2,
+        category: category2,
+        postID: post._id,
+        steps: []
+    });
+    recipe.save();
+    //creating each step in recipes
+    let stepIDs = [];
+	let stepimages = req.files.steppic;
+	for(i = 0; i < stepimages.length; i++){ 
+		if (stepimages.length===1) {
+			const step = new Step({
+				image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${stepimages[i].filename}`)),
+				instruction: req.body.stepdesc,
+			});
+			step.save();
+			stepIDs.push(step._id);
+		}
+		else {
+			const step = new Step({
+				image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${stepimages[i].filename}`)),
+				instruction: req.body.stepdesc[i],
+			});
+			step.save();
+			stepIDs.push(step._id);
+		}
+		moveFile(path.join(__dirname, '..', `/public/uploads/${stepimages[i].filename}`), path.join(__dirname, '..', `/public/uploads/${post._id}/steppic${i}.png`)).then(() => {
+			console.log('File Added Successfully')
+		}).catch(err => {
+			console.log(err);
+		});
+	}
+	recipe.steps = stepIDs;
+	Step.findOneAndUpdate({id: recipe._id}, {steps: recipe.steps}, {new:true}).then(() => {
+		console.log('Recipe updated');
+		setTimeout(function(){res.redirect(`post/${post._id}`);}, 4000);
+	}).catch(err => {
+		console.log(err);
+	});
 }
 exports.getWorkouts = (req, res, next) => {
 	let result1, result2;

@@ -460,6 +460,11 @@ html {
 	  margin-left: 10px;
 	  padding-left: 5%;
   }
+  #error, #error2 {
+	  color: red;
+	  font-size: 2vh;
+	  display: none;
+  }
  @media(max-width: 1300px) {
 	.exerciseFormButton, .stepFormButton {
 		width: 200px;
