@@ -1,7 +1,9 @@
 const Post = require('../models/posts');
 const User = require('../models/users');
 const Workout = require('../models/workouts');
+const Recipe = require('../models/recipes');
 const Exercise = require('../models/exercises');
+const Step = require('../models/steps');
 const Review = require('../models/reviews');
 const fs = require('fs');
 const moveFile = require('move-file');
@@ -88,21 +90,21 @@ exports.postWorkout = (req, res, next) =>{
 }
 exports.getWorkouts = (req, res, next) => {
 	let result1, result2;
-	let topPosts = Post.getTopPosts().then(result => {
+	let topPosts = Post.getWTopPosts().then(result => {
 		result1 = result;
+		var date = new Date();
 		for (let i = 0; i< result1.length; i++) {
-			var date = new Date();
 			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
 			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
 		}
-		let newPosts = Post.getNewPosts().then(data => {
+		let newPosts = Post.getWNewPosts().then(data => {
 			result2=data;
 			for (let i = 0; i< result1.length; i++) {
 				var date = new Date();
 				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
 				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
 			}
-			res.render('workouts', {
+			res.render('workout', {
 				user: req.session.user,
 				topPosts: result1,
 				newPosts: result2	
@@ -110,16 +112,16 @@ exports.getWorkouts = (req, res, next) => {
 		})
 	});
 }
-exports.getMoreWorkouts = (req, res, next) =>{
+exports.getWorkSeemoreTop = (req, res, next) =>{
 	let result1, result2;
-	let topPosts = Post.getmoreTopPosts().then(result => {
+	let topPosts = Post.getWMoreTopPosts().then(result => {
 		result1 = result;
 		for (let i = 0; i< result1.length; i++) {
 			var date = new Date();
 			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
 			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
 		}
-		let newPosts = Post.getNewPosts().then(data => {
+		let newPosts = Post.getWNewPosts().then(data => {
 			console.log(data);
 			result2=data;
 			for (let i = 0; i< result2.length; i++) {
@@ -127,32 +129,7 @@ exports.getMoreWorkouts = (req, res, next) =>{
 				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
 				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
 			}
-			res.render('exercises', {
-				user: req.session.user,
-				topPosts: result1,
-				newPosts: result2	
-			});
-		})
-	});
-}
-exports.getSeemoreTop = (req, res, next) =>{
-	let result1, result2;
-	let topPosts = Post.getMoreTopPosts().then(result => {
-		result1 = result;
-		for (let i = 0; i< result1.length; i++) {
-			var date = new Date();
-			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
-			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
-		}
-		let newPosts = Post.getNewPosts().then(data => {
-			console.log(data);
-			result2=data;
-			for (let i = 0; i< result2.length; i++) {
-				var date = new Date();
-				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
-				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
-			}
-			res.render('exercises', {
+			res.render('workout', {
 				user: req.session.user,
 				topPosts: result1,
 				newPosts: result2
@@ -160,16 +137,16 @@ exports.getSeemoreTop = (req, res, next) =>{
 		})
 	});
 }
-exports.getSeemoreNew = (req, res, next) =>{
+exports.getWorkSeemoreNew = (req, res, next) =>{
 	let result1, result2;
-	let topPosts = Post.getTopPosts().then(result => {
+	let topPosts = Post.getWTopPosts().then(result => {
 		result1 = result;
 		for (let i = 0; i< result1.length; i++) {
 			var date = new Date();
 			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
 			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
 		}
-		let newPosts = Post.getMoreNewPosts().then(data => {
+		let newPosts = Post.getWMoreNewPosts().then(data => {
 			console.log(data);
 			result2=data;
 			for (let i = 0; i< result2.length; i++) {
@@ -177,13 +154,102 @@ exports.getSeemoreNew = (req, res, next) =>{
 				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
 				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
 			}
-			res.render('exercises', {
+			res.render('workout', {
 				user: req.session.user,
 				topPosts: result1,
 				newPosts: result2	
 			});
 		})
 	});
+}
+exports.getRecipes = (req, res, next) => {
+	let result1, result2;
+	let topPosts = Post.getRTopPosts().then(result => {
+		result1 = result;
+		for (let i = 0; i< result1.length; i++) {
+			var date = new Date();
+			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
+			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+		}
+		let newPosts = Post.getRNewPosts().then(data => {
+			result2=data;
+			for (let i = 0; i< result1.length; i++) {
+				var date = new Date();
+				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
+				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
+			}
+			res.render('recipe', {
+				user: req.session.user,
+				topPosts: result1,
+				newPosts: result2	
+			});
+		})
+	});
+}
+exports.getRecSeemoreTop = (req, res, next) =>{
+	let result1, result2;
+	let topPosts = Post.getRMoreTopPosts().then(result => {
+		result1 = result;
+		for (let i = 0; i< result1.length; i++) {
+			var date = new Date();
+			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
+			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+		}
+		let newPosts = Post.getRNewPosts().then(data => {
+			console.log(data);
+			result2=data;
+			for (let i = 0; i< result2.length; i++) {
+				var date = new Date();
+				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
+				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
+			}
+			res.render('recipe', {
+				user: req.session.user,
+				topPosts: result1,
+				newPosts: result2
+			});
+		})
+	});
+}
+exports.getRecSeemoreNew = (req, res, next) =>{
+	let result1, result2;
+	let topPosts = Post.getRTopPosts().then(result => {
+		result1 = result;
+		for (let i = 0; i< result1.length; i++) {
+			var date = new Date();
+			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
+			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+		}
+		let newPosts = Post.getRMoreNewPosts().then(data => {
+			console.log(data);
+			result2=data;
+			for (let i = 0; i< result2.length; i++) {
+				var date = new Date();
+				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
+				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
+			}
+			res.render('recipe', {
+				user: req.session.user,
+				topPosts: result1,
+				newPosts: result2	
+			});
+		})
+	});
+}
+exports.getsearchposts = (req,res, next) => {
+    let resultpost;
+    var date = new Date();
+    let postres = Post.getSearch(req.query.search).then(result =>{
+        resultpost = result;
+        for(let i = 0; i<resultpost.length; i++){
+            resultpost[i].image = `uploads/${result[i]._id}/postimg.png`;
+            resultpost[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+        }
+        res.render("searchpost", {
+            user: req.session.user,
+            result: resultpost
+        });
+    })
 }
 exports.getPost = (req, res, next) => {
 	let exerciseImgs = [];

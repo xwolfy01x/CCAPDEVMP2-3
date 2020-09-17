@@ -78,9 +78,11 @@ exports.getProfile =(req, res, next) =>{
 	})
 };
 exports.getPostform = (req, res, next) =>{
-	res.render("post",{
-		user: req.session.user
-	})
+	if (req.session.user)
+		res.render("post",{
+			user: req.session.user
+		})
+	else res.redirect('/');
 };
 exports.postUpdateUser = (req,res,next) =>{
 	user = req.session.user

@@ -16,36 +16,45 @@ block body
 					input#recipeTitleBox(name = "recipetitle", placeholder = "Title of post", type = "text", required)
 					p#recipeTitle RECIPE THUMBNAIL
 					label.upload
-						input.file#thumbnail(name = "postimg", type = "file", onchange="readRecipeThumbnail(this, 0)",required)
-						input.file2#thumbnailName(type="text", disabled, required)
+						input.file#thumbnail2(name = "postimg", type = "file", onchange="readRecipeThumbnail(this, 0)",required)
+						input.file2#thumbnailName2(type="text", disabled, required)
 						span.customFile Browse
 					br
 					p#recipeCategories(style="color: white;") CATEGORIES:
 					div#1focus.focusopt(style="z-index:2; box-sizing: border-box;")
-						input#seafood.boxes.one(name = "seafood", type = "checkbox" , onclick="checkfullcategory(this)")
-						label(for = "seafood") Seafood
+						input#seafood.boxes.one(name = "seafood", type = "checkbox")
+						label(for = "seafood", style="color: white;") Seafood
 						br
-						input#seafood.boxes.one(name = "pastry", type = "checkbox" , onclick="checkfullcategory(this)")
-						label(for = "pastry") Pastry
+						input#pastry.boxes.one(name = "pastry", type = "checkbox")
+						label(for = "pastry", style="color: white;") Pastry
 						br
-						input#vegetables.boxes.one(name = "vegetables", type = "checkbox" , onclick="checkfullcategory(this)")
-						label(for = "vegetables") Vegetables
+						input#vegetables.boxes.one(name = "vegetables", type = "checkbox")
+						label(for = "vegetables", style="color: white;") Vegetables
 						br
-						input#meat.boxes.one(name = "meat", type = "checkbox" , onclick="checkfullcategory(this)")
-						label(for = "meat") Meat
+						input#meat.boxes.one(name = "meat", type = "checkbox")
+						label(for = "meat", style="color: white;") Meat
 						br
-						input#fruits.boxes.one(name = "seafood", type = "checkbox" , onclick="checkfullcategory(this)")
-						label(for = "fruits") Fruits
+						input#fruits.boxes.one(name = "seafood", type = "checkbox")
+						label(for = "fruits", style="color: white;") Fruits
+						input#recipechecks(type="text", style="display: none;")
 				#thumbnailImg(style="grid-column: 3/5;")
 					img#recipepostimg(src="", alt="Post Thumbnail", style="display: none;")
 			#ingredientsContainer
 				p INGREDIENTS LIST
-				input#ingredients(type="text", placeholder="ingredient")
+				input#ingredients(type="text", placeholder="add ingredients here")
 				input#fullingredients(type="text", style="display: none;", name="ingredients")
 				button(type="button")
 					img#addingredients(src="/images/plus.png" onclick="addIngredient();")
 				#ingredientsList
-			button#rpostbtn(type="submit") Post
+			#slideshow2Container
+				#slideshow2
+			#stepsContainer
+				p Instruction Steps
+				.stepCont
+					button#addSteps(type="button")
+						img(src="/images/plus.png")
+			center
+				button#rpostbtn(type="button") Post
 	#workoutcontainer(style = "display: none")
 		form#workoutpost(action = "/newworkoutpost",method = "POST", name = "workoutpost", enctype="multipart/form-data")
 			.workTitleSection
@@ -77,25 +86,25 @@ block body
 				#workBodyFocus
 					p#workBodyFocusTitle BODY FOCUS
 				div#1focus.focusopt(style="z-index:2; box-sizing: border-box;")
-					input#abdomen.boxes.one(name = "abdomen", type = "checkbox" , onclick="checkfullbody(this)")
+					input#abdomen.boxes.one(name = "abdomen", type = "checkbox")
 					label(for = "abdomen") Abdomen
 				div#2focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
-					input#glutes.boxes.one(name = "glutes", type = "checkbox" , onclick="uncheckfullbody(this)")
+					input#glutes.boxes.one(name = "glutes", type = "checkbox")
 					label(for = "glutes") Glutes
 				div#3focus.focusopt(style="z-index:2;; box-sizing: border-box; width: 100%;")
-					input#triceps.boxes.one(name = "triceps", type = "checkbox" , onclick="uncheckfullbody(this)")
+					input#triceps.boxes.one(name = "triceps", type = "checkbox")
 					label(for = "triceps") Triceps
 				div#4focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
-					input#biceps.boxes.one(name = "biceps", type = "checkbox" , onclick="uncheckfullbody(this)")
+					input#biceps.boxes.one(name = "biceps", type = "checkbox")
 					label(for = "biceps") Biceps
 				div#5focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
-					input#back.boxes.one(name = "back", type = "checkbox" , onclick="uncheckfullbody(this)")
+					input#back.boxes.one(name = "back", type = "checkbox")
 					label(for = "back") Back
 				div#6focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
-					input#chest.boxes.one(name = "chest", type = "checkbox" , onclick="uncheckfullbody(this)")
+					input#chest.boxes.one(name = "chest", type = "checkbox")
 					label(for = "chest") Chest
 				div#7focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
-					input#thighs.boxes.one(name = "thighs", type = "checkbox", onclick="uncheckfullbody(this)")
+					input#thighs.boxes.one(name = "thighs", type = "checkbox")
 					label(for = "thighs") Thighs
 				div#8focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
 					input#wholebody.boxes(name = "wholebody", type = "checkbox", onclick="toggle(this);")
@@ -107,6 +116,6 @@ block body
 					button#addExercise(type="button")
 						img(src="/images/plus.png")
 			center
-				button#wpostbtn(type="submit", disabled) Post
+				button#wpostbtn(type="submit") Post
 block scripts
 	script(src="/scripts/post.js")

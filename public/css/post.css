@@ -39,7 +39,7 @@ html {
 	  align-items: flex-start;
 	  justify-content: space-evenly;
   }
-  .left-col button, .right-col button, #wpostbtn {
+  .left-col button, .right-col button, #wpostbtn, #rpostbtn {
 	  font-size: 5vmin;
 	  background-color: darkred;
 	  color: white;
@@ -114,6 +114,10 @@ html {
 	  outline: 0;
 	  border: 0;
 	  background-color: white;
+	  font-family: 'Actor';
+	  font-weight: 600;
+	  text-align: center;
+	  font-size: 2vh;
   }
   .customFile {
 	  position: relative;
@@ -155,6 +159,18 @@ html {
 	  opacity: 0.8;
 	  display: flex;
 	  padding-left: 15vh;
+  }
+  #slideshow2Container {
+	  width: 50%;
+	  display: inline-block;
+	  height: 80%;
+	  box-sizing: border-box;
+	  padding: 10vh 15vh 0vh 10vh;
+  }
+  #slideshow2 {
+	  width: 100%;
+	  height: 100%;
+	  border: 5px solid #b04632;
   }
   .focusopt{
 	  padding-left: 20vh;
@@ -223,7 +239,7 @@ html {
 	  font-weight: 700;
 	  width: 100%;
   }
-  #workExercisesContainer {
+  #workExercisesContainer, #stepsContainer {
 	  padding: 0vh 15vh 15vh 15vh;
   }
   #addExercise img {
@@ -231,14 +247,14 @@ html {
 	  width: 25vmin;
 	  cursor: pointer;
   }
-  #workExercisesContainer p {
+  #workExercisesContainer p, #stepsContainer p {
 	  font-weight: 600;
 	  font-family: 'Actor';
 	  font-size: 5vh;
 	  grid-column: 1/6; 
 	  border-top: 5px solid #b04632;
   }
-  .newExercise {
+  .newExercise, .newSteps {
 	  display: grid;
 	  background-color:white;
 	  color: black;
@@ -246,11 +262,11 @@ html {
 	  width: 100%;
 	  cursor: pointer;
   }
-  .exerciseFormButton {
+  .exerciseFormButton, .stepFormButton {
 	  width: 300px;
 	  height: 400px;
   }
-  .exerciseForm {
+  .exerciseForm, .stepForm {
 	  padding: 5vh;
 	  position: fixed;
 	  display: grid;
@@ -268,32 +284,32 @@ html {
 	  color: white;
 	  background-color: #b04632;
   }
-  .exerciseForm button {
+  .exerciseForm button, .stepForm button {
 	  color: black;
 	  font-family: 'Actor';
 	  font-size: 3vh;
 	  width: 30%;
 	  background-color: white;
   }
-  .exerciseForm span {
+  .exerciseForm span, .stepForm span {
 	  font-size: 2.5vh;
 	  font-family: 'Actor';
   }
-  .exerciseForm textarea {
+  .exerciseForm textarea, .stepForm textarea {
 	  width: 100%;
 	  height: 90%;
   }
-  .exerciseForm input {
+  .exerciseForm input, .stepForm input {
 	  font-size: 2vh;
 	  font-family: 'Actor';
 	  width: 100%;
 	  font-weight: 600;
 	  height: 100%;
   }
-  .exerciseForm input:focus{
+  .exerciseForm input:focus, .stepForm input::focus {
 	  outline: 0;
   }
-  .newExercise {
+  .newExercise, .newStep {
 	  display: grid;
 	  background-color:#f2f2f2;
 	  color: black;
@@ -302,20 +318,20 @@ html {
 	  cursor: pointer;
   }
 
-  .exerNameDisplay {
+  .exerNameDisplay, .stepNameDisplay {
 	  font-size: 3vh;
 	  padding: 2vh 1vh;
   }
-  .exerPicDisplay {	
+  .exerPicDisplay, .stepPicDisplay {	
 	  height: 300;
 	  width: 250;
   }
-  .execCont {
+  .execCont, .stepCont {
 	  display: flex;
 	  flex-direction: row;
 	  overflow-x: scroll;
   }
-  .exerciseFormButton {
+  .exerciseFormButton, .stepFormButton {
 	  width: 300px;
 	  height: 400px;
 	  display: grid;
@@ -325,21 +341,24 @@ html {
 	  margin-bottom: 2rem;
 	  padding-bottom: 2rem;
   }
-  .exerciseFormButton:hover~.exerciseFormButton {
+  .exerciseFormButton:hover~.exerciseFormButton, .stepFormButton:hover~.stepFormButton {
 	  transform: translateX(5rem);
   }
   .exerciseFormButton:not(:first-child) {
 	  margin-left: -5rem;
   }
-  .execCont::-webkit-scrollbar {
+  .stepFormButton:not(:first-child) {
+	  margin-left: -5rem;
+  }
+  .execCont::-webkit-scrollbar, .stepCont::-webkit-scrollbar {
 	  width: 15px;
 	  height: 15px;
   }
-  .execCont::-webkit-scrollbar-thumb {
+  .execCont::-webkit-scrollbar-thumb, .stepCont::-webkit-scrollbar-thumn {
 	  background: darkred;
 	  border-radius: 10px;
   }
-  .execCont::-webkit-scrollbar-track {
+  .execCont::-webkit-scrollbar-track, .stepCont::-webkit-scrollbar-track {
 	  background: black;
 	  border-radius: 50px;
   }
@@ -365,6 +384,7 @@ html {
 	  font-size: 5vh;
 	  font-family: 'Actor';
 	  width: 50%;
+	  float: left;
 	  box-sizing: border-box;
   }
   #ingredients {
@@ -389,7 +409,6 @@ html {
   #ingredientsContainer button:focus {
 		border: 0;
 		outline: 0;
-
 	}
   #addingredients {
 	  width: 60px;
@@ -425,8 +444,8 @@ html {
 	  height: 45px;
   }
   #ingredientsList button {
-	  height: 100%;
-	  width: 100%;
+	  height: 50;
+	  width: 50;
 	  color: white;
 	  top: 0px;	
 	  background-color: red;
@@ -434,6 +453,7 @@ html {
   }
   #ingredientsList span {
 	  height: 100%;
+	  width: 100%;
 	  text-align: center;
 	  font-family: 'Actor';
 	  font-weight: 600;
@@ -441,7 +461,7 @@ html {
 	  padding-left: 5%;
   }
  @media(max-width: 1300px) {
-	.exerciseFormButton {
+	.exerciseFormButton, .stepFormButton {
 		width: 200px;
 		height: 300px;
 	}
@@ -453,7 +473,7 @@ html {
 	  #workDurationBox, #workDiffBox, #recipeCatBox {
 		  font-size: 3vh;
 	  }
-	  .execCont::-webkit-scrollbar {
+	  .execCont::-webkit-scrollbar, .stepCont::-webkit-scrollbar {
 		width: 10px;
 		height: 10px;
 	}

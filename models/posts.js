@@ -67,27 +67,51 @@ const postSchema = new Schema({
 		required: true
 	}
 }, { versionKey: '_somethingElse' });
-postSchema.statics.getTopPosts = async function() {
-	return Post.find().sort({likes: -1}).limit(5).then(result =>{
+postSchema.statics.getWTopPosts = async function() {
+	return Post.find({category: 'Workout'}).sort({likes: -1}).limit(5).then(result =>{
 		return result;
 	}).catch(err => {
 		console.log(err);
 	});
 }
-postSchema.statics.getMoreTopPosts = async function() {
-	return Post.find().sort({likes: -1}).limit(25).then(result =>{
+postSchema.statics.getWMoreTopPosts = async function() {
+	return Post.find({category: 'Workout'}).sort({likes: -1}).limit(25).then(result =>{
 		return result;
 	});
 }
-postSchema.statics.getNewPosts = async function() {
-	return Post.find().sort({dateCreated: -1}).limit(5).then(result =>{
+postSchema.statics.getWNewPosts = async function() {
+	return Post.find({category: 'Workout'}).sort({dateCreated: -1}).limit(5).then(result =>{
 		return result;
 	}).catch(err => {
 		console.log(err);
 	});
 }
-postSchema.statics.getMoreNewPosts = async function() {
-	return Post.find().sort({dateCreated: -1}).limit(25).then(result =>{
+postSchema.statics.getWMoreNewPosts = async function() {
+	return Post.find({category: 'Workout'}).sort({dateCreated: -1}).limit(25).then(result =>{
+		return result;
+	});
+}
+postSchema.statics.getRTopPosts = async function() {
+	return Post.find({category: 'Recipe'}).sort({likes: -1}).limit(5).then(result =>{
+		return result;
+	}).catch(err => {
+		console.log(err);
+	});
+}
+postSchema.statics.getRMoreTopPosts = async function() {
+	return Post.find({category: 'Recipe'}).sort({likes: -1}).limit(25).then(result =>{
+		return result;
+	});
+}
+postSchema.statics.getRNewPosts = async function() {
+	return Post.find({category: 'Recipe'}).sort({dateCreated: -1}).limit(5).then(result =>{
+		return result;
+	}).catch(err => {
+		console.log(err);
+	});
+}
+postSchema.statics.getRMoreNewPosts = async function() {
+	return Post.find({category: 'Recipe'}).sort({dateCreated: -1}).limit(25).then(result =>{
 		return result;
 	});
 }
@@ -97,6 +121,13 @@ postSchema.statics.getPost = async function(id) {
 	}).catch(err => {
 		console.log(err);
 	})
+}
+postSchema.statics.getSearch = async function(str){
+    return Post.find({title: {"$regex": str, "$options": "i"}}).then(result =>{
+        return result;
+    }).catch(err=> {
+        console.log(err);
+    })
 }
 const Post = mongoose.model('Post', postSchema, 'Posts');
 module.exports = Post;

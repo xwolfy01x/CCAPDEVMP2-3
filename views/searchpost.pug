@@ -1,0 +1,14 @@
+extends ./layouts/navbar.pug
+block css
+    link(rel="stylesheet", type="text/css", href ="/css/searchpost.css")
+block body
+    .postscontainer
+        .subcontainer#workoutpost
+            .categoryHeader
+                span.headerTitle SEARCH RESULTS:
+            each posts in result
+                a.workoutpost(href=`post/${posts._id}`)
+                    img.image(src=`${posts.image}`)
+                    .postInfo(href=`exercises/post/${posts._id}`)
+                        p.workposttitle #{posts.title}
+                        p.workpostbottom #{posts.displayDate} #{posts.likes.length} likes

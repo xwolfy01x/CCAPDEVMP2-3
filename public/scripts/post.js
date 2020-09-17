@@ -56,6 +56,38 @@ $("#addExercise").click(function (){
 	</div>`);
 	document.getElementById("wpostbtn").disabled = false;
 })
+let idexer2=1;
+$("#addSteps").click(function (){
+	document.getElementById('addSteps').insertAdjacentHTML("beforebegin",`
+	<div id="stepFormButton${idexer2}" class="stepFormButton">
+		<div class="newSteps" onclick="showStepForm('${idexer2}')" id="showyButton2${idexer2}">
+			<center>
+				<span id="stepNameDisplay${idexer2}" class="stepNameDisplay"></span>
+				<img id="stepPicDisplay${idexer2}" src="#" class="stepPicDisplay" alt="imagehere">
+			</center>
+		</div>
+		<button type="button" class="removeButton" onclick="removeStep('newStep${idexer2}Form', 'stepFormButton${idexer2}')">Remove</button>
+	</div>`);
+	document.getElementById('recipepost').insertAdjacentHTML("afterbegin", `<div class="stepForm" id="newStep${idexer2}Form">
+		<span>Step ${idexer2} Name:</span>
+		<input type="text" id="stepname${idexer2}" name="stepname" class="stepname" required>
+		<span>Exercise ${idexer2} Picture: </span>
+		<input type="file" id="steppic${idexer2}" name="steppic" class="steppic" onchange="readURL2(this, ${idexer2})" accept="image/*">
+		<div style="grid-column: 1/5">
+			<span>Step ${idexer2} Instructions:</span><br>
+			<textarea id="stepdesc${idexer2}" name="stepdesc" class="stepdesc" required></textarea>
+		</div>
+		<center style="grid-column: 1/3;">
+			<input type="text" value="1" style="display: none;" id='cancel2${idexer2}' required>
+			<input type="button" onclick="hideStepForm('${idexer2}'); checkCancelCount2('cancel2${idexer2}', 'newStep${idexer2}Form', 'stepFormButton${idexer2}')" value="Cancel">
+		</center>
+		<center style="grid-column:3/5;">
+		<input type="text" value="1" style="display: none;" id='add2${idexer2}' required>
+			<input type="button" onclick="hideStepForm('${idexer2}'); checkAddCount2('add2${idexer2}'); increaseStepCount('${idexer2}');" value="Add">
+		</center>
+	</div>`);
+	document.getElementById("wpostbtn").disabled = false;
+})
 function showExerForm(id) {
 	document.getElementById(`newExercise${id}Form`).style.display="grid";
 	document.getElementById(`newExercise${id}Form`).style.gridTemplateColumns="repeat(4, 1fr);"
@@ -63,17 +95,36 @@ function showExerForm(id) {
 	document.getElementById(`newExercise${id}Form`).style.gridColumnGap="2%";
 	document.getElementById(`newExercise${id}Form`).style.gridRowGap="5%";
 }
+function showStepForm(id) {
+	document.getElementById(`newStep${id}Form`).style.display="grid";
+	document.getElementById(`newStep${id}Form`).style.gridTemplateColumns="repeat(4, 1fr);"
+	document.getElementById(`newStep${id}Form`).style.gridTemplateRows="3vh 30vh 3vh 3vh;"
+	document.getElementById(`newStep${id}Form`).style.gridColumnGap="2%";
+	document.getElementById(`newStep${id}Form`).style.gridRowGap="5%";
+}
 function hideExerForm(id) {
 	document.getElementById(`newExercise${id}Form`).style.display="none";
+}
+function hideStepForm(id) {
+	document.getElementById(`newStep${id}Form`).style.display="none";
 }
 function removeExercise(formid, buttonid) {
 	$(`#${formid}`).remove();
 	$(`#${buttonid}`).css('display', 'none');
 	$(`#${buttonid}`).remove();
 }
+function removeStep(formid, buttonid) {
+	$(`#${formid}`).remove();
+	$(`#${buttonid}`).css('display', 'none');
+	$(`#${buttonid}`).remove();
+}
 function increaseExerCount(id) {
 	$(`#exerNameDisplay${id}`).html($(`#exername${id}`).val());
-	$(`#cancel${id}`).val(`2`);
+	$(`#cancel2${id}`).val(`2`);
+}
+function increaseStepCount(id) {
+	$(`#stepNameDisplay${id}`).html($(`#stepname${id}`).val());
+	$(`#cancel2${id}`).val(`2`);
 }
 function readWorkThumbnail(input, count) {
 	if (input.files && input.files[0]) {
@@ -91,7 +142,7 @@ function readRecipeThumbnail(input, count) {
 		var reader = new FileReader();
 		reader.onload = e => {
 			$(`#recipepostimg`).attr("src", e.target.result);
-			$(`#thumbnailName`).val($('#thumbnail').val().split('\\')[2]);
+			$(`#thumbnailName2`).val($('#thumbnail2').val().split('\\')[2]);
 			$(`#recipepostimg`).css('display', 'block');
 		}
 		reader.readAsDataURL(input.files[0]);
@@ -106,6 +157,15 @@ function readURL(input, count) {
 		reader.readAsDataURL(input.files[0]);
 	}	
 }
+function readURL2(input, count) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = e => {
+			$(`#stepPicDisplay${count}`).attr("src", e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}	
+}
 function checkCancelCount(id, formid, buttonid) {
 	var cancelid = id;
 	var count = parseInt($(`#${cancelid}`).val(), 10);
@@ -113,13 +173,29 @@ function checkCancelCount(id, formid, buttonid) {
 	if (count === 1) 
 		removeExercise(formid, buttonid);
 }
+function checkCancelCount2(id, formid, buttonid) {
+	var cancelid = id;
+	var count = parseInt($(`#${cancelid}`).val(), 10);
+	console.log(count)
+	if (count === 1) 
+		removeStep(formid, buttonid);
+}
 function checkAddCount(id) {
 	var addid = id;
 	var count = parseInt($(`#${addid}`).val(), 10);
 	console.log(count)
 	if (count === 1) {
 		idexer++;
-		$(`#${addid}`).val('2');
+		$(`#${id}`).val('2');
+	}
+}
+function checkAddCount2(id) {
+	var addid = id;
+	var count = parseInt($(`#${addid}`).val(), 10);
+	console.log(count)
+	if (count === 1) {
+		idexer2++;
+		$(`#${id}`).val('2');
 	}
 }
 let slideNumber = -1;
@@ -144,6 +220,20 @@ function showSlide() {
 	$('#slideshow').css('background-size', '100% 100%');
     setTimeout(showSlide, 4000);
 }
+showSlide2();
+function showSlide2() {
+	var array = [
+		"../images/seafood.jpg",
+		"../images/pastry.jpg",
+		"../images/vegetables.jpg",
+		"../images/meat.jpg",
+		"../images/fruits.jpg",
+	];
+	slideNumber++;
+    $('#slideshow2').css('background-image', `url(${array[slideNumber%array.length]})`);
+	$('#slideshow2').css('background-size', '100% 100%');
+    setTimeout(showSlide2, 4000);
+}
 $("#wpostbtn").click(function() {
 	document.getElementById('bodyFocusList').value='';
 	if(document.getElementById('abdomen').checked) 
@@ -164,16 +254,47 @@ $("#wpostbtn").click(function() {
         document.getElementById('bodyFocusList').value+='wholebody';
 	document.workoutpost.submit();
 })
+let incompleteData = 0;
+$("#rpostbtn").click(function() {
+	document.getElementById('fullingredients').value='';
+	document.getElementById('recipechecks').value='';
+	if(document.getElementById('seafood').checked) 
+        document.getElementById('recipechecks').value+='seafood ';
+    if(document.getElementById('pastry').checked)
+        document.getElementById('recipechecks').value+='pastry ';
+    if(document.getElementById('vegetables').checked)
+        document.getElementById('recipechecks').value+='vegetables ';
+    if(document.getElementById('meat').checked)
+        document.getElementById('recipechecks').value+='meat ';
+    if(document.getElementById('fruits').checked)
+		document.getElementById('recipechecks').value+='fruits ';
+	if(document.getElementById('recipechecks').value === '') incompleteData = 1;
+	if (document.getElementsByClassName('stepForm').length == 0) incompleteData = 1;
+	for(let i = 0; i < document.getElementsByClassName('ingredients').length; i++)
+		document.getElementById('fullingredients').value += $(`#ingredient${i}`).children('center').children('span').text()+'¿';
+	if(document.getElementById('fullingredients').value!='') incompleteData = 1;
+	for(let i = 0; i< document.getElementsByClassName('stepForm').length; i++)
+		if ($(`#stepname${i+1}`).val() == '' || $(`#steppic${i+1}`).val()=='' || $(`#stepdesc${i+1}`).val() == '')
+			incompleteData = 1;
+	console.log(incompleteData);
+	if(!incompleteData) {
+		incompleteData=0;
+		document.recipepost.submit();
+		
+	}
+})
 let ingCount = 0;
 function addIngredient() {
-	document.getElementById('ingredientsList').insertAdjacentHTML('afterbegin', `
-		<li id="ingredient${ingCount}" class="ingredients">
-			<button type="button" class="ingDel" onclick="deleteIngredient(${ingCount})">X</button>
-			<center><span>${$("#ingredients").val()}</span></center>
-		</li>
-	`)
-	$('#ingredients').val('');
-	ingCount++;
+	if($('#ingredients').val()!='') {
+		document.getElementById('ingredientsList').insertAdjacentHTML('afterbegin', `
+			<li id="ingredient${ingCount}" class="ingredients">
+				<button type="button" class="ingDel" onclick="deleteIngredient(${ingCount})">X</button>
+				<center><span>${$("#ingredients").val()}</span></center>
+			</li>
+		`)
+		ingCount++;
+		$('#ingredients').val('');
+	}
 }
 function deleteIngredient(count) {
 	$(`#ingredient${count}`).remove();
