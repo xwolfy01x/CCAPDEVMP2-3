@@ -190,9 +190,13 @@ button{
     grid-column: 1/3;
 }
 #likeContainer {
-    display: inline-block; 
-    position: absolute; 
+    position: relative;
+    width: 100%;
+    margin-bottom: 5%;
     right: 50px;
+}
+#likeContainer form {
+    float: right;
 }
 #postComment, .editComment, .cancelComment {
     padding: 2vh;
