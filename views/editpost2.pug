@@ -1,0 +1,85 @@
+extends ./layouts/navbar.pug
+block css
+	link(rel = "stylesheet", type = "text/css", href = "/css/editpost2.css")
+block body
+	#recipecontainer
+		-idexer2 = 100
+		form#recipepost(action = "/editrecipe", method = "POST", name = "recipepost", enctype="multipart/form-data")
+			input(type="text", style="display: none;", name="recid", value=`${recipe._id}`)
+			input(type="text", style="display: none;", name="postid", value=`${post._id}`)
+			each step in steps
+				.stepForm(id=`newStep${idexer2}Form`, style="display: none;")
+					span Step Picture: 
+					input.steppic(type="file" id=`steppic${idexer2}` name="steppic" onchange=`readURL2(this, ${idexer2})` accept="image/*")
+					div(style="grid-column: 1/5")
+						span Step Instructions:
+						textarea.stepdesc(id=`stepdesc${idexer2}` name="stepdesc" required) #{step.instruction}
+					center(style="grid-column: 1/3;")
+						input(type="text" value="2" style="display: none;" id=`cancel2${idexer2}` required)
+						input(type="button" onclick=`hideStepForm('${idexer2}'); checkCancelCount2('cancel2${idexer2}', 'newStep${idexer2}Form', 'stepFormButton${idexer2}')` value="Cancel")
+					center(style="grid-column:3/5;")
+						input(type="text" value="2" style="display: none;" id=`add2${idexer2}` required)
+						input(type="button" onclick=`hideStepForm('${idexer2}'); checkAddCount2('add2${idexer2}', 'cancel2${idexer}'); increaseStepCount('${idexer2}');` value="Add")
+			.recipeTitleSection
+				div(style="grid-column: 1/3;")
+					p#recipeTitle RECIPE TITLE
+					input#recipeTitleBox(name = "recipetitle", placeholder = "Title of post", type = "text", required, value=`${post.title}`)
+					p#recipeTitle RECIPE THUMBNAIL
+					label.upload
+						input.file#thumbnail2(name = "postimg2", type = "file", onchange="readRecipeThumbnail(this, 0)",required)
+						input.file2#thumbnailName2(type="text", disabled, required)
+						span.customFile Browse
+					br
+					p#recipeCategories(style="color: white;") CATEGORIES:
+					div#1focus.focusopt(style="z-index:2; box-sizing: border-box;")
+						input#seafood.boxes.one(name = "seafood", type = "checkbox", checked=(recipe.category.includes('seafood')))
+						label(for = "seafood", style="color: white;") Seafood
+						br
+						input#pastry.boxes.one(name = "pastry", type = "checkbox", checked=(recipe.category.includes('pastry')))
+						label(for = "pastry", style="color: white;") Pastry
+						br
+						input#vegetables.boxes.one(name = "vegetables", type = "checkbox", checked=(recipe.category.includes('vegetables')))
+						label(for = "vegetables", style="color: white;") Vegetables
+						br
+						input#meat.boxes.one(name = "meat", type = "checkbox", checked=(recipe.category.includes('meat')))
+						label(for = "meat", style="color: white;") Meat
+						br
+						input#fruits.boxes.one(name = "seafood", type = "checkbox", checked=(recipe.category.includes('seafood')))
+						label(for = "fruits", style="color: white;") Fruits
+						input#recipechecks(type="text", style="display: none;" name="recipechecks")
+				#thumbnailImg(style="grid-column: 3/5;")
+					img#recipepostimg(src="", alt="Post Thumbnail", style="display: none;")
+			#ingredientsContainer
+				-var ingCount = 100
+				p INGREDIENTS LIST
+				input#ingredients(type="text", placeholder="add ingredients here")
+				input#fullingredients(type="text", style="display: none;", name="ingredients")
+				button(type="button")
+					img#addingredients(src="/images/plus.png" onclick="addIngredient();")
+				#ingredientsList
+					each ingredient in recipe.ingredients
+						li.ingredients(id=`ingredient${ingCount}`)
+							button.ingDel(type="button" onclick=`deleteIngredient(${ingCount})`) X
+							center
+								span #{ingredient}
+			#slideshow2Container
+				#slideshow2
+			#stepsContainer
+				p Instruction Steps
+				.stepCont
+					-idexer2=100
+					each step in steps
+						.stepFormButton(id=`stepFormButton${idexer2}` class="stepFormButton")
+							.newSteps(onclick=`showStepForm('${idexer2}')` id=`showyButton2${idexer2}`)
+								center
+									span.stepNameDisplay(id=`stepNameDisplay${idexer2}`)
+									img.stepPicDisplay(id=`stepPicDisplay${idexer2}` src="#" alt="imagehere")
+							button.removebutton(type="button" onclick=`removeStep('newStep${idexer2}Form', 'stepFormButton${idexer2}')`) Remove
+					button#addSteps(type="submit")
+						img(src="/images/plus.png")
+			center
+				p#error2 Hi
+				button#cancelbtn(type="button" onclick="window.location='/'") Cancel
+				button#rpostbtn(type="button") Post
+block scripts
+	script(src="/scripts/post.js")

@@ -58,6 +58,7 @@ exports.postWorkout = (req, res, next) =>{
 				description: req.body.exerdesc,
 				repetitions: parseInt(req.body.exerrep,10),
 				sets: parseInt(req.body.exerset, 10),
+				workoutID: work._id
 			});
 			exercise.save();
 			exerciseIDs.push(exercise._id);
@@ -69,6 +70,7 @@ exports.postWorkout = (req, res, next) =>{
 				description: req.body.exerdesc[i],
 				repetitions: parseInt(req.body.exerrep[i],10),
 				sets: parseInt(req.body.exerset[i], 10),
+				workoutID: work._id
 			});
 			exercise.save();
 			exerciseIDs.push(exercise._id);
@@ -127,7 +129,7 @@ exports.postRecipe = (req,res, next) =>{
         ingredients: ingredients2,
         category: category2,
         postID: post._id,
-        steps: []
+		steps: []
     });
     recipe.save();
     //creating each step in recipes
@@ -138,6 +140,7 @@ exports.postRecipe = (req,res, next) =>{
 			const step = new Step({
 				image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${stepimages[i].filename}`)),
 				instruction: req.body.stepdesc,
+				recipeID: recipe._id
 			});
 			step.save();
 			stepIDs.push(step._id);
@@ -146,6 +149,7 @@ exports.postRecipe = (req,res, next) =>{
 			const step = new Step({
 				image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${stepimages[i].filename}`)),
 				instruction: req.body.stepdesc[i],
+				recipeID: recipe._id
 			});
 			step.save();
 			stepIDs.push(step._id);
@@ -327,6 +331,60 @@ exports.getsearchposts = (req,res, next) => {
         });
     })
 }
+exports.getEditPost = (req, res, next) => {
+	let exerciseImgs = [];
+	let exercises=[];
+	let steps = [];
+	let owner = false;
+	let stepImgs = [];
+	if (req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
+		if(req.session.user) {
+			for (i=0; i< req.session.user.posts.length; i++)
+				if (req.session.user.posts[i]._id === req.params.postId)
+					owner = true
+			if (owner)	{
+				let post = Post.getPost(req.params.postId);
+				post.then(result2 => {
+					let acquiredPost = result2;
+					if (acquiredPost.category === 'Workout') {
+						let data = Workout.getDetails(req.params.postId);
+						data.then(result => {
+							let acquiredWork = result;
+							for (let i=0; i<acquiredWork.exercises.length; i++) {
+								exercises.push(acquiredWork.exercises[acquiredWork.exercises.length-i-1])
+								exerciseImgs.push(`/uploads/${acquiredPost._id}/exerpic${acquiredWork.exercises.length-i-1}.png`)
+							}
+							res.render('editpost', {
+								post: acquiredPost,
+								workout: acquiredWork,
+								exercises: exercises,
+								exerciseImgs: exerciseImgs,
+								user: req.session.user
+							});
+						});
+					} else if (acquiredPost.category === 'Recipe') {
+						let data = Recipe.getDetails(req.params.postId);
+						data.then(result => {
+							let acquiredRecipe = result;
+							for (let i = 0; i< acquiredRecipe.steps.length; i++) {
+								steps.push(acquiredRecipe.steps[acquiredRecipe.steps.length-1-i]);
+								stepImgs.push(`/uploads/${acquiredPost._id}/steppic${acquiredRecipe.steps.length-i-1}.png`);
+							}
+							res.render('editPost2', {
+								post: acquiredPost,
+								recipe: acquiredRecipe,
+								steps: steps,
+								stepImgs: stepImgs,
+								user: req.session.user
+							});
+						})
+					}
+				});
+			} else res.redirect('/');
+		} 
+		else res.redirect('/');
+	} else next();
+}
 exports.getPost = (req, res, next) => {
 	let exerciseImgs = [];
 	let stepImgs = [];
@@ -437,5 +495,196 @@ exports.likePost = (req, res, next) => {
 		});
 		res.redirect(`/post/${req.body.postId}`)
 	})
-
+}
+exports.deletePost = (req, res, next) =>{
+	if (req.params.postId.match(/^[0-9a-fA-F]{24}$/)){
+		let post = Post.getPost(req.params.postId);
+		post.then(result =>{
+			let acquiredPost = result;
+			if(acquiredPost.category == "Workout"){
+				let workout = Workout.getWorkout(req.params.postId);
+				workout.then(wresult => {
+					let workoutRef = wresult;
+					Exercise.deleteExercise(workoutRef._id).catch(err => {
+						console.log(err);
+					});
+					Workout.deleteWorkout(req.params.postId).catch(err => {
+						console.log(err);
+					});
+				})
+			}else if(acquiredPost.category == "Recipe"){
+				let recipe = Recipe.getRecipe(req.params.postId);
+				recipe.then(rresult => {
+					let recipeRef = rresult;
+					Step.deleteStep(recipeRef._id).catch(err => {
+						console.log(err);
+					})
+					Recipe.deleteRecipe(req.params.postId).catch(err => {
+						console.log(err);
+					});
+				})
+			}
+			Post.deletePost(req.params.postId).catch(err => {
+				console.log(err);
+			});
+			Review.deleteReviews(req.params.postId).catch(err => {
+				console.log(err);
+			});
+			User.findById({_id: req.session.user._id}).then(uresult => {
+				uresult.posts.splice(uresult.posts.indexOf(req.params.postId),1);
+				let temp = uresult.posts;
+				User.updateOne({_id: req.session.user._id}, {posts: temp}).then(() => {
+					console.log('Deleted Post on User');
+				}).catch(err => {
+					console.log(err);
+				})
+			})
+			try {
+				fs.rmdirSync(path.join(__dirname, '..', `/public/uploads/${req.params.postId}`), {recursive: true});
+				console.log('Images are deleted!');
+			} catch(err) {
+				console.log(err);
+			}
+			res.redirect("/profile");
+		}).catch(err => {
+				console.log(err);
+		});
+	}
+}
+exports.postEditWorkout = (req,res, next) => {
+    Exercise.deleteMany({workoutID: req.body.workid}).then(function(){
+        var currdate = new Date();
+        Post.findOneAndUpdate(
+            {_id: req.body.postid}, 
+            {
+                title: req.body.workouttitle,
+                dateUpdated: currdate.toISOString().slice(0,10),
+                image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${req.files.postimg[0].filename}`))
+            },
+            {new: true}
+        ).then(function(){
+            moveFile(path.join(__dirname, '..', `/public/uploads/${req.files.postimg[0].filename}`), 
+            path.join(__dirname, '..', `/public/uploads/${req.body.postid}/postimg.png`)).then(() => {
+                console.log('File Added Successfully')
+            })
+            let bodyFocus = req.body.bodyfocuslist.split(' ');
+            let bodyFocus2 = [];
+            for (let i = 0; i < bodyFocus.length; i++)
+                if (bodyFocus[i] != '')
+                    bodyFocus2.push(bodyFocus[i])
+            let exerciseIDs = [];
+            let exerimages = req.files.exerpic;
+            for(i = 0; i < exerimages.length; i++){ 
+                if (exerimages.length===1) {
+                    const exercise = new Exercise({
+                        name: req.body.exername,
+                        image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${exerimages[i].filename}`)),
+                        description: req.body.exerdesc,
+                        repetitions: parseInt(req.body.exerrep,10),
+						sets: parseInt(req.body.exerset, 10),
+						workoutID: req.body.workid
+                    });
+                    exercise.save();
+                    exerciseIDs.push(exercise._id);
+                }
+                else {
+                    const exercise = new Exercise({
+                        name: req.body.exername[i],
+                        image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${exerimages[i].filename}`)),
+                        description: req.body.exerdesc[i],
+                        repetitions: parseInt(req.body.exerrep[i],10),
+						sets: parseInt(req.body.exerset[i], 10),
+						workoutID: req.body.workid
+                    });
+                    exercise.save();
+                    exerciseIDs.push(exercise._id);
+                }
+				moveFile(path.join(__dirname, '..', `/public/uploads/${exerimages[i].filename}`), path.join(__dirname, '..', `/public/uploads/${req.body.postid}/exerpic${i}.png`)).then(() => {
+					console.log('File Added Successfully')
+				}).catch(err => {
+					console.log(err);
+				});
+            }
+            Workout.findOneAndUpdate(
+                {_id: req.body.workid},
+                {
+					duration: parseInt(req.body.workoutdur),
+                    difficulty: req.body.workoutdiff,
+                    bodyfocus: bodyFocus2,
+                    exercises: exerciseIDs
+                },
+                {new: true}
+            ).then(function(){
+                setTimeout(function(){res.redirect(`post/${req.body.postid}`);}, 4000);
+            })              
+        })
+    })
+};
+exports.postEditRecipe = (req,res, next) => {
+    Step.deleteMany({recipeID: req.body.recid}).then(function(){
+		var currdate = new Date();
+        Post.findOneAndUpdate(
+            {_id: req.body.postid}, 
+            {
+                title: req.body.recipetitle,
+                dateUpdated: currdate.toISOString().slice(0,10),
+                image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${req.files.postimg2[0].filename}`))
+            },
+            {new: true}
+        ).then(function(){
+            moveFile(path.join(__dirname, '..', `/public/uploads/${req.files.postimg2[0].filename}`), path.join(__dirname, '..', `/public/uploads/${req.body.postid}/postimg.png`)).then(() => {
+                console.log('File Added Successfully')
+            }).catch(err => {
+                console.log(err);
+            });
+            let category = req.body.recipechecks.split(' ');
+            let category2 = [];
+            for(let i = 0; i < category.length; i++)
+                if(category[i] != '')
+                    category2.push(category[i]);
+            let ingredients = req.body.ingredients.split('¿');
+            let ingredients2 = [];
+            for(let i = 0; i < ingredients.length; i++)
+                if(ingredients[i] != '')
+                    ingredients2.push(ingredients[i]);
+            let stepIDs = [];
+            let stepimages = req.files.steppic;
+            for(i = 0; i < stepimages.length; i++){ 
+                if (stepimages.length===1) {
+                    const step = new Step({
+                        image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${stepimages[i].filename}`)),
+						instruction: req.body.stepdesc,
+						recipeID: req.body.recid
+                    });
+                    step.save();
+                    stepIDs.push(step._id);
+                }
+                else {
+                    const step = new Step({
+                        image: fs.readFileSync(path.join(__dirname, '..', `/public/uploads/${stepimages[i].filename}`)),
+						instruction: req.body.stepdesc[i],
+						recipeID: req.body.recid
+                    });
+                    step.save();
+                    stepIDs.push(step._id);
+                }
+                moveFile(path.join(__dirname, '..', `/public/uploads/${stepimages[i].filename}`), path.join(__dirname, '..', `/public/uploads/${req.body.postid}/steppic${i}.png`)).then(() => {
+                    console.log('File Added Successfully')
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+            Recipe.findOneAndUpdate(
+                {_id: req.body.recid},
+                {
+					ingredients: ingredients2,
+					category: category2,
+                    steps: stepIDs
+                },
+                {new: true}
+            ).then(function(){
+                setTimeout(function(){res.redirect(`post/${req.body.postid}`);}, 4000);
+            })
+        })
+    })
 }

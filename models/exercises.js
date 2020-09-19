@@ -27,6 +27,10 @@ const exerSchema = new Schema({
     sets:{
         type: Number,
         required: true
+    },
+    workoutID: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Workout'
     }
 }, { versionKey: '_somethingElse' });
 exerSchema.statics.getExercise =  async id => {
@@ -35,6 +39,13 @@ exerSchema.statics.getExercise =  async id => {
     }).catch(err => {
         console.log(err);
     })
+}
+exerSchema.statics.deleteExercise = async id => {
+	Exercise.deleteMany({workoutID: id}).then(delresult => {
+		console.log(`Exercises with Workout ID: ${id} successfully deleted!`);
+	}).catch(err => {
+		console.log(err);	
+	})
 }
 const Exercise = mongoose.model('Exercise', exerSchema, 'Exercises');
 module.exports = Exercise;

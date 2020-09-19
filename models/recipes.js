@@ -28,5 +28,12 @@ recipeSchema.statics.getDetails = async id => {
         path: 'post'
     });
 }
+recipeSchema.statics.deleteRecipe = async function(id){
+	Recipe.deleteOne({postID: id}).then(delresult => {
+		console.log(`Recipe ID: ${id} successfully deleted!`);
+	}).catch(err => {
+		console.log(err);
+	})
+}
 const Recipe = mongoose.model('Recipe', recipeSchema, 'Recipes');
 module.exports = Recipe;

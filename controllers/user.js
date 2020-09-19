@@ -1,5 +1,4 @@
 const User = require('../models/users');
-const Post = require('../models/posts');
 exports.getIndex = (req, res, next) => {
 	res.render('index', {
 		user: req.session.user,

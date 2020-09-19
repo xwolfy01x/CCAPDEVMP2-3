@@ -46,5 +46,12 @@ workoutSchema.statics.getDetails = async id => {
         path: 'post'
     });
 }
+workoutSchema.statics.deleteWorkout = async function(id){
+	Workout.deleteOne({postID: id}).then(delresult => {
+		console.log(`Workout with Post ID: ${id} successfully deleted!`);
+	}).catch(err => {
+		console.log(err);
+	})
+}
 const Workout = mongoose.model('Workout', workoutSchema, 'Workouts');
 module.exports = Workout;

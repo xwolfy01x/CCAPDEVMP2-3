@@ -30,5 +30,12 @@ const reviewSchema = new Schema ({
 reviewSchema.statics.getReviews = async id => {
 	return Review.find({postId: id}).populate('userId');
 }
+reviewSchema.statics.deleteReviews = async id => {
+	Review.deleteMany({postId:id}).then(delresult => {
+		console.log(`Reviews on ${id} are deleted!`);
+	}).catch(err => {
+		console.log(err);
+	})
+}
 const Review = mongoose.model('Review', reviewSchema, 'reviews') 
 module.exports = Review;

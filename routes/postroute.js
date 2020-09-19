@@ -11,6 +11,10 @@ route.get('/search', postController.getsearchposts);
 route.get('/seemoretoprecipe', postController.getRecSeemoreTop); 
 route.get('/seemorenewrecipe', postController.getRecSeemoreNew);
 route.get('/post/:postId', postController.getPost);
+route.get('/editpost/:postId', postController.getEditPost);
+route.get('/deletepost/:postId', postController.deletePost);
+route.post('/editrecipe', upload.fields([{name:'postimg2', maxCount: 1}, {name: 'steppic', maxCount: 20}]), postController.postEditRecipe);
+route.post('/editworkout', upload.fields([{name:'postimg', maxCount: 1}, {name: 'exerpic', maxCount: 20}]), postController.postEditWorkout);
 route.post('/newrecipepost', upload.fields([{name:'postimg2', maxCount: 1}, {name: 'steppic', maxCount: 20}]), postController.postRecipe)
 route.post('/post/likePost', postController.likePost);
 module.exports = route;

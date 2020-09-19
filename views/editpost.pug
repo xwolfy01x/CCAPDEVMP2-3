@@ -1,0 +1,102 @@
+extends ./layouts/navbar.pug
+block css
+	link(rel = "stylesheet", type = "text/css", href = "/css/editPost.css")
+block body
+	-var idexer=100;
+	#workoutcontainer
+		form#workoutpost(action = "/editworkout",method = "POST", name = "workoutpost", enctype="multipart/form-data")
+			input(type="text", style="display: none;", name="workid", value=`${workout._id}`)
+			input(type="text", style="display: none;", name="postid", value=`${post._id}`)
+			each exercise in exercises
+				.exerciseForm(id=`newExercise${idexer}Form`, style="display: none;")
+					span Exercise Name:
+					input(type="text" id=`exername${idexer}` name="exername" required, value=`${exercise.name}`)
+					span Exercise Picture:
+					input(type="file" id=`exerpic${idexer}` name="exerpic" onchange=`readURL(this, ${idexer})` accept="image/*")
+					div(style="grid-column: 1/5")
+						span Exercise Instructions:
+						textarea(id=`exerdesc${idexer}` name="exerdesc" required) #{exercise.description}
+					span Exercise Repetitions:
+					input(type="number" id=`exerrep${idexer}` name="exerrep" required value=`${exercise.repetitions}`)
+					span Exercise Sets: 
+					input(type="number" id="exerset${idexer}" name="exerset" required value=`${exercise.sets}`)
+					center(style="grid-column: 1/3;")
+						input(type="text" value="2" style="display: none;" id=`cancel${idexer}` required)
+						input(type="button" onclick=`hideExerForm('${idexer}'); checkCancelCount('cancel${idexer}', 'newExercise${idexer}Form', 'exerciseFormButton${idexer}')` value="Cancel")
+					center(style="grid-column: 3/5")
+						input(type="text" value="2" style="display: none;" id=`add${idexer}` required)
+						input(type="button" onclick=`hideExerForm('${idexer}'); checkAddCount('add${idexer}', 'cancel${idexer}'); increaseExerCount('${idexer}');` value="Add")
+					-idexer++;
+			-idexer = 100
+			.workTitleSection
+				div(style="grid-column: 1/3;")
+					p#workTitle WORKOUT TITLE
+					input#workTitleBox(name = "workouttitle", placeholder = "Title of post", type = "text", autocomplete = "off", value=`${post.title}` required)
+					p#workTitle WORKOUT THUMBNAIL
+					label.upload
+						input.file#thumbnail(name = "postimg", type = "file", onchange="readWorkThumbnail(this, 0)",required)
+						input.file2#thumbnailName(type="text", disabled, required)
+						span.customFile Browse
+					br
+					.workDurationSection(style="grid-column: 1/2")
+						p#workDuration ESTIMATED DURATION
+						select#workDurationBox(name="workoutdur", required)
+							option(value="30", selected=(workout.duration==='30')) 30 minutes
+							option(value="60", selected=(workout.duration==='60')) 60 minutes
+							option(value="90", selected=(workout.duration==='90')) 90 minutes
+					.workDifficultySection(style="grid-column: 1/2")
+						p#workDiff DIFFICULTY
+						select#workDiffBox(name="workoutdiff", required)
+							option(value="Beginner", selected=(workout.difficulty=== 'Beginner'))  Beginner
+							option(value="Intermediate", selected=(workout.difficulty=== 'Intermediate')) Intermediate
+							option(value="Advanced", selected=(workout.difficulty=== 'Advanced'))  Advanced
+				#thumbnailImg(style="grid-column: 3/5;")
+					img#workpostimg(src=`#`, alt="Post Thumbnail")
+			.workBodyFocusSection
+				#slideshow
+				#workBodyFocus
+					p#workBodyFocusTitle BODY FOCUS
+				div#1focus.focusopt(style="z-index:2; box-sizing: border-box;")
+					input#abdomen.boxes.one(name = "abdomen", type = "checkbox", checked =(workout.bodyfocus.includes('abdomen')))
+					label(for = "abdomen") Abdomen
+				div#2focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
+					input#glutes.boxes.one(name = "glutes", type = "checkbox", checked = (workout.bodyfocus.includes('glutes')))
+					label(for = "glutes") Glutes
+				div#3focus.focusopt(style="z-index:2;; box-sizing: border-box; width: 100%;")
+					input#triceps.boxes.one(name = "triceps", type = "checkbox", checked = (workout.bodyfocus.includes('triceps')))
+					label(for = "triceps") Triceps
+				div#4focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
+					input#biceps.boxes.one(name = "biceps", type = "checkbox", checked = (workout.bodyfocus.includes('biceps')))
+					label(for = "biceps") Biceps
+				div#5focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
+					input#back.boxes.one(name = "back", type = "checkbox", checked = (workout.bodyfocus.includes('back')))
+					label(for = "back") Back
+				div#6focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
+					input#chest.boxes.one(name = "chest", type = "checkbox", checked = (workout.bodyfocus.includes('chest')))
+					label(for = "chest") Chest
+				div#7focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
+					input#thighs.boxes.one(name = "thighs", type = "checkbox", checked = (workout.bodyfocus.includes('thighs')))
+					label(for = "thighs") Thighs
+				div#8focus.focusopt(style="z-index:2; box-sizing: border-box; width: 100%;")
+					input#wholebody.boxes(name = "wholebody", type = "checkbox", onclick="toggle(this);", checked = (workout.bodyfocus.includes('wholebody')))
+					label(for = "wholebody") Whole Body
+				input#bodyFocusList(type="text", style="display: none;" name="bodyfocuslist")
+			#workExercisesContainer
+				p Exercises
+				.execCont
+					each exercise in exercises	
+						.exerciseFormButton(id=`exerciseformButton${idexer}`)
+							.newExercise(id=`showyButton${idexer}` onclick=`showExerForm('${idexer}')`)
+								center
+									span.exerNameDisplay(id=`exerNameDisplay${idexer}`)
+									img.exerPicDisplay(id=`exerPicDisplay${idexer}`,src=`#`, alt="imagehere")
+							button.removeButton(type="button", onclick=`removeExercise('newExercise${idexer}Form', 'exerciseFormButton${idexer}');`) Remove
+						-idexer++
+					button#addExercise(type="button")
+						img(src="/images/plus.png")
+			center
+				p#error Hi
+				button#cancelbtn(type="button" onclick="window.location='/'") Cancel
+				button#wpostbtn(type="button") Post
+block scripts
+	script(src="/scripts/post.js")

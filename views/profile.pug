@@ -27,17 +27,15 @@ block body
 			each userPost in user.posts
 				li
 					a(href=`/post/${userPost._id}`)
-					img.postimgs(src=`/uploads/${userPost._id}/postimg.png`)
+						img.postimgs(src=`/uploads/${userPost._id}/postimg.png`)
 					div.posttext
 						h3(class="name") #{userPost.title}
 						p Category: #{userPost.category}
 						p Likes: #{userPost.likes.length}
 					div#buttons
-						form(method="POST", action="/editpost")
-							input(type="text", value=`${userPost._id}`, name="postId")
+						form(method="GET", action=`/editpost/${userPost._id}`)
 							button.postbtn(type="submit")
 								img.editbtn(src="/images/editButton.png")
-						form(method="POST", action="/deletepost")
-							input(type="text", value=`${userPost._id}`, name="postId")
+						form(method="GET", action=`/deletepost/${userPost._id}`)
 							button.postbtn(type="submit")
 								img.deletebtn(src="/images/deleteButton.png")

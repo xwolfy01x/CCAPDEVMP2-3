@@ -33,17 +33,17 @@ $("#addExercise").click(function (){
 		<button type="button" class="removeButton" onclick="removeExercise('newExercise${idexer}Form', 'exerciseFormButton${idexer}')">Remove</button>
 	</div>`);
 	document.getElementById('workoutpost').insertAdjacentHTML("afterbegin", `<div class="exerciseForm" id="newExercise${idexer}Form">
-		<span>Exercise ${idexer} Name:</span>
+		<span>Exercise Name:</span>
 		<input type="text" id="exername${idexer}" name="exername" required>
-		<span>Exercise ${idexer} Picture: </span>
+		<span>Exercise Picture: </span>
 		<input type="file" id="exerpic${idexer}" name="exerpic" onchange="readURL(this, ${idexer})" accept="image/*">
 		<div style="grid-column: 1/5">
-			<span>Exercise ${idexer} Instructions:</span><br>
+			<span>Exercise Instructions:</span>
 			<textarea id="exerdesc${idexer}" name="exerdesc" required></textarea>
 		</div>
-		<span>Exercise ${idexer} Repetitions:</span> 
+		<span>Exercise Repetitions:</span> 
 		<input type="number" id="exerrep${idexer}" name="exerrep" required>
-		<span>Exercise ${idexer} Sets:</span> 
+		<span>Exercise Sets:</span> 
 		<input type="number" id="exerset${idexer}" name="exerset" required>
 		<center style="grid-column: 1/3;">
 			<input type="text" value="1" style="display: none;" id='cancel${idexer}' required>
@@ -69,10 +69,10 @@ $("#addSteps").click(function (){
 		<button type="button" class="removeButton" onclick="removeStep('newStep${idexer2}Form', 'stepFormButton${idexer2}')">Remove</button>
 	</div>`);
 	document.getElementById('recipepost').insertAdjacentHTML("afterbegin", `<div class="stepForm" id="newStep${idexer2}Form">
-		<span>Step ${idexer2} Picture: </span>
+		<span>Step Picture: </span>
 		<input type="file" id="steppic${idexer2}" name="steppic" class="steppic" onchange="readURL2(this, ${idexer2})" accept="image/*">
 		<div style="grid-column: 1/5">
-			<span>Step ${idexer2} Instructions:</span><br>
+			<span>Step Instructions:</span>
 			<textarea id="stepdesc${idexer2}" name="stepdesc" class="stepdesc" required></textarea>
 		</div>
 		<center style="grid-column: 1/3;">
@@ -258,10 +258,12 @@ $("#wpostbtn").click(function() {
 		incompleteData = 1;
 	}
 	for (let i = 0; i < document.getElementsByClassName('exerciseForm').length; i++) {
-		if($(`#exername${i+1}`).val()=='' || $(`#exerpic${i+1}`).val()=='' || $(`#exerrep${i+1}`).val()=='' || $(`#exerdesc${i+1}`).val()=='' || $(`#exerset${i+1}`).val()=='') {
+		console.log(i);
+		if($('.exerciseForm')[i].children[1].value ==  '' || $('.exerciseForm')[i].children[3].value =='' || $('.exerciseForm')[i].children[4].children[1].value=='' ||$('.exerciseForm')[i].children[6].value == '' || $('.exerciseForm')[i].children[8].value == '') {
+			$('#error').text('Please do not leave any incomplete details on the exercises')
 			incompleteData = 1;
-			$('#error').text('Please answer all your exercise fields')
 		}
+		console.log(i);
 	}
 	if(!incompleteData) document.workoutpost.submit();
 	else $('#error').css('display', 'block');
@@ -294,11 +296,13 @@ $("#rpostbtn").click(function() {
 		$('#error2').text('Please add your ingredients!');
 		incompleteData = 1
 	};
-	for(let i = 0; i< document.getElementsByClassName('stepForm').length; i++)
-		if ($(`#stepname${i+1}`).val() == '' || $(`#steppic${i+1}`).val()=='' || $(`#stepdesc${i+1}`).val() == ''){
+	for(let i = 0; i< document.getElementsByClassName('stepForm').length; i++) {
+		console.log('error' + i);
+		if ($('.stepForm')[i].children[1].value=='' || $('.stepForm')[i].children[2].children[1].value == ''){
 			incompleteData = 1;
 			$('#error2').text('Please answer all your step details!');
 		}
+	}
 	if(!incompleteData) {
 		incompleteData=0;
 		document.recipepost.submit();

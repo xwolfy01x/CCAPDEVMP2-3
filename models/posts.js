@@ -89,5 +89,12 @@ postSchema.statics.getSearch = async function(str){
         console.log(err);
     })
 }
+postSchema.statics.deletePost = async function(id){
+	Post.deleteOne({_id: id}).then(delresult => {
+		console.log(`Post ID: ${id} successfully deleted!`);
+	}).catch(err => {
+		console.log(err);
+	})
+}
 const Post = mongoose.model('Post', postSchema, 'Posts');
 module.exports = Post;
