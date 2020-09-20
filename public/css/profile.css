@@ -19,6 +19,12 @@ body {
   padding: 10px;
   position: relative;
 }
+#toedit{
+	margin-bottom: 0;
+}
+button#cancel{
+	margin-top: 0;
+}
 #center {
   width: 50%;
   display: grid;
@@ -63,6 +69,7 @@ span#editname{
   font-family: "Actor";
   background-color: #a41725;
   border: 1px solid white;
+  cursor: pointer;
 }
 
 .editing #name,
@@ -140,7 +147,8 @@ div#buttons input[type=text]{
 
 .postbtn{
 	border:none;
-	background-color: inherit;
+  background-color: inherit;
+  cursor: pointer;
 }
 
 .editbtn, .deletebtn{
