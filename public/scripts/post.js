@@ -20,6 +20,11 @@ function toggle(source) {
             checkboxes[i].checked = source.checked;
     }
 }
+function notwholebody(source) {
+	var wholebody = document.getElementById('wholebody');
+	if(source.checked == false)
+        wholebody.checked = false;
+}
 let idexer = 1;
 $("#addExercise").click(function (){
 	document.getElementById('addExercise').insertAdjacentHTML("beforebegin",`
