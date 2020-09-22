@@ -14,7 +14,6 @@ $('#postdiv').hover(function() {
 })
 $('.userbtn').hover(function() {
     let navbarheight = 0;
-
     $(this).css('background-color', 'darkred');
 	navbarheight = $('#navbar').height();
 	$('.drop').css('top', navbarheight);

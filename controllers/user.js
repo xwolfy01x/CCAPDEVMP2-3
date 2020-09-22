@@ -1,4 +1,5 @@
 const User = require('../models/users');
+const CryptoJS = require('crypto-js');
 exports.getIndex = (req, res, next) => {
 	res.render('index', {
 		user: req.session.user,
@@ -18,7 +19,7 @@ exports.postRegister = (req, res, next) => {
 	const user = new User({
 		fname: req.body.fname, 
 		lname: req.body.lname, 
-		password: req.body.password, 
+		password: CryptoJS.AES.encrypt(req.body.password, "OFIT-Secret").toString(), 
 		email: req.body.email,
 		posts: []
 	});
@@ -49,7 +50,7 @@ exports.postLogin = (req, res, next) => {
 	let data = User.isExisting(user.email);
 	data.then(result => {
 		if (result) {
-			if (result.email === req.body.email && result.password === req.body.password){
+			if (result.email === req.body.email && CryptoJS.AES.decrypt(result.password, "OFIT-Secret").toString(CryptoJS.enc.Utf8) === req.body.password){
 				req.session.user = result;
 				res.redirect('/');
       		} else res.render('login_register', {
