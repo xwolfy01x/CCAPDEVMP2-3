@@ -90,7 +90,7 @@ exports.postUpdateUser = (req,res,next) =>{
 		{_id: user._id},
 		{fname: req.body.newfname, 
 		lname: req.body.newlname,
-		password: req.body.newpw},
+		password: CryptoJS.AES.encrypt(req.body.newpw, "OFIT-Secret").toString()},
 		{new: true},
 		(err, user) =>{
 			if(err)
