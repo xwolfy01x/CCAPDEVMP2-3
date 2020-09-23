@@ -72,7 +72,7 @@
     display: grid;
     grid-template-columns: repeat(2,1fr);
     background-color: #b04632;
-    height: 95%;
+    height: 100%;
 }
 #postHeaderLeft {
     display: flex;
