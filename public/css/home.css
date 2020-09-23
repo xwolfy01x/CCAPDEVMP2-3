@@ -80,6 +80,47 @@ a {
 .acro {
 	padding-top: 5%;
 }
+
+#footer{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 20% 1fr;
+	font-family: 'Actor';
+	background-color: #b04632;
+	width: 100%;
+	position: relative;
+	bottom: 0;
+}
+#foothead{
+	grid-column: 1/span 3;
+	grid-row: 1/span 1;
+	padding-top: 10px;
+	font-size: 4vh;
+	font-weight: 800;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+.data1{
+	font-size: 2.7vh;
+	grid-column: 1/span 1;
+	grid-row: 2/span 1;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+.data2{
+	font-size: 2.7vh;
+	grid-column: 2/span 1;
+	grid-row: 2/span 1;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+.data3{
+	font-size: 2.7vh;
+	grid-column: 3/span 1;
+	grid-row: 2/span 1;
+	padding-left: 10px;
+	padding-top: 10px;
+}
 @media (max-width: 1300px) {
 	h1 {
 		font-size: 2em;

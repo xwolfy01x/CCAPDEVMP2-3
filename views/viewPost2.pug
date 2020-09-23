@@ -60,7 +60,7 @@ block body
                         input#pId(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
             div#temp
                 each comment in comments
-                    div
+                    div(style="")
                         span.dateCreated #{comment.dateCreated.toISOString().slice(0,10)}
                         br
                         span.userCommentor #{comment.userId.fname} #{comment.userId.lname} says..
@@ -69,7 +69,7 @@ block body
                                 img.ebtn#edit(src="/images/editButton.png", onclick=`
                                     $("#editCommentBox").text("${comment.comment}");
                                     $("#editComment${userCount}").css("display", "inline-block");
-                                    $("#cancelComment${userCount}").css("display", "inline-block");
+                                     $("#cancelComment${userCount}").css("display", "inline-block");
                                     $("#editcommentID").val('${comment._id}');
                                     document.getElementById('comment${userCount}').contentEditable=true;
                                 `)
@@ -80,8 +80,8 @@ block body
                                     input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
                                     input#editcommentID(type="text", value=`${comment._id}`, name=`commentId`, style="display: none;")
                     if comment.userId._id == guest._id
-                        form(id=`editForm${userCount}`,action="/editComment", name=`editForm${userCount}`, method="POST")
-                            blockquote(id=`comment${userCount}`) #{comment.review}
+                        form(id=`editForm${userCount}`,action="/editComment", name=`editForm${userCount}`, method="POST" style="width: 100%;")
+                            blockquote(id=`comment${userCount}` style="overflow-wrap: break-word; word-break: break-all;") #{comment.review}
                             button.cancelComment(id=`cancelComment${userCount}`, type="button", onclick=`
                                 $("#editComment${userCount}").css("display", "none");
                                 $("#cancelComment${userCount}").css("display", "none");
@@ -94,7 +94,7 @@ block body
                             input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
                             input(id=`hiddenComment${userCount}`, type="text", name=`comment`, style="display: none;")
                     else
-                        blockquote(id=`comment${userCount}`) "#{comment.review}"
+                        blockquote(id=`comment${userCount}` style="overflow-wrap: break-word; word-break: break-all;") "#{comment.review}"
                     --userCount++
 block scripts
     script(src="/scripts/viewPost.js")

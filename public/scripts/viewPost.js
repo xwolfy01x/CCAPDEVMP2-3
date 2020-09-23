@@ -18,7 +18,7 @@ $(document).ready(function() {
                         <div>
                             <span class="dateCreated">${dateCreated.toISOString().slice(0,10)}</span>
                             <br>
-                            <span class="userCommentor">${data.user.fname} ${data.user.lname} says..</span>
+                            <span class="userCommentor"></span>
                             <button>
                                 <img class="ebtn" id="#edit" src="/images/editButton.png", onclick='
                                     $("#editCommentBox").text("${data.comment.review}");
@@ -35,8 +35,8 @@ $(document).ready(function() {
                                 </form>
                             </button>
                         </div>
-                        <form id="editForm${userCount}" action="/editComment", name="editForm${userCount}", method="POST">
-                            <blockquote id="comment${userCount}"> ${data.comment.review} </blockquote>
+                        <form id="editForm${userCount}" action="/editComment", name="editForm${userCount}", method="POST" style="width: 100%;">
+                            <blockquote id="comment${userCount}" style="overflow-wrap: break-word; word-break: break-all;"></blockquote>
                             <button class="cancelComment" id="cancelComment${userCount}", type="button", onclick="
                                 $('#editComment${userCount}').css('display', 'none');
                                 $('#cancelComment${userCount}').css('display', 'none');
@@ -52,6 +52,8 @@ $(document).ready(function() {
                             <input id="hiddenComment${userCount}" type="text" name="comment" style="display: none;">
                         </form>
                     `);
+                    document.getElementsByClassName('userCommentor')[0].innerText = data.user.fname + ' ' + data.user.lname + ' says...';
+                    document.getElementById(`comment${userCount}`).innerText = data.comment.review;
                     userCount++;
                 }
             })
@@ -88,36 +90,6 @@ $(document).ready(function() {
         $(this).parent().next().remove();
         $(this).parent().remove();
     })
-    // $('.editComment').click(function() {
-    //     $(this).prev().prev().attr('contenteditable', false);
-    //     $(this).css('display', 'none');
-    //     $(this).prev().css('display', 'none');
-    //     $.ajax({
-    //         url: 'http://localhost:3000/editComment',
-    //         method: 'POST',
-    //         data: {
-    //             commentId: $(this).next().val(),
-    //             comment: $(this).next().next().next().val()
-    //         },
-    //         success: function() {
-    //             console.log('success');
-    //         }
-    //     });
-    // })
-    // $('.deleteComment').click(function() {
-    //     $.ajax({
-    //         url: 'http://localhost:3000/deleteComment',
-    //         method: 'POST',
-    //         data: {
-    //             commentId: $(this).next().next().val()
-    //         },
-    //         success: function() {
-    //             console.log('deleted!')
-    //         }
-    //     });
-    //     $(this).parent().next().remove();
-    //     $(this).parent().remove();
-    // })
     $('.like').click(function() {
         console.log($(this).prev().val())
         $.ajax({

@@ -122,11 +122,11 @@ function removeStep(formid, buttonid) {
 	$(`#${buttonid}`).remove();
 }
 function increaseExerCount(id) {
-	$(`#exerNameDisplay${id}`).html($(`#exername${id}`).val());
+	$(`#exerNameDisplay${id}`).text($(`#exername${id}`).val());
 	$(`#cancel2${id}`).val(`2`);
 }
 function increaseStepCount(id) {
-	$(`#stepNameDisplay${id}`).html($(`#stepname${id}`).val());
+	$(`#stepNameDisplay${id}`).text($(`#stepname${id}`).val());
 	$(`#cancel2${id}`).val(`2`);
 }
 function readWorkThumbnail(input, count) {
@@ -319,9 +319,10 @@ function addIngredient() {
 		document.getElementById('ingredientsList').insertAdjacentHTML('afterbegin', `
 			<li id="ingredient${ingCount}" class="ingredients">
 				<button type="button" class="ingDel" onclick="deleteIngredient(${ingCount})">X</button>
-				<center><span>${$("#ingredients").val()}</span></center>
+				<center><span id="i${ingCount}"></span></center>
 			</li>
 		`)
+		$(`#i${ingCount}`).text($("#ingredients").val());
 		ingCount++;
 		$('#ingredients').val('');
 	}
