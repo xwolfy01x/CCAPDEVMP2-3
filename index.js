@@ -28,4 +28,4 @@ app.use(postRoute);
 app.use(commentRoute)
 mongoose.set('useFindAndModify', false);
 mongoose.connect('mongodb+srv://Chi:wintermelon@cluster0.nula3.gcp.mongodb.net/OFIT?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
