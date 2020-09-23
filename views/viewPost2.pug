@@ -13,10 +13,10 @@ block body
                     form(method="POST", action="likePost")
                         input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
                         if userLiked === true
-                            button
+                            button.like(type="button")
                                 img.likeBtn(src="/images/LikeAfter.png") 
                         else if userLiked === false && guest.addReview
-                            button
+                            button.like(type="button")
                                 img.likeBtn(src="/images/LikeBefore.png")
                         else 
                             button(disabled)
@@ -51,14 +51,14 @@ block body
             span#commentTitle Comments
             if guest.addReview
                 div
-                    form(action="/postComment", method="POST")
+                    form#fco(action="/postComment", method="POST")
                         span#postCommentTitle Post your comment here!
                         textarea#postCommentBox(name="comment", required)
                         br
                         br
                         button#postComment(type="submit") Post Comment
-                        input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
-            div
+                        input#pId(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
+            div#temp
                 each comment in comments
                     div
                         span.dateCreated #{comment.dateCreated.toISOString().slice(0,10)}
@@ -75,7 +75,7 @@ block body
                                 `)
                             button
                                 form(action="/deleteComment", method="POST")
-                                    button(type="submit")
+                                    button.deleteComment(type="submit")
                                         img.ebtn#delete(src="/images/deleteButton.png")
                                     input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
                                     input#editcommentID(type="text", value=`${comment._id}`, name=`commentId`, style="display: none;")
@@ -89,7 +89,6 @@ block body
                             `) Cancel
                             button.editComment(id=`editComment${userCount}`, type="button", onclick=`
                                 $("#hiddenComment${userCount}").val($("#comment${userCount}").html());
-                                document.editForm${userCount}.submit()
                             `) Save
                             input#editcommentID(type="text", value=`${comment._id}`, name=`commentId`, style="display: none;")
                             input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")

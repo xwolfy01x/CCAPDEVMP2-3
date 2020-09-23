@@ -8,14 +8,14 @@ exports.postReview = (req, res, next) => {
         review: req.body.comment
     });
     comment.save();
-    res.redirect(`/post/${req.body.postId}`);
+    res.send({user: req.session.user, comment: comment});
 }
 exports.editReview = (req, res, next) => {
     Review.findOneAndUpdate(
         {_id: req.body.commentId}, 
         {review: req.body.comment}
     ).then(() => {
-        res.redirect(`/post/${req.body.postId}`);
+        res.send(true);
     }).catch(err => {
         console.log(err);
     })
@@ -24,7 +24,7 @@ exports.deleteReview = (req, res, next) => {
     Review.findOneAndDelete(
         {_id: req.body.commentId}
     ).then(() => {
-        res.redirect(`/post/${req.body.postId}`);
+        res.send('Deleted Review!');
     }).catch(err => {
         console.log(err);
     })

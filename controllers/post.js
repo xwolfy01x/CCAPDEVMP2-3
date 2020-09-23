@@ -493,7 +493,7 @@ exports.likePost = (req, res, next) => {
 		Post.findOneAndUpdate({_id: req.body.postId}, {likes: newLikes}, {new:true}).catch (err => {
 			console.log(err);
 		});
-		res.redirect(`/post/${req.body.postId}`)
+		res.send('success!');
 	})
 }
 exports.deletePost = (req, res, next) =>{
