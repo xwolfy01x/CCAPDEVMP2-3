@@ -7,7 +7,7 @@ $(document).ready(function() {
     $('#postComment').click(function() {
         if ($('#postCommentBox').val()!='') {
             $.ajax({
-                url: 'https://o-fit.herokuapp.com/postComment',
+                url: '/postComment',
                 method: 'POST',
                 data: {
                     postId: $('#pId').val(),
@@ -65,7 +65,7 @@ $(document).ready(function() {
         $(this).css('display', 'none');
         $(this).prev().css('display', 'none');
         $.ajax({
-            url: 'https://o-fit.herokuapp.com/editComment',
+            url: '/editComment',
             method: 'POST',
             data: {
                 commentId: $(this).next().val(),
@@ -78,7 +78,7 @@ $(document).ready(function() {
     })
     $("body").delegate('.deleteComment', 'click', function() {
         $.ajax({
-            url: 'https://o-fit.herokuapp.com/deleteComment',
+            url: '/deleteComment',
             method: 'POST',
             data: {
                 commentId: $(this).next().next().val()
@@ -93,7 +93,7 @@ $(document).ready(function() {
     $('.like').click(function() {
         console.log($(this).prev().val())
         $.ajax({
-            url: 'https://o-fit.herokuapp.com/post/likePost',
+            url: '/likePost',
             method: 'POST',
             data: {
                 postId: $(this).prev().val()

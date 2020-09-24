@@ -26,7 +26,7 @@ block body
                     if workout.difficulty == "Advanced"
                         span(style="color: red;") #{workout.difficulty}
                 #likeContainer
-                    form(method="POST", action="likePost")
+                    form(method="POST", action="/likePost")
                         input(type="text", value=`${post._id}`, name=`postId`, style="display: none;")
                         if userLiked === true
                             button.like(type="button")
