@@ -172,17 +172,17 @@ exports.getWorkouts = (req, res, next) => {
 	let result1, result2;
 	let topPosts = Post.getWTopPosts().then(result => {
 		result1 = result;
-		var date = new Date();
 		for (let i = 0; i< result1.length; i++) {
-			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
-			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+			var date = new Date(result[i].dateCreated);
+			result1[i].image = `uploads/${result[i]._id}/postimg.png`;
+			result1[i].displayDate = date.toString().slice(4,15);
 		}
 		let newPosts = Post.getWNewPosts().then(data => {
 			result2=data;
 			for (let i = 0; i< result1.length; i++) {
-				var date = new Date();
+				var date = new Date(data[i].dateCreated);
 				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
-				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
+				result2[i].displayDate = date.toString().slice(4,15);
 			}
 			res.render('workout', {
 				user: req.session.user,
@@ -197,17 +197,17 @@ exports.getWorkSeemoreTop = (req, res, next) =>{
 	let topPosts = Post.getWMoreTopPosts().then(result => {
 		result1 = result;
 		for (let i = 0; i< result1.length; i++) {
-			var date = new Date();
+			var date = new Date(result[i].dateCreated);
 			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
-			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+			result1[i].displayDate = date.toString().slice(4,15);
 		}
 		let newPosts = Post.getWNewPosts().then(data => {
 			console.log(data);
 			result2=data;
 			for (let i = 0; i< result2.length; i++) {
-				var date = new Date();
+				var date = new Date(data[i].dateCreated);
 				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
-				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
+				result2[i].displayDate = date.toString().slice(4,15);
 			}
 			res.render('workout', {
 				user: req.session.user,
@@ -222,17 +222,17 @@ exports.getWorkSeemoreNew = (req, res, next) =>{
 	let topPosts = Post.getWTopPosts().then(result => {
 		result1 = result;
 		for (let i = 0; i< result1.length; i++) {
-			var date = new Date();
+			var date = new Date(result[i].dateCreated);
 			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
-			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+			result1[i].displayDate = date.toString().slice(4,15);
 		}
 		let newPosts = Post.getWMoreNewPosts().then(data => {
 			console.log(data);
 			result2=data;
 			for (let i = 0; i< result2.length; i++) {
-				var date = new Date();
+				var date = new Date(data[i].dateCreated);
 				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
-				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
+				result2[i].displayDate = date.toString().slice(4,15);
 			}
 			res.render('workout', {
 				user: req.session.user,
@@ -247,16 +247,16 @@ exports.getRecipes = (req, res, next) => {
 	let topPosts = Post.getRTopPosts().then(result => {
 		result1 = result;
 		for (let i = 0; i< result1.length; i++) {
-			var date = new Date();
+			var date = new Date(result[i].dateCreated);
 			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
-			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+			result1[i].displayDate = date.toString().slice(4,15);
 		}
 		let newPosts = Post.getRNewPosts().then(data => {
 			result2=data;
 			for (let i = 0; i< result1.length; i++) {
-				var date = new Date();
+				var date = new Date(data[i].dateCreated);
 				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
-				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
+				result2[i].displayDate = date.toString().slice(4,15);
 			}
 			res.render('recipe', {
 				user: req.session.user,
@@ -271,17 +271,17 @@ exports.getRecSeemoreTop = (req, res, next) =>{
 	let topPosts = Post.getRMoreTopPosts().then(result => {
 		result1 = result;
 		for (let i = 0; i< result1.length; i++) {
-			var date = new Date();
+			var date = new Date(result[i].dateCreated);
 			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
-			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+			result1[i].displayDate = date.toString().slice(4,15);
 		}
 		let newPosts = Post.getRNewPosts().then(data => {
 			console.log(data);
 			result2=data;
 			for (let i = 0; i< result2.length; i++) {
-				var date = new Date();
+				var date = new Date(data[i].dateCreated);
 				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
-				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
+				result2[i].displayDate = date.toString().slice(4,15);
 			}
 			res.render('recipe', {
 				user: req.session.user,
@@ -296,17 +296,17 @@ exports.getRecSeemoreNew = (req, res, next) =>{
 	let topPosts = Post.getRTopPosts().then(result => {
 		result1 = result;
 		for (let i = 0; i< result1.length; i++) {
-			var date = new Date();
+			var date = new Date(result[i].dateCreated);
 			result1[i].image = `uploads/${result[i]._id}/postimg.png`; 
-			result1[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+			result1[i].displayDate = date.toString().slice(4,15);
 		}
 		let newPosts = Post.getRMoreNewPosts().then(data => {
 			console.log(data);
 			result2=data;
 			for (let i = 0; i< result2.length; i++) {
-				var date = new Date();
+				var date = new Date(data[i].dateCreated);
 				result2[i].image = `uploads/${data[i]._id}/postimg.png`; 
-				result2[i].displayDate = date.toString(data[i].dateCreated).slice(4,15);
+				result2[i].displayDate = date.toString().slice(4,15);
 			}
 			res.render('recipe', {
 				user: req.session.user,
@@ -318,12 +318,13 @@ exports.getRecSeemoreNew = (req, res, next) =>{
 }
 exports.getsearchposts = (req,res, next) => {
     let resultpost;
-    var date = new Date();
+
     let postres = Post.getSearch(req.query.search).then(result =>{
         resultpost = result;
         for(let i = 0; i<resultpost.length; i++){
+			var date = new Date(result[i].dateCreated);
             resultpost[i].image = `uploads/${result[i]._id}/postimg.png`;
-            resultpost[i].displayDate = date.toString(result[i].dateCreated).slice(4,15);
+            resultpost[i].displayDate = date.toString().slice(4,15);
         }
         res.render("searchpost", {
             user: req.session.user,
