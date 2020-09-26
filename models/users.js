@@ -39,7 +39,11 @@ userSchema.statics.isExisting = async email => {
 	})
 };
 userSchema.statics.getUser = async id => {
-	return User.findOne({_id: id}).populate('posts');
+	return User.findOne({_id: id}).populate('posts').then(result => {
+		return result;
+	}).catch(err => {
+		console.log(err);
+	});
 }
 const User = mongoose.model('User', userSchema, 'Users');
 module.exports = User;

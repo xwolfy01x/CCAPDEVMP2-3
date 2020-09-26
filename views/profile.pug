@@ -22,19 +22,20 @@ block body
 				input(type="password" id="pw" name="newpw")
 				button(class="edit" id="save" type="submit") Save Changes
 			button(class="edit" id="cancel" onclick = 'cancel()') Cancel
-		ul#center
-			each userPost in user.posts
-				li
-					a(href=`/post/${userPost._id}`)
-						img.postimgs(src=`/uploads/${userPost._id}/postimg.png`, href=`/post/${userPost._id}`)
-					div.posttext
-						h3(class="name") #{userPost.title}
-						p Category: #{userPost.category}
-						p Likes: #{userPost.likes.length}
-					div#buttons
-						form(method="GET", action=`/editpost/${userPost._id}`)
-							button.postbtn(type="submit")
-								img.editbtn(src="/images/editButton.png")
-						form(method="GET", action=`/deletepost/${userPost._id}`)
-							button.postbtn(type="submit")
-								img.deletebtn(src="/images/deleteButton.png")
+		.postcont
+			ul#center
+				each userPost in user.posts
+					li
+						a(href=`/post/${userPost._id}`)
+							img.postimgs(src=`/uploads/${userPost._id}/postimg.png`, href=`/post/${userPost._id}`)
+						div.posttext
+							h3(class="name") #{userPost.title}
+							p Category: #{userPost.category}
+							p Likes: #{userPost.likes.length}
+						div#buttons
+							form(method="GET", action=`/editpost/${userPost._id}`)
+								button.postbtn(type="submit")
+									img.editbtn(src="/images/editButton.png")
+							form(method="GET", action=`/deletepost/${userPost._id}`)
+								button.postbtn(type="submit")
+									img.deletebtn(src="/images/deleteButton.png")

@@ -298,6 +298,7 @@ html {
   .exerciseForm textarea, .stepForm textarea {
 	  width: 100%;
 	  height: 90%;
+	  resize: none;
   }
   .exerciseForm input, .stepForm input {
 	  font-size: 2vh;
