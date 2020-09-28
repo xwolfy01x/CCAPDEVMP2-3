@@ -145,8 +145,8 @@ button{
     font-weight: 600;
 }
 #eimage {
-    width: 70%;
-    height: 100%;
+    width: 400px;
+    height: 300px;
     border: 5px solid black;
 }
 #commentsSection {
